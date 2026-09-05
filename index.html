@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#0b1329">
+<title>Azul Caribe Lounge · Menú Digital</title>
+<meta name="description" content="Menú digital interactivo de Azul Caribe Lounge">
+<link rel="apple-touch-icon" href="images/logo-palm.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-ambience"></div>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splash">
+  <img class="splash-logo" src="images/logo-palm.png" alt="Azul Caribe Lounge">
+  <div class="splash-title">AZUL <span>CARIBE</span></div>
+  <div class="splash-sub" id="splash-sub">Lounge · Bienvenidos</div>
+  <div class="splash-loading"><span class="dot-spin"></span> <span id="splash-loading-text">Cargando el menú…</span></div>
+</div>
+
+<!-- ===== HERO / PORTADA (estructura tipo Maido: portada + avatar + info) ===== -->
+<header class="venue-hero" id="venue-hero">
+  <div class="venue-cover">
+    <div class="status-pill"><span class="dot"></span> <span id="status-text">Abierto ahora</span></div>
+    <button class="lang-btn" id="lang-btn" aria-label="Idioma / Language / Idioma">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9s1.3-6.5 3.8-9z"/></svg>
+      <span id="lang-btn-label">ES</span>
+    </button>
+    <div class="lang-menu" id="lang-menu"></div>
+  </div>
+  <div class="venue-card">
+    <img class="venue-logo" src="images/logo-palm.png" alt="Azul Caribe Lounge">
+    <div class="venue-eyebrow" id="venue-eyebrow">Coctelería de autor</div>
+    <h1 class="venue-name">Azul Caribe <span>Lounge</span></h1>
+    <p class="venue-tagline" id="venue-tagline">Cocina caribeña · Cartagena de Indias, Colombia</p>
+    <button class="info-btn" id="info-btn">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/></svg>
+      <span id="info-btn-label">Información</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== POUR SCENE: escena de scroll bloqueado con el video de Higgsfield ===== -->
+<section class="pour-scene" id="pour-scene">
+  <video class="pour-video" id="pour-video" muted playsinline preload="auto" poster="images/pour-full.jpg">
+    <source src="videos/mojito-pour.webm" type="video/webm">
+    <source src="videos/mojito-pour.mp4" type="video/mp4">
+  </video>
+  <img class="pour-fallback-img" id="pour-fallback-img" src="images/pour-empty.jpg" alt="">
+  <div class="pour-overlay"></div>
+  <div class="pour-content">
+    <div class="pour-eyebrow" id="pour-eyebrow">Coctelería de autor</div>
+    <h2 class="pour-title" id="pour-title">El arte de servir <span>Azul Caribe</span></h2>
+    <div class="pour-products" id="pour-products"></div>
+  </div>
+  <div class="pour-progress" id="pour-progress"><div class="pour-progress-bar" id="pour-progress-bar"></div></div>
+</section>
+
+<!-- ===== STICKY NAV: buscador + categorías (tipo Maido) ===== -->
+<div class="sticky-nav" id="sticky-nav">
+  <div class="sticky-nav-row">
+    <button class="icon-btn" id="search-toggle" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <div class="nav-scroll-wrap" id="nav-scroll-wrap">
+      <nav class="catnav" id="catnav"></nav>
+    </div>
+  </div>
+  <div class="search-row" id="search-row">
+    <input type="text" id="search-input" placeholder="Buscar en el menú… (ej. camarones, café, ron)">
+  </div>
+</div>
+
+<main id="menu-section">
+  <div id="menu-content"></div>
+</main>
+
+<!-- ===== FLOATING CART (FAB) ===== -->
+<div class="fab-total" id="fab-total"></div>
+<button class="fab-cart hidden" id="cart-btn">
+  🛒
+  <span class="fab-badge" id="cart-count">0</span>
+</button>
+
+<footer>
+  <img class="foot-logo" src="images/logo-palm.png" alt="">
+  <div class="foot-name">AZUL CARIBE LOUNGE</div>
+  <div class="foot-note" id="foot-note">Precios en pesos colombianos (COP) · Disfrute con moderación</div>
+</footer>
+
+<!-- ===== MODAL: INFORMACIÓN DEL LOUNGE ===== -->
+<div class="overlay" id="info-overlay"></div>
+<div class="info-modal" id="info-modal">
+  <div class="info-modal-head">
+    <h3 id="info-modal-title">Información</h3>
+    <button class="close-btn" id="info-close">×</button>
+  </div>
+  <div class="info-modal-body">
+    <img class="info-logo" src="images/logo-palm.png" alt="Azul Caribe Lounge">
+    <div class="info-name">Azul Caribe Lounge</div>
+    <div class="info-row"><span>📲</span> <span id="info-whatsapp-text">Pedidos por WhatsApp al enviar tu carrito</span></div>
+    <div class="info-row"><span>💳</span> <span id="info-prices-text">Precios en pesos colombianos (COP)</span></div>
+    <div class="info-row"><span>🍹</span> <span id="info-cuisine-text">Cocina caribeña con toques haitianos y nikkei-peruanos</span></div>
+    <div class="info-note" id="info-note-text">¿Quieres agregar dirección, horarios o redes sociales aquí? Edítalo fácilmente en <code>index.html</code>, dentro de <code>#info-modal</code>.</div>
+  </div>
+</div>
+
+<!-- ===== MODAL: PRODUCTO EXPANDIDO ===== -->
+<div class="overlay" id="product-overlay"></div>
+<div class="product-modal" id="product-modal">
+  <button class="pm-close" id="product-close">×</button>
+  <div class="pm-photo-wrap">
+    <img class="pm-photo" id="pm-photo" src="" alt="">
+    <span class="pm-badge" id="pm-badge"></span>
+  </div>
+  <div class="pm-body">
+    <div class="pm-title-row">
+      <div>
+        <h2 class="pm-name" id="pm-name"></h2>
+      </div>
+      <div class="pm-price" id="pm-price"></div>
+    </div>
+    <p class="pm-desc" id="pm-desc"></p>
+    <div class="pm-tags" id="pm-tags"></div>
+    <div class="pm-price-select" id="pm-price-select"></div>
+  </div>
+  <div class="pm-footer">
+    <div class="stepper" id="pm-stepper">
+      <button class="step-minus">−</button>
+      <span class="qn" id="pm-qty">0</span>
+      <button class="step-plus">+</button>
+    </div>
+    <button class="row-add-btn" id="pm-add-btn">Agregar al pedido</button>
+  </div>
+</div>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 id="drawer-title">Tu pedido</h3>
+    <button class="close-btn" id="close-drawer">×</button>
+  </div>
+  <div class="drawer-items" id="drawer-items"></div>
+  <div class="drawer-foot" id="drawer-foot">
+    <div class="total-row"><span id="total-label">Total</span> <span class="amt" id="total-amt">$0</span></div>
+    <textarea class="note" id="order-note" rows="2" placeholder="Notas del pedido (mesa, alergias, etc.) — opcional"></textarea>
+    <button class="send-btn" id="send-whatsapp">📲 Enviar pedido por WhatsApp</button>
+    <button class="clear-btn" id="clear-cart">Vaciar pedido</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
