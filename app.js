@@ -809,8 +809,13 @@ function buildWhatsappMessage() {
     const variantLabel = item.precioBotella ? (mode === "botella" ? " (Botella)" : " (Trago)") : "";
     lines.push(`${itemEmoji(item)} ${cart[key]}x ${item.nombre.es}${variantLabel} — ${fmt(unit * cart[key])}`);
   });
+  const subtotal = cartTotal();
+  const tip = Math.round(subtotal * 0.10);
   lines.push("");
-  lines.push(`💰 *Total: ${fmt(cartTotal())}*`);
+  lines.push(`🧮 Subtotal: ${fmt(subtotal)}`);
+  lines.push(`🙏 Servicio voluntario (10%): ${fmt(tip)}`);
+  lines.push(`💰 *Total con servicio: ${fmt(subtotal + tip)}*`);
+  lines.push("_El servicio es voluntario; si prefieres no incluirlo, avísanos._");
   const note = document.getElementById("order-note").value.trim();
   if (note) { lines.push(""); lines.push(`📝 *Nota:* ${note}`); }
   lines.push("");
