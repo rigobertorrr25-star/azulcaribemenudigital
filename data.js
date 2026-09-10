@@ -278,7 +278,7 @@ const MENU_DATA = [
   { id:"kp5", cat:"bar", sub:"premium",
     nombre:{ es:"Boulevardier", en:"Boulevardier", pt:"Boulevardier" },
     desc:{ es:"Bourbon, Campari y vermut rojo.", en:"Bourbon, Campari and sweet vermouth.", pt:"Bourbon, Campari e vermute tinto." },
-    precio:45000, img:"bar-cocteleria-premium", tags:[], badge:"bartender" },
+    precio:45000, img:"bar-boulevardier", img2:"bar-boulevardier-x", tags:[], badge:"bartender" },
 
   // ---- VINO & SANGRÍA / WINE & SANGRIA / VINHO & SANGRIA ----
   { id:"v1", cat:"bar", sub:"vino",
