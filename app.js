@@ -25,11 +25,6 @@ Estos son mis datos:
 
 🙌 Quedo atento/a a la confirmación de disponibilidad. ¡Gracias!`;
 
-// Productos destacados dentro de la "pour scene" (escena de scroll bloqueado
-// con el video de Higgsfield). Edita este arreglo con los ids de data.js
-// que quieras mostrar mientras se llena el vaso (2 a 4 ideales).
-// Vacío = no se muestran tarjetas, para que se aprecie mejor el video del Mojito.
-const POUR_SHOWCASE_IDS = [];
 
 // Efecto de "destape" interactivo: al hacer clic directamente sobre la foto
 // del producto, se reproduce un video real (generado con Higgsfield) donde
@@ -163,7 +158,6 @@ function refreshAll() {
   renderCatNav();
   renderGrid();
   renderCart();
-  renderPourProducts();
   if (modalItemId) renderProductModal();
 }
 
@@ -470,134 +464,79 @@ function resetUncorkVideo(wrap, video, card) {
   try { video.currentTime = 0; } catch (err) { /* no-op */ }
 }
 
-// ============ POUR SCENE: escena de scroll bloqueado (video Higgsfield) ============
-function renderPourProducts() {
-  const wrap = document.getElementById("pour-products");
-  if (!wrap) return;
-  const items = POUR_SHOWCASE_IDS.map(id => MENU_DATA.find(i => i.id === id)).filter(Boolean);
-  wrap.innerHTML = items.map((item, i) => `
-    <div class="pour-card" data-id="${item.id}" data-order="${i}" tabindex="0" role="button" aria-label="${itemName(item)}">
-      <img src="images/${item.img}.jpg" alt="${itemName(item)}" loading="lazy">
-      <div class="pour-card-body">
-        <div class="pour-card-name">${itemName(item)}</div>
-        <div class="pour-card-price">${priceLabelShort(item)}</div>
-      </div>
-    </div>`).join("");
-  wrap.querySelectorAll(".pour-card").forEach(card => {
-    const open = () => openProductModal(card.dataset.id);
-    card.addEventListener("click", open);
-    card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
-  });
-}
-
-// Escena de "llenado" con scroll bloqueado:
-// 1) Cuando la sección entra en pantalla (y aún no se ha reproducido), se
-//    bloquea el scroll (wheel/touch/teclado) y arranca el video a alta
-//    velocidad (playbackRate elevado) desde el vaso vacío hasta el lleno.
-// 2) Mientras se reproduce, la barra de progreso avanza y las tarjetas de
-//    producto entran con una animación escalonada (fade + slide).
-// 3) Al terminar el video (o si falla/está ausente, tras un tiempo de
-//    seguridad), el scroll se libera y la página continúa navegando normal.
+// ============ POUR SCENE: vaso de mojito guiado por el scroll (bidireccional) ============
+// El tramo #pour-scroll mide 240vh; su hijo .pour-stage queda "sticky" mientras
+// se recorre. NO se bloquea el scroll: la página se desplaza normal y el nivel
+// del líquido se calcula a partir de la posición del scroll dentro de ese tramo.
+//   progreso = (-rect.top) / (rect.height - alto de la ventana)   [0..1]
+// Al bajar el progreso sube (se llena); al subir baja (se vacía). Un pequeño
+// suavizado (lerp por requestAnimationFrame) evita saltos con scroll brusco.
 function initPourScene() {
-  const section = document.getElementById("pour-scene");
-  const video = document.getElementById("pour-video");
-  const progressBar = document.getElementById("pour-progress-bar");
-  const cards = () => Array.from(document.querySelectorAll(".pour-card"));
-  if (!section || !video) return;
+  const section = document.getElementById("pour-scroll");
+  if (!section) return;
+  const svg = section.querySelector(".pour-glass");
+  const liquid = section.querySelector("#pourLiquid");
+  const stopTop = section.querySelector("#pourStopTop");
+  const stopBot = section.querySelector("#pourStopBot");
+  const bar = document.getElementById("pour-progress-bar");
+  const items = Array.from(section.querySelectorAll(".pour-item[data-at]"));
+  if (!svg || !liquid) return;
 
-  let state = "idle"; // idle -> locked -> playing -> done
-  let safetyTimer = null;
+  const FILL_TRAVEL = 300;   // unidades SVG que recorre el líquido (vacío -> lleno)
+  const SMOOTH = 0.16;       // 0..1 — más bajo = más suave (equivale a scrub ~0.5)
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function lockScroll() {
-    document.body.classList.add("scroll-locked");
-  }
-  function unlockScroll() {
-    document.body.classList.remove("scroll-locked");
-  }
-  function blockEvent(e) { e.preventDefault(); }
-  function attachScrollBlockers() {
-    window.addEventListener("wheel", blockEvent, { passive: false });
-    window.addEventListener("touchmove", blockEvent, { passive: false });
-    window.addEventListener("keydown", blockKeyScroll, { passive: false });
-  }
-  function detachScrollBlockers() {
-    window.removeEventListener("wheel", blockEvent, { passive: false });
-    window.removeEventListener("touchmove", blockEvent, { passive: false });
-    window.removeEventListener("keydown", blockKeyScroll, { passive: false });
-  }
-  function blockKeyScroll(e) {
-    const keys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "Spacebar", "Home", "End"];
-    if (keys.includes(e.key)) e.preventDefault();
-  }
+  // extremos de color del líquido (arriba y abajo del degradado)
+  const TOP_EMPTY = [206, 232, 214], TOP_FULL = [118, 196, 66];   // #76c442
+  const BOT_EMPTY = [176, 210, 188], BOT_FULL = [56, 142, 60];    // #388E3C
+  const lerp = (a, b, t) => Math.round(a + (b - a) * t);
+  const mixRGB = (A, B, t) => `rgb(${lerp(A[0],B[0],t)},${lerp(A[1],B[1],t)},${lerp(A[2],B[2],t)})`;
 
-  function revealContent() {
-    section.classList.add("reveal");
-    cards().forEach((card, i) => {
-      setTimeout(() => card.classList.add("show"), 220 + i * 160);
-    });
+  let current = 0;   // progreso mostrado
+  let target = 0;    // progreso objetivo según el scroll
+  let rafId = null;
+
+  function readScroll() {
+    const rect = section.getBoundingClientRect();
+    const travel = rect.height - window.innerHeight;
+    target = travel > 0 ? Math.min(1, Math.max(0, -rect.top / travel)) : 0;
+    ensureLoop();
   }
 
-  function finishScene() {
-    if (state === "done") return;
-    state = "done";
-    clearTimeout(safetyTimer);
-    if (progressBar) progressBar.style.width = "100%";
-    detachScrollBlockers();
-    unlockScroll();
-    section.classList.add("pour-done");
+  function ensureLoop() { if (rafId == null) rafId = requestAnimationFrame(step); }
+
+  function step() {
+    rafId = null;
+    // acercarse al objetivo (o saltar directo si el usuario pidió menos movimiento)
+    current += (target - current) * (reduceMotion ? 1 : SMOOTH);
+    if (Math.abs(target - current) < 0.0009) current = target;
+    paint(current);
+    if (current !== target) ensureLoop();
   }
 
-  function startFilling() {
-    if (state !== "idle") return;
-    state = "locked";
-    lockScroll();
-    attachScrollBlockers();
-    revealContent();
+  function paint(p) {
+    // nivel del líquido: se traslada hacia arriba a medida que p -> 1 (acelerado por GPU)
+    liquid.style.transform = `translate3d(0, ${((1 - p) * FILL_TRAVEL).toFixed(2)}px, 0)`;
 
-    // Si el video falla o el archivo aún no existe en el servidor, el propio
-    // elemento <video> dispara "error" (manejado abajo) y se usa la imagen
-    // de respaldo (siempre visible detrás hasta que "video-ready" se active).
-    // El temporizador de seguridad garantiza que el scroll SIEMPRE se libere,
-    // incluso si ningún evento del video llega a dispararse.
-    video.addEventListener("canplay", () => section.classList.add("video-ready"), { once: true });
-    video.addEventListener("timeupdate", () => {
-      if (video.duration) {
-        const pct = Math.min(100, (video.currentTime / video.duration) * 100);
-        if (progressBar) progressBar.style.width = pct + "%";
-      }
-    });
-    video.addEventListener("ended", finishScene, { once: true });
-    video.addEventListener("error", finishScene, { once: true });
+    // color: de translúcido claro a verde mojito vibrante
+    const c = Math.pow(p, 0.7);
+    if (stopTop) stopTop.setAttribute("stop-color", mixRGB(TOP_EMPTY, TOP_FULL, c));
+    if (stopBot) stopBot.setAttribute("stop-color", mixRGB(BOT_EMPTY, BOT_FULL, c));
 
-    state = "playing";
-    video.playbackRate = 2.2; // alta velocidad: llenado rápido e impactante
-    const playPromise = video.play();
-    if (playPromise && playPromise.catch) playPromise.catch(() => finishScene());
+    // barra de progreso
+    if (bar) bar.style.width = (p * 100).toFixed(1) + "%";
 
-    // Salvavidas: libera el scroll tras un tiempo prudente pase lo que pase,
-    // para que la página nunca quede bloqueada permanentemente.
-    safetyTimer = setTimeout(finishScene, 6000);
+    // burbujas: solo mientras hay líquido en movimiento visible
+    svg.classList.toggle("pouring", p > 0.12);
 
-    // Chequeo temprano: si el archivo de video no existe o no carga (por
-    // ejemplo mientras aún no se ha publicado el .mp4 generado), Chrome no
-    // siempre dispara "error" en el <video>, así que se detecta por su
-    // networkState/readyState y se libera el scroll de inmediato en vez de
-    // esperar los 6s completos del salvavidas.
-    setTimeout(() => {
-      if (state !== "playing") return;
-      const noSource = video.networkState === 3 /* NETWORK_NO_SOURCE */ && video.readyState === 0;
-      if (noSource) finishScene();
-    }, 1200);
+    // hielos / hierbabuena / lima: se revelan al pasar su umbral (y se ocultan al volver)
+    for (const el of items) el.classList.toggle("in", p >= parseFloat(el.dataset.at));
   }
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.6 && state === "idle") {
-        startFilling();
-      }
-    });
-  }, { threshold: [0, 0.6, 1] });
-  io.observe(section);
+  window.addEventListener("scroll", readScroll, { passive: true });
+  window.addEventListener("resize", readScroll);
+  readScroll();
+  paint(0);
 }
 
 // ============ MODAL DE PRODUCTO (vista expandida) ============
@@ -851,7 +790,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initLangSwitcher();
   renderCatNav();
   renderGrid();
-  renderPourProducts();
   updateCartUI();
   initSearchToggle();
   initCatnavScroll();
