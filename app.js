@@ -1,6 +1,37 @@
 // ============ CONFIGURACIÓN ============
 const WHATSAPP_NUMBER = "573107907194";
 
+// Mensaje que se abre en WhatsApp al tocar el botón "Reservar" (mismo número
+// que los pedidos). El cliente completa los datos y responde con "CONFIRMAR".
+const RESERVATION_MESSAGE = `¡Hola! Gracias por contactar a Azul Caribe Lounge. Estamos listos para brindarte una experiencia exclusiva frente al mar Caribe. Para gestionar tu reserva con la atención impecable que mereces, por favor completa los siguientes datos:
+
+*1. Datos Principales*
+• Nombre completo de la persona que realiza la reserva.
+• Número de personas que asistirán.
+• Fecha y hora deseada para la reserva.
+• Motivo de la celebración (Cena casual, Aniversario, Reunión de negocios, Despedida de soltero/a, Cumpleaños, Otro).
+
+*2. Seguimiento Personalizado*
+• Si tu celebración es un Cumpleaños:
+   - ¿Cuál es el nombre de la persona que cumple años?
+   - ¿Deseas agregar alguna preparación especial? (Pastel de la casa, decoración temática, brindis sorpresa, etc.).
+• Restricciones Alimentarias:
+   - ¿Algún asistente presenta alergias alimentarias o restricciones dietéticas?
+   - Escribe libremente los detalles: intolerancias, preferencias vegetarianas/veganas, menús sin gluten o sin lactosa, etc.
+
+*3. Resumen y Confirmación*
+Una vez nos compartas la información, te presentaremos este formato para tu validación final:
+
+*Resumen de tu Reserva - Azul Caribe Lounge*
+• Titular: [Nombre completo]
+• Asistentes: [Número] personas
+• Fecha y Hora: [Fecha] a las [Hora]
+• Motivo: [Motivo de la celebración]
+• Detalles de Cumpleaños: [Nombre y sorpresas solicitadas]
+• Restricciones Dietéticas: [Detalles o Ninguna]
+
+Por favor, responde este mensaje con los datos solicitados y finaliza con la palabra "CONFIRMAR" para asegurar tu mesa en nuestro espacio exclusivo. ¡Te esperamos!`;
+
 // Productos destacados dentro de la "pour scene" (escena de scroll bloqueado
 // con el video de Higgsfield). Edita este arreglo con los ids de data.js
 // que quieras mostrar mientras se llena el vaso (2 a 4 ideales).
@@ -78,6 +109,7 @@ function applyStaticTranslations() {
   setText("venue-eyebrow", t("venueEyebrow"));
   setText("venue-tagline", t("tagline"));
   setText("info-btn-label", t("infoBtn"));
+  setText("reserve-btn-label", t("reserveBtn"));
   setPlaceholder("search-input", t("searchPlaceholder"));
   setText("foot-note", t("footNote"));
   setText("info-modal-title", t("infoHeader"));
@@ -810,6 +842,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initInfoModal();
   initPourScene();
   initScrollSpyListener();
+
+  document.getElementById("reserve-btn").addEventListener("click", () => {
+    const msg = encodeURIComponent(RESERVATION_MESSAGE);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+  });
 
   document.getElementById("cart-btn").addEventListener("click", openDrawer);
   document.getElementById("close-drawer").addEventListener("click", closeDrawer);
