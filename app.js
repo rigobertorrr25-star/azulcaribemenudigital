@@ -4,22 +4,24 @@ const WHATSAPP_NUMBER = "573103670548";
 // Mensaje que se abre en WhatsApp al tocar el botón "Reservar" (mismo número
 // que los pedidos). Está redactado en primera persona: lo envía el cliente,
 // que completa cada campo y lo manda.
-const RESERVATION_MESSAGE = `Hola, quiero hacer una reserva en *Azul Caribe Lounge*. Estos son mis datos:
+const RESERVATION_MESSAGE = `🌴 ¡Hola! Quiero hacer una reserva en *Azul Caribe Lounge* 🌊
 
-*1. Datos principales*
-• Nombre completo (titular de la reserva):
-• Número de personas:
-• Fecha y hora deseada:
-• Motivo de la celebración: (Cena casual / Aniversario / Reunión de negocios / Despedida de soltero/a / Cumpleaños / Otro)
+Estos son mis datos:
 
-*2. Si es un cumpleaños*
-• Nombre de quien cumple años:
-• Preparación especial que me gustaría: (pastel de la casa, decoración temática, brindis sorpresa, etc.)
+📋 *1. Datos principales*
+👤 Nombre completo (titular de la reserva):
+👥 Número de personas:
+📅 Fecha y hora deseada:
+🎉 Motivo de la celebración: (Cena casual / Aniversario / Reunión de negocios / Despedida de soltero/a / Cumpleaños / Otro)
 
-*3. Restricciones alimentarias*
-• Alergias o restricciones de algún asistente: (intolerancias, vegetariano/vegano, sin gluten, sin lactosa… o "Ninguna")
+🎂 *2. Si es un cumpleaños*
+🥳 Nombre de quien cumple años:
+✨ Preparación especial que me gustaría: (pastel de la casa, decoración temática, brindis sorpresa, etc.)
 
-Quedo atento/a a la confirmación de disponibilidad. ¡Gracias!`;
+🍽️ *3. Restricciones alimentarias*
+⚠️ Alergias o restricciones de algún asistente: (intolerancias, vegetariano/vegano, sin gluten, sin lactosa… o "Ninguna")
+
+🙌 Quedo atento/a a la confirmación de disponibilidad. ¡Gracias!`;
 
 // Productos destacados dentro de la "pour scene" (escena de scroll bloqueado
 // con el video de Higgsfield). Edita este arreglo con los ids de data.js
