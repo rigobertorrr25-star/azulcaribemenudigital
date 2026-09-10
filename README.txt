@@ -1,5 +1,21 @@
-AZUL CARIBE LOUNGE — MENÚ DIGITAL (v14)
+AZUL CARIBE LOUNGE — MENÚ DIGITAL (v15)
 =======================================
+
+QUÉ CAMBIÓ EN v15
+-------------------
+- La sección "El arte de servir Azul Caribe" ya NO bloquea el scroll ni
+  usa el video. Ahora el vaso se "llena" cruzando 4 fotos (arte-1 vacío
+  -> arte-4 lleno) según la posición del scroll: al bajar se llena, al
+  subir se vacía (bidireccional, con un suavizado tipo scrub). El tramo
+  #pour-scroll mide 230vh (200vh en móvil) y su hijo .pour-stage queda
+  sticky mientras se recorre. Toda la lógica está en initPourScene() de
+  app.js; para cambiar las fotos o el orden, edita el bloque
+  <div class="pour-photos"> en index.html.
+- El video (videos/mojito-pour.*) y las imágenes pour-empty/full.jpg
+  siguen en el repo pero ya no se usan en la página.
+- Números de WhatsApp separados para pedidos y reservas, botón "Reservar"
+  en la portada, servicio voluntario 10% en el mensaje de pedido, y
+  cache-busting (?v=) + etiquetas no-cache en index.html.
 
 QUÉ CAMBIÓ EN v14
 -------------------
@@ -180,15 +196,12 @@ QUÉ CAMBIÓ EN v4
 - Mantiene exactamente la misma paleta navy/dorado, tipografía y estilo
   del resto del sitio.
 
-Cómo cambiar el video más adelante: reemplaza el archivo
-"videos/mojito-pour.mp4" por uno nuevo con el mismo nombre (o cambia la
-ruta en el <source> dentro de index.html, sección "POUR SCENE"). Las
-imágenes "images/pour-full.jpg" (vaso lleno, usada como portada/poster) e
-"images/pour-empty.jpg" (vaso vacío, respaldo mientras carga) también se
-pueden reemplazar por otras fotos del mismo trago si cambias de cóctel
-protagonista. Los 3 cócteles destacados de esa sección se controlan desde
-la constante POUR_SHOWCASE_IDS al inicio de "app.js" — solo pon ahí los
-"id" (de data.js) de los productos que quieras mostrar.
+(v15) Esta sección ahora se controla con el scroll y 4 fotos — ver la
+nota de v15 arriba. Para cambiarla: las fotos son images/arte-1..4.jpg
+(4:5) y su orden está en el bloque <div class="pour-photos"> de
+index.html; el largo del recorrido de llenado está en
+".pour-scroll { height: 230vh }" (styles.css); la lógica en
+initPourScene() de app.js (la constante SMOOTH ajusta el suavizado).
 
 QUÉ CAMBIÓ EN v3
 -------------------

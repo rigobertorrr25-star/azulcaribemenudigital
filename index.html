@@ -10,7 +10,7 @@
 <title>Azul Caribe Lounge · Menú Digital</title>
 <meta name="description" content="Menú digital interactivo de Azul Caribe Lounge">
 <link rel="apple-touch-icon" href="images/logo-palm.png">
-<link rel="stylesheet" href="styles.css?v=20260911f">
+<link rel="stylesheet" href="styles.css?v=20260911g">
 </head>
 <body>
 <div class="bg-ambience"></div>
@@ -51,20 +51,27 @@
   </div>
 </header>
 
-<!-- ===== POUR SCENE: escena de scroll bloqueado con el video de Higgsfield ===== -->
-<section class="pour-scene" id="pour-scene">
-  <video class="pour-video" id="pour-video" muted playsinline preload="auto" poster="images/pour-full.jpg">
-    <source src="videos/mojito-pour.webm" type="video/webm">
-    <source src="videos/mojito-pour.mp4" type="video/mp4">
-  </video>
-  <img class="pour-fallback-img" id="pour-fallback-img" src="images/pour-empty.jpg" alt="">
-  <div class="pour-overlay"></div>
-  <div class="pour-content">
-    <div class="pour-eyebrow" id="pour-eyebrow">Coctelería de autor</div>
-    <h2 class="pour-title" id="pour-title">El arte de servir <span>Azul Caribe</span></h2>
-    <div class="pour-products" id="pour-products"></div>
+<!-- ===== POUR SCENE: el vaso se "llena" cruzando 4 fotos según el scroll =====
+     Bidireccional y sin bloqueo: #pour-scroll es un tramo alto; .pour-stage
+     queda sticky mientras se recorre; el progreso se calcula desde la
+     posición del scroll y funde arte-1 (vacío) -> arte-4 (lleno). -->
+<section class="pour-scroll" id="pour-scroll">
+  <div class="pour-stage" id="pour-stage">
+    <div class="pour-overlay" aria-hidden="true"></div>
+
+    <div class="pour-photos" id="pour-photos">
+      <img class="pour-photo" src="images/arte-1.jpg" alt="Mojito Azul Caribe" loading="eager">
+      <img class="pour-photo" src="images/arte-2.jpg" alt="Mojito Azul Caribe" loading="eager">
+      <img class="pour-photo" src="images/arte-3.jpg" alt="Mojito Azul Caribe" loading="eager">
+      <img class="pour-photo" src="images/arte-4.jpg" alt="Mojito Azul Caribe" loading="eager">
+    </div>
+
+    <div class="pour-content">
+      <div class="pour-eyebrow" id="pour-eyebrow">Coctelería de autor</div>
+      <h2 class="pour-title" id="pour-title">El arte de servir <span>Azul Caribe</span></h2>
+    </div>
+    <div class="pour-progress"><div class="pour-progress-bar" id="pour-progress-bar"></div></div>
   </div>
-  <div class="pour-progress" id="pour-progress"><div class="pour-progress-bar" id="pour-progress-bar"></div></div>
 </section>
 
 <!-- ===== STICKY NAV: buscador + categorías (tipo Maido) ===== -->
@@ -163,8 +170,8 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="i18n.js?v=20260911f"></script>
-<script src="data.js?v=20260911f"></script>
-<script src="app.js?v=20260911f"></script>
+<script src="i18n.js?v=20260911g"></script>
+<script src="data.js?v=20260911g"></script>
+<script src="app.js?v=20260911g"></script>
 </body>
 </html>
