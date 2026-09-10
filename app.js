@@ -28,7 +28,8 @@ Estos son mis datos:
 // Productos destacados dentro de la "pour scene" (escena de scroll bloqueado
 // con el video de Higgsfield). Edita este arreglo con los ids de data.js
 // que quieras mostrar mientras se llena el vaso (2 a 4 ideales).
-const POUR_SHOWCASE_IDS = ["k1", "k2", "v2"];
+// Vacío = no se muestran tarjetas, para que se aprecie mejor el video del Mojito.
+const POUR_SHOWCASE_IDS = [];
 
 // Efecto de "destape" interactivo: al hacer clic directamente sobre la foto
 // del producto, se reproduce un video real (generado con Higgsfield) donde
