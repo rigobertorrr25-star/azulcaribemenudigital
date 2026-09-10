@@ -172,112 +172,73 @@ a{color:inherit;text-decoration:none;}
 .reserve-btn:hover{filter:brightness(1.08); box-shadow:0 6px 18px rgba(212,175,55,0.45);}
 .reserve-btn:active{transform:translateY(1px);}
 
-/* ============ POUR SCENE (vaso de mojito que se llena con el scroll) ============ */
-/* .pour-scroll es un tramo alto; .pour-stage queda "sticky" mientras se recorre.
-   No hay bloqueo de scroll: la página se desplaza con total normalidad y el
-   progreso del vaso se calcula a partir de la posición del scroll. */
-.pour-scroll{
+/* ============ POUR SCENE (video de scroll bloqueado) ============ */
+.pour-scene{
   position:relative; z-index:5;
-  height:240vh;                 /* largo del recorrido de llenado */
-}
-.pour-stage{
-  position:sticky; top:0;
-  height:100vh; height:100svh; min-height:440px;
+  height:100vh; height:100svh; min-height:480px; max-height:900px;
   overflow:hidden; background:var(--navy);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:22px;
+  display:flex; align-items:flex-end; justify-content:center;
 }
+.pour-video, .pour-fallback-img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
+.pour-fallback-img{ opacity:1; transition:opacity .4s ease; z-index:1; }
+.pour-video{ z-index:2; background:var(--navy); }
+.pour-scene.video-ready .pour-fallback-img{ opacity:0; }
 .pour-overlay{
-  position:absolute; inset:0; z-index:0; pointer-events:none;
+  position:absolute; inset:0; z-index:3; pointer-events:none;
   background:
-    radial-gradient(700px 420px at 50% 42%, rgba(41,73,120,0.45), transparent 70%),
-    linear-gradient(180deg, rgba(11,19,41,0.9) 0%, rgba(11,19,41,0.25) 30%, rgba(11,19,41,0.35) 70%, rgba(11,19,41,0.95) 100%);
+    linear-gradient(180deg, rgba(11,19,41,0.55) 0%, rgba(11,19,41,0.15) 32%, rgba(11,19,41,0.25) 60%, rgba(11,19,41,0.92) 100%),
+    radial-gradient(1100px 500px at 50% 100%, rgba(11,19,41,0.6), transparent 70%);
 }
-.pour-copy{
-  position:relative; z-index:2; text-align:center; padding:0 24px;
+.pour-content{
+  position:relative; z-index:4; width:100%; max-width:var(--maxw);
+  padding:0 24px 56px; text-align:center;
 }
 .pour-eyebrow{
   color:var(--sand); letter-spacing:4px; font-size:11.5px; text-transform:uppercase; margin-bottom:10px;
+  opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;
 }
 .pour-title{
-  font-size:clamp(24px,4.2vw,40px); color:var(--white); margin:0; line-height:1.2;
+  font-size:clamp(24px,4.2vw,40px); color:var(--white); margin:0 0 26px; line-height:1.2;
   text-shadow:0 4px 24px rgba(0,0,0,0.5);
+  opacity:0; transform:translateY(16px); transition:opacity .6s ease .1s, transform .6s ease .1s;
 }
 .pour-title span{color:var(--gold);}
+.pour-scene.reveal .pour-eyebrow, .pour-scene.reveal .pour-title{ opacity:1; transform:translateY(0); }
 
-.pour-glass-wrap{
-  position:relative; z-index:1;
-  display:flex; align-items:center; justify-content:center;
+.pour-products{
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
 }
-.pour-glass{
-  width:clamp(190px, 40vw, 300px); height:auto; max-height:58vh;
-  filter:drop-shadow(0 24px 40px rgba(0,0,0,0.45));
+.pour-card{
+  width:150px; background:rgba(11,19,41,0.55); backdrop-filter:blur(6px);
+  border:1px solid rgba(212,175,55,0.35); border-radius:14px; overflow:hidden;
+  opacity:0; transform:translateY(28px) scale(0.96);
+  transition:opacity .55s cubic-bezier(.2,.8,.2,1), transform .55s cubic-bezier(.2,.8,.2,1);
 }
-/* la capa de líquido se mueve verticalmente con el progreso (acelerada por GPU) */
-.pour-liquid{
-  will-change:transform;
-  transform:translate3d(0, 300px, 0);   /* estado inicial: vacío */
-  transition:transform .05s linear;
-}
-.pour-surface{ opacity:0.85; }
-
-/* hielos, hierbabuena y lima: ocultos hasta que el líquido pasa su umbral.
-   El reveal es SOLO opacidad en .pour-item (para no pisar el transform de
-   posición); el "pop" y el balanceo van en el hijo .pour-pop. */
-.pour-item{ opacity:0; transition:opacity .45s ease; }
-.pour-item.in{ opacity:1; }
-.pour-pop{
-  transform-box:fill-box; transform-origin:center;
-  transform:scale(0.5);
-  transition:transform .55s cubic-bezier(.2,.9,.25,1.4);
-}
-.pour-item.in .pour-pop{ transform:scale(1); }
-.pour-ice .pour-pop{ fill:rgba(226,244,255,0.5); stroke:rgba(255,255,255,0.5); stroke-width:1.2; }
-/* balanceo suave una vez visibles */
-.pour-ice .pour-item.in .pour-pop{ animation:pour-bob 3.6s ease-in-out .55s infinite; }
-.pour-mint .pour-item.in .pour-pop{ animation:pour-bob 2.9s ease-in-out .55s infinite; }
-
-@keyframes pour-bob{
-  0%,100%{ transform:scale(1) translateY(0); }
-  50%{ transform:scale(1) translateY(-3.5px); }
-}
-
-/* burbujas: solo animan mientras se está sirviendo (.pouring en el <svg>) */
-.pour-bubbles circle{ fill:rgba(255,255,255,0.5); opacity:0; }
-.pour-glass.pouring .pour-bubbles circle{
-  animation:pour-bubble 3.4s linear infinite;
-  animation-delay:var(--d, 0s);
-}
-@keyframes pour-bubble{
-  0%{ transform:translate(0,0); opacity:0; }
-  12%{ opacity:0.8; }
-  80%{ opacity:0.5; }
-  100%{ transform:translate(var(--x, 0), -120px); opacity:0; }
-}
-
-.pour-straw{ opacity:0.9; }
-.pour-glass-shine{ opacity:0.5; }
+.pour-card.show{ opacity:1; transform:translateY(0) scale(1); }
+.pour-card img{ width:100%; height:96px; object-fit:cover; }
+.pour-card-body{ padding:9px 10px 12px; text-align:left; }
+.pour-card-name{ font-family:'Georgia',serif; font-size:12.5px; color:var(--white); line-height:1.25; }
+.pour-card-price{ color:var(--gold); font-size:12px; font-weight:700; margin-top:3px; font-family:'Georgia',serif; }
 
 .pour-progress{
-  position:absolute; left:0; right:0; bottom:0; height:3px; z-index:3;
+  position:absolute; left:0; right:0; bottom:0; height:3px; z-index:6;
   background:rgba(255,255,255,0.08);
 }
 .pour-progress-bar{
   height:100%; width:0%; background:linear-gradient(90deg, var(--gold), var(--sand));
+  transition:width .1s linear;
 }
 
 @media (max-width:640px){
-  .pour-scroll{ height:200vh; }
-  .pour-stage{ gap:14px; }
-  .pour-glass{ width:min(62vw, 240px); }
+  .pour-scene{ max-height:none; }
+  .pour-card{ width:118px; }
+  .pour-card img{ height:78px; }
 }
 
-@media (prefers-reduced-motion:reduce){
-  .pour-liquid{ transition:none; }
-  .pour-pop{ transition:opacity .2s ease; transform:scale(1); }
-  .pour-item.in .pour-pop{ animation:none; }
-  .pour-glass.pouring .pour-bubbles circle{ animation:none; }
-}
+/* Bloquea el scroll de la página mientras el cóctel se está sirviendo */
+body.scroll-locked{ overflow:hidden; height:100vh; touch-action:none; }
 
 /* ============ STICKY NAV ============ */
 .sticky-nav{

@@ -1,23 +1,5 @@
-AZUL CARIBE LOUNGE — MENÚ DIGITAL (v15)
+AZUL CARIBE LOUNGE — MENÚ DIGITAL (v14)
 =======================================
-
-QUÉ CAMBIÓ EN v15
--------------------
-- La sección "El arte de servir Azul Caribe" ya NO usa un video. Ahora es
-  un vaso de mojito dibujado en SVG que se llena y se vacía siguiendo el
-  scroll (bidireccional): al bajar se llena de 0% a 100%, al subir se
-  vacía. No se bloquea el scroll en ningún momento — la página se
-  desplaza con total normalidad y el nivel del líquido se calcula a
-  partir de la posición del scroll (ver initPourScene en app.js).
-- El líquido cambia de translúcido claro a verde mojito vibrante, y a
-  medida que sube van apareciendo hielos, hojas de hierbabuena, una
-  rodaja de lima en el borde y burbujas.
-- Se eliminaron los archivos que ya no se usan: videos/mojito-pour.*,
-  images/pour-empty.jpg, images/pour-full.jpg.
-- Se agregaron dos números de WhatsApp separados: pedidos y reservas
-  (ver "LOS NÚMEROS DE WHATSAPP" más abajo), un botón "Reservar" en la
-  portada, servicio voluntario del 10% en el mensaje de pedido, y
-  cache-busting (?v=) + etiquetas no-cache en index.html.
 
 QUÉ CAMBIÓ EN v14
 -------------------
@@ -198,11 +180,15 @@ QUÉ CAMBIÓ EN v4
 - Mantiene exactamente la misma paleta navy/dorado, tipografía y estilo
   del resto del sitio.
 
-(v15) Esta sección ahora es un vaso SVG guiado por el scroll — ver la nota
-de v15 arriba. Para ajustarla: el largo del recorrido de llenado está en
-".pour-scroll { height: 240vh }" (styles.css) y los umbrales en que
-aparecen hielos/hierbabuena/lima son los atributos "data-at" del SVG en
-index.html. La lógica vive en initPourScene() de app.js.
+Cómo cambiar el video más adelante: reemplaza el archivo
+"videos/mojito-pour.mp4" por uno nuevo con el mismo nombre (o cambia la
+ruta en el <source> dentro de index.html, sección "POUR SCENE"). Las
+imágenes "images/pour-full.jpg" (vaso lleno, usada como portada/poster) e
+"images/pour-empty.jpg" (vaso vacío, respaldo mientras carga) también se
+pueden reemplazar por otras fotos del mismo trago si cambias de cóctel
+protagonista. Los 3 cócteles destacados de esa sección se controlan desde
+la constante POUR_SHOWCASE_IDS al inicio de "app.js" — solo pon ahí los
+"id" (de data.js) de los productos que quieras mostrar.
 
 QUÉ CAMBIÓ EN v3
 -------------------
@@ -251,9 +237,9 @@ QUÉ INCLUYE ESTA CARPETA
 - styles.css   -> estilos (colores, tipografía, tema Caribe)
 - i18n.js      -> textos de interfaz y traducciones (ES/EN/PT) — edítalo para ajustar cualquier texto fijo
 - data.js      -> TODOS los productos, precios y descripciones en los 3 idiomas (edítalo aquí para actualizar el menú)
-- app.js       -> la lógica (idioma, buscador, filtros, grid, modal de producto, carrito, WhatsApp, vaso de mojito guiado por scroll)
-- images/      -> las fotos de productos + el logo
-- videos/      -> videos de "destape" de las botellas (uncork-*.webm/mp4)
+- app.js       -> la lógica (idioma, buscador, filtros, grid, modal de producto, carrito, WhatsApp, escena de scroll bloqueado)
+- images/      -> las fotos de productos + el logo (incluye pour-full.jpg y pour-empty.jpg de la nueva sección)
+- videos/      -> el video del cóctel llenándose (mojito-pour.mp4) generado con Higgsfield
 
 CÓMO PUBLICARLO EN INTERNET (gratis, sin programar)
 -----------------------------------------------------
