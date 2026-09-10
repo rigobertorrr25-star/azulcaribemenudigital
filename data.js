@@ -38,6 +38,10 @@ const MENU_DATA = [
     nombre:{ es:"Adicional de Queso", en:"Extra Cheese", pt:"Adicional de Queijo" },
     desc:{ es:"Porción extra de queso para acompañar tu desayuno.", en:"Extra portion of cheese to add to your breakfast.", pt:"Porção extra de queijo para acompanhar seu café da manhã." },
     precio:5000, img:"aperitivo-papas-queso", tags:[] },
+  { id:"d7", cat:"desayuno",
+    nombre:{ es:"Desayuno Completo", en:"Full Breakfast", pt:"Café da Manhã Completo" },
+    desc:{ es:"Huevos revueltos, chorizo, tocino y sándwich de jamón y queso a la plancha, acompañado de un bowl de fruta fresca.", en:"Scrambled eggs, sausage, bacon, and a grilled ham and cheese sandwich, served with a fresh fruit bowl.", pt:"Ovos mexidos, linguiça, bacon e sanduíche de presunto e queijo na chapa, acompanhado de um bowl de fruta fresca." },
+    precio:25000, img:"desayuno-completo", tags:[] },
 
   // ---- APERITIVOS PARA COMPARTIR / STARTERS / APERITIVOS ----
   { id:"a1", cat:"aperitivos",
