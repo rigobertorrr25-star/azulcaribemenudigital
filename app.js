@@ -2,35 +2,24 @@
 const WHATSAPP_NUMBER = "573107907194";
 
 // Mensaje que se abre en WhatsApp al tocar el botón "Reservar" (mismo número
-// que los pedidos). El cliente completa los datos y responde con "CONFIRMAR".
-const RESERVATION_MESSAGE = `¡Hola! Gracias por contactar a Azul Caribe Lounge. Estamos listos para brindarte una experiencia exclusiva frente al mar Caribe. Para gestionar tu reserva con la atención impecable que mereces, por favor completa los siguientes datos:
+// que los pedidos). Está redactado en primera persona: lo envía el cliente,
+// que completa cada campo y lo manda.
+const RESERVATION_MESSAGE = `Hola, quiero hacer una reserva en *Azul Caribe Lounge*. Estos son mis datos:
 
-*1. Datos Principales*
-• Nombre completo de la persona que realiza la reserva.
-• Número de personas que asistirán.
-• Fecha y hora deseada para la reserva.
-• Motivo de la celebración (Cena casual, Aniversario, Reunión de negocios, Despedida de soltero/a, Cumpleaños, Otro).
+*1. Datos principales*
+• Nombre completo (titular de la reserva):
+• Número de personas:
+• Fecha y hora deseada:
+• Motivo de la celebración: (Cena casual / Aniversario / Reunión de negocios / Despedida de soltero/a / Cumpleaños / Otro)
 
-*2. Seguimiento Personalizado*
-• Si tu celebración es un Cumpleaños:
-   - ¿Cuál es el nombre de la persona que cumple años?
-   - ¿Deseas agregar alguna preparación especial? (Pastel de la casa, decoración temática, brindis sorpresa, etc.).
-• Restricciones Alimentarias:
-   - ¿Algún asistente presenta alergias alimentarias o restricciones dietéticas?
-   - Escribe libremente los detalles: intolerancias, preferencias vegetarianas/veganas, menús sin gluten o sin lactosa, etc.
+*2. Si es un cumpleaños*
+• Nombre de quien cumple años:
+• Preparación especial que me gustaría: (pastel de la casa, decoración temática, brindis sorpresa, etc.)
 
-*3. Resumen y Confirmación*
-Una vez nos compartas la información, te presentaremos este formato para tu validación final:
+*3. Restricciones alimentarias*
+• Alergias o restricciones de algún asistente: (intolerancias, vegetariano/vegano, sin gluten, sin lactosa… o "Ninguna")
 
-*Resumen de tu Reserva - Azul Caribe Lounge*
-• Titular: [Nombre completo]
-• Asistentes: [Número] personas
-• Fecha y Hora: [Fecha] a las [Hora]
-• Motivo: [Motivo de la celebración]
-• Detalles de Cumpleaños: [Nombre y sorpresas solicitadas]
-• Restricciones Dietéticas: [Detalles o Ninguna]
-
-Por favor, responde este mensaje con los datos solicitados y finaliza con la palabra "CONFIRMAR" para asegurar tu mesa en nuestro espacio exclusivo. ¡Te esperamos!`;
+Quedo atento/a a la confirmación de disponibilidad. ¡Gracias!`;
 
 // Productos destacados dentro de la "pour scene" (escena de scroll bloqueado
 // con el video de Higgsfield). Edita este arreglo con los ids de data.js
