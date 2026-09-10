@@ -490,23 +490,29 @@ function renderPourProducts() {
   });
 }
 
-// Escena de "llenado" con scroll bloqueado:
-// 1) Cuando la sección entra en pantalla (y aún no se ha reproducido), se
-//    bloquea el scroll (wheel/touch/teclado) y arranca el video a alta
-//    velocidad (playbackRate elevado) desde el vaso vacío hasta el lleno.
-// 2) Mientras se reproduce, la barra de progreso avanza y las tarjetas de
-//    producto entran con una animación escalonada (fade + slide).
-// 3) Al terminar el video (o si falla/está ausente, tras un tiempo de
-//    seguridad), el scroll se libera y la página continúa navegando normal.
+// Escena "El arte de servir" con scroll bloqueado:
+// 1) Cuando la sección entra en pantalla se bloquea el scroll (wheel/touch/
+//    teclado), el video de fondo se reproduce (atenuado) en bucle y arranca
+//    el MONTAJE DE FOTOS: arte-1 -> arte-4 se funden en secuencia dentro de
+//    un marco dorado, con un zoom lento (Ken Burns).
+// 2) La barra de progreso avanza según el montaje (no según el video).
+// 3) Al terminar el montaje (o tras el salvavidas de seguridad), el scroll
+//    se libera; queda visible la última foto sobre el video.
+// Config: PHOTO_MS = tiempo por foto, HOLD_MS = extra al final.
+const POUR_PHOTO_MS = 900;
+const POUR_HOLD_MS = 600;
+
 function initPourScene() {
   const section = document.getElementById("pour-scene");
   const video = document.getElementById("pour-video");
   const progressBar = document.getElementById("pour-progress-bar");
-  const cards = () => Array.from(document.querySelectorAll(".pour-card"));
+  const photoEls = Array.from(section ? section.querySelectorAll(".pour-photo") : []);
   if (!section || !video) return;
 
   let state = "idle"; // idle -> locked -> playing -> done
   let safetyTimer = null;
+  let photoTimers = [];
+  const montageTotal = POUR_PHOTO_MS * Math.max(1, photoEls.length) + POUR_HOLD_MS;
 
   function lockScroll() {
     document.body.classList.add("scroll-locked");
@@ -530,17 +536,34 @@ function initPourScene() {
     if (keys.includes(e.key)) e.preventDefault();
   }
 
+  function showPhoto(idx) {
+    photoEls.forEach((el, i) => el.classList.toggle("on", i === idx));
+  }
+
+  function runMontage() {
+    const start = performance.now();
+    photoEls.forEach((_, i) => {
+      photoTimers.push(setTimeout(() => { if (state !== "done") showPhoto(i); }, i * POUR_PHOTO_MS));
+    });
+    (function bar(now) {
+      if (state === "done") return;
+      const p = Math.min(1, (now - start) / montageTotal);
+      if (progressBar) progressBar.style.width = (p * 100).toFixed(1) + "%";
+      if (p < 1) requestAnimationFrame(bar);
+    })(start);
+    safetyTimer = setTimeout(finishScene, montageTotal);
+  }
+
   function revealContent() {
     section.classList.add("reveal");
-    cards().forEach((card, i) => {
-      setTimeout(() => card.classList.add("show"), 220 + i * 160);
-    });
   }
 
   function finishScene() {
     if (state === "done") return;
     state = "done";
     clearTimeout(safetyTimer);
+    photoTimers.forEach(clearTimeout);
+    if (photoEls.length) showPhoto(photoEls.length - 1); // deja la última foto visible
     if (progressBar) progressBar.style.width = "100%";
     detachScrollBlockers();
     unlockScroll();
@@ -549,45 +572,24 @@ function initPourScene() {
 
   function startFilling() {
     if (state !== "idle") return;
-    state = "locked";
+    state = "playing";
     lockScroll();
     attachScrollBlockers();
     revealContent();
 
-    // Si el video falla o el archivo aún no existe en el servidor, el propio
-    // elemento <video> dispara "error" (manejado abajo) y se usa la imagen
-    // de respaldo (siempre visible detrás hasta que "video-ready" se active).
-    // El temporizador de seguridad garantiza que el scroll SIEMPRE se libere,
-    // incluso si ningún evento del video llega a dispararse.
+    // El video corre de fondo, atenuado y en bucle, solo como ambiente. Si no
+    // carga, queda la imagen de respaldo detrás (pour-empty.jpg). El montaje
+    // de fotos es independiente del video y controla cuándo termina la escena.
     video.addEventListener("canplay", () => section.classList.add("video-ready"), { once: true });
-    video.addEventListener("timeupdate", () => {
-      if (video.duration) {
-        const pct = Math.min(100, (video.currentTime / video.duration) * 100);
-        if (progressBar) progressBar.style.width = pct + "%";
-      }
-    });
-    video.addEventListener("ended", finishScene, { once: true });
-    video.addEventListener("error", finishScene, { once: true });
-
-    state = "playing";
-    video.playbackRate = 2.2; // alta velocidad: llenado rápido e impactante
+    video.loop = true;
+    video.playbackRate = 1;
     const playPromise = video.play();
-    if (playPromise && playPromise.catch) playPromise.catch(() => finishScene());
+    if (playPromise && playPromise.catch) playPromise.catch(() => { /* el montaje sigue igual */ });
 
-    // Salvavidas: libera el scroll tras un tiempo prudente pase lo que pase,
-    // para que la página nunca quede bloqueada permanentemente.
-    safetyTimer = setTimeout(finishScene, 6000);
+    runMontage();
 
-    // Chequeo temprano: si el archivo de video no existe o no carga (por
-    // ejemplo mientras aún no se ha publicado el .mp4 generado), Chrome no
-    // siempre dispara "error" en el <video>, así que se detecta por su
-    // networkState/readyState y se libera el scroll de inmediato en vez de
-    // esperar los 6s completos del salvavidas.
-    setTimeout(() => {
-      if (state !== "playing") return;
-      const noSource = video.networkState === 3 /* NETWORK_NO_SOURCE */ && video.readyState === 0;
-      if (noSource) finishScene();
-    }, 1200);
+    // Salvavidas absoluto: el scroll SIEMPRE se libera aunque algo falle.
+    setTimeout(finishScene, montageTotal + 2000);
   }
 
   const io = new IntersectionObserver((entries) => {

@@ -191,9 +191,40 @@ a{color:inherit;text-decoration:none;}
     linear-gradient(180deg, rgba(11,19,41,0.55) 0%, rgba(11,19,41,0.15) 32%, rgba(11,19,41,0.25) 60%, rgba(11,19,41,0.92) 100%),
     radial-gradient(1100px 500px at 50% 100%, rgba(11,19,41,0.6), transparent 70%);
 }
+/* ---- Montaje de fotos sobre el video ---- */
+.pour-photos{
+  position:absolute; inset:0; z-index:4; pointer-events:none;
+  display:flex; align-items:center; justify-content:center;
+  padding-bottom:96px;              /* deja aire para el título abajo */
+  opacity:0; transition:opacity .5s ease;
+}
+.pour-scene.reveal .pour-photos{ opacity:1; }
+.pour-photo-frame{
+  position:relative;
+  width:min(64vw, 300px); aspect-ratio:4 / 5;
+  border-radius:16px; overflow:hidden;
+  border:2px solid rgba(212,175,55,0.9);
+  box-shadow:0 26px 60px rgba(0,0,0,0.6), 0 0 0 7px rgba(11,19,41,0.4), inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+.pour-photo{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transform:scale(1.12); filter:saturate(0.85);
+  transition:opacity .55s ease;
+  will-change:opacity, transform;
+}
+.pour-photo.on{
+  opacity:1; transform:scale(1); filter:saturate(1.05);
+  transition:opacity .55s ease, transform 2.6s ease-out, filter 1.4s ease;
+}
+/* el video se atenúa mientras corre el montaje, y vuelve al terminar */
+.pour-scene.reveal .pour-video,
+.pour-scene.reveal .pour-fallback-img{ filter:brightness(0.45) blur(1.5px); transition:filter .6s ease; }
+.pour-scene.pour-done .pour-video,
+.pour-scene.pour-done .pour-fallback-img{ filter:brightness(0.7); }
+
 .pour-content{
-  position:relative; z-index:4; width:100%; max-width:var(--maxw);
-  padding:0 24px 56px; text-align:center;
+  position:relative; z-index:5; width:100%; max-width:var(--maxw);
+  padding:0 24px 44px; text-align:center;
 }
 .pour-eyebrow{
   color:var(--sand); letter-spacing:4px; font-size:11.5px; text-transform:uppercase; margin-bottom:10px;
@@ -235,6 +266,13 @@ a{color:inherit;text-decoration:none;}
   .pour-scene{ max-height:none; }
   .pour-card{ width:118px; }
   .pour-card img{ height:78px; }
+  .pour-photos{ padding-bottom:78px; }
+  .pour-photo-frame{ width:min(70vw, 260px); }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pour-photo{ transform:none; }
+  .pour-photo.on{ transform:none; transition:opacity .35s ease; }
 }
 
 /* Bloquea el scroll de la página mientras el cóctel se está sirviendo */
