@@ -34,6 +34,10 @@ const MENU_DATA = [
     nombre:{ es:"Papa Criolla con Pikliz", en:"Criolla Potatoes with Pikliz", pt:"Batata Crioula com Pikliz" },
     desc:{ es:"Papas criollas doradas acompañadas de pikliz haitiano picante.", en:"Golden criolla potatoes served with spicy Haitian pikliz.", pt:"Batatas crioulas douradas acompanhadas de pikliz haitiano picante." },
     precio:22000, img:"desayuno-papa-criolla", tags:[] },
+  { id:"d6", cat:"desayuno",
+    nombre:{ es:"Adicional de Queso", en:"Extra Cheese", pt:"Adicional de Queijo" },
+    desc:{ es:"Porción extra de queso para acompañar tu desayuno.", en:"Extra portion of cheese to add to your breakfast.", pt:"Porção extra de queijo para acompanhar seu café da manhã." },
+    precio:5000, img:"aperitivo-papas-queso", tags:[] },
 
   // ---- APERITIVOS PARA COMPARTIR / STARTERS / APERITIVOS ----
   { id:"a1", cat:"aperitivos",
@@ -209,6 +213,12 @@ const MENU_DATA = [
     desc:{ es:"Elaborados con licores seleccionados y recetas clásicas.", en:"Crafted with select spirits and classic recipes.", pt:"Preparados com destilados selecionados e receitas clássicas." },
     precio:42500, img:"bar-cocteleria-premium", tags:[], badge:"bartender" },
 
+  // ---- COCTELERÍA PREMIUM / PREMIUM COCKTAILS / COQUETELARIA PREMIUM ----
+  { id:"k3", cat:"bar", sub:"premium",
+    nombre:{ es:"Boulevardier", en:"Boulevardier", pt:"Boulevardier" },
+    desc:{ es:"Clásico de autor con bourbon, Campari y vermut rojo.", en:"Craft classic with bourbon, Campari, and sweet vermouth.", pt:"Clássico autoral com bourbon, Campari e vermute tinto." },
+    precio:45000, img:"bar-cocteleria-premium", tags:[], badge:"bartender" },
+
   // ---- VINO & SANGRÍA / WINE & SANGRIA / VINHO & SANGRIA ----
   { id:"v1", cat:"bar", sub:"vino",
     nombre:{ es:"Vino por Copa", en:"Wine by the Glass", pt:"Vinho por Taça" },
@@ -318,6 +328,7 @@ const CATEGORIES = [
 // Subgrupos dentro de la categoría "bar"
 const BAR_SUBS = {
   cocteles: { es:"Cócteles", en:"Cocktails", pt:"Coquetéis" },
+  premium: { es:"Coctelería Premium", en:"Premium Cocktails", pt:"Coquetelaria Premium" },
   vino: { es:"Vino & Sangría", en:"Wine & Sangria", pt:"Vinho & Sangria" },
   cerveza: { es:"Cerveza", en:"Beer", pt:"Cerveja" },
   licores: { es:"Licores", en:"Spirits", pt:"Destilados" },
