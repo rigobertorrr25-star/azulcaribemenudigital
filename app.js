@@ -1,5 +1,7 @@
 // ============ CONFIGURACIÓN ============
-const WHATSAPP_NUMBER = "573103670548";
+// Números de WhatsApp (código de país + número, sin + ni espacios).
+const WHATSAPP_ORDER_NUMBER = "573213296814";       // pedidos (botón 🛒)
+const WHATSAPP_RESERVATION_NUMBER = "573103670548"; // reservas (botón Reservar)
 
 // Mensaje que se abre en WhatsApp al tocar el botón "Reservar" (mismo número
 // que los pedidos). Está redactado en primera persona: lo envía el cliente,
@@ -777,24 +779,42 @@ function renderCart() {
   document.getElementById("total-amt").textContent = fmt(cartTotal());
 }
 
+// Emoji por tipo de producto para el mensaje de pedido de WhatsApp.
+function itemEmoji(item) {
+  if (item.cat === "bar") {
+    return ({ cocteles: "🍸", premium: "🥃", vino: "🍷", cerveza: "🍺", licores: "🥃" })[item.sub] || "🍹";
+  }
+  return ({
+    desayuno: "🍳", aperitivos: "🍤", cafe: "☕",
+    bebidas: "🥤", platos: "🍽️", carnes: "🥩", sides: "🍟",
+  })[item.cat] || "🍽️";
+}
+
 // El mensaje de WhatsApp se envía siempre en español porque lo recibe el
 // personal del lounge (independientemente del idioma que esté viendo el
 // cliente en la pantalla). Si prefieres que siga el idioma del cliente,
 // se puede ajustar fácilmente aquí.
 function buildWhatsappMessage() {
   const keys = Object.keys(cart).filter(k => cart[k] > 0);
-  let lines = ["Hola, quiero hacer este pedido en *Azul Caribe Lounge*:", ""];
+  const totalItems = keys.reduce((n, k) => n + cart[k], 0);
+  let lines = [
+    "🌴 *Nuevo pedido — Azul Caribe Lounge* 🌊",
+    "",
+    `🧾 *Mi pedido* (${totalItems} ${totalItems === 1 ? "producto" : "productos"}):`,
+  ];
   keys.forEach(key => {
     const { item, mode } = parseCartKey(key);
     if (!item) return;
     const unit = unitPriceFor(item, mode);
     const variantLabel = item.precioBotella ? (mode === "botella" ? " (Botella)" : " (Trago)") : "";
-    lines.push(`• ${cart[key]}x ${item.nombre.es}${variantLabel} — ${fmt(unit * cart[key])}`);
+    lines.push(`${itemEmoji(item)} ${cart[key]}x ${item.nombre.es}${variantLabel} — ${fmt(unit * cart[key])}`);
   });
   lines.push("");
-  lines.push(`Total: ${fmt(cartTotal())}`);
+  lines.push(`💰 *Total: ${fmt(cartTotal())}*`);
   const note = document.getElementById("order-note").value.trim();
-  if (note) { lines.push(""); lines.push(`Nota: ${note}`); }
+  if (note) { lines.push(""); lines.push(`📝 *Nota:* ${note}`); }
+  lines.push("");
+  lines.push("🙌 ¡Gracias! Quedo atento/a a la confirmación.");
   return lines.join("\n");
 }
 
@@ -836,7 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("reserve-btn").addEventListener("click", () => {
     const msg = encodeURIComponent(RESERVATION_MESSAGE);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${WHATSAPP_RESERVATION_NUMBER}?text=${msg}`, "_blank");
   });
 
   document.getElementById("cart-btn").addEventListener("click", openDrawer);
@@ -853,7 +873,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const keys = Object.keys(cart).filter(k => cart[k] > 0);
     if (keys.length === 0) return;
     const msg = encodeURIComponent(buildWhatsappMessage());
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${WHATSAPP_ORDER_NUMBER}?text=${msg}`, "_blank");
   });
 
   document.addEventListener("keydown", (e) => {

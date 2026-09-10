@@ -252,11 +252,12 @@ Opción más fácil — Netlify Drop:
 Otras opciones válidas: GitHub Pages, Vercel, o subirlo por FTP a cualquier hosting.
 IMPORTANTE: sube la carpeta "images" junto con los archivos, todos al mismo nivel.
 
-EL NÚMERO DE WHATSAPP YA ESTÁ CONFIGURADO
+LOS NÚMEROS DE WHATSAPP YA ESTÁN CONFIGURADOS
 --------------------------------------------
-En "app.js", la primera línea útil ya tiene tu número:
-    const WHATSAPP_NUMBER = "573103670548";
-Si cambia, edítalo ahí (código de país + número, sin espacios ni +).
+En "app.js", al inicio hay dos números (código de país + número, sin espacios ni +):
+    const WHATSAPP_ORDER_NUMBER = "573213296814";       // pedidos (botón carrito)
+    const WHATSAPP_RESERVATION_NUMBER = "573103670548"; // reservas (botón Reservar)
+Si cambian, edítalos ahí.
 
 CÓMO ACTUALIZAR PRECIOS O PRODUCTOS
 --------------------------------------
