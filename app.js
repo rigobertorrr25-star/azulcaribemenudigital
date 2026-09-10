@@ -1,5 +1,5 @@
 // ============ CONFIGURACIÓN ============
-const WHATSAPP_NUMBER = "573107907194";
+const WHATSAPP_NUMBER = "573103670548";
 
 // Mensaje que se abre en WhatsApp al tocar el botón "Reservar" (mismo número
 // que los pedidos). Está redactado en primera persona: lo envía el cliente,

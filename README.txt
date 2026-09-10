@@ -255,7 +255,7 @@ IMPORTANTE: sube la carpeta "images" junto con los archivos, todos al mismo nive
 EL NÚMERO DE WHATSAPP YA ESTÁ CONFIGURADO
 --------------------------------------------
 En "app.js", la primera línea útil ya tiene tu número:
-    const WHATSAPP_NUMBER = "573107907194";
+    const WHATSAPP_NUMBER = "573103670548";
 Si cambia, edítalo ahí (código de país + número, sin espacios ni +).
 
 CÓMO ACTUALIZAR PRECIOS O PRODUCTOS
