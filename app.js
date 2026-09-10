@@ -104,7 +104,6 @@ function applyStaticTranslations() {
   setText("info-whatsapp-text", t("infoWhatsapp"));
   setText("info-prices-text", t("infoPrices"));
   setText("info-cuisine-text", t("infoCuisine"));
-  setHTML("info-note-text", t("infoNote"));
   setText("drawer-title", t("yourOrder"));
   setText("total-label", t("total"));
   setPlaceholder("order-note", t("notePlaceholder"));

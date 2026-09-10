@@ -534,8 +534,18 @@ textarea.note{
   display:flex; align-items:center; gap:10px; text-align:left;
   font-size:13px; color:var(--gray); padding:10px 4px; border-bottom:1px solid rgba(255,255,255,0.06);
 }
-.info-note{margin-top:16px; font-size:11px; color:var(--gray-dim); line-height:1.6; text-align:left;}
-.info-note code{background:rgba(212,175,55,0.12); padding:1px 5px; border-radius:4px; color:var(--sand);}
+a.info-row{ text-decoration:none; transition:color .2s; }
+a.info-row:hover{ color:var(--sand); }
+.info-socials{
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px;
+}
+.info-social{
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--glass); border:1px solid var(--glass-border); color:var(--sand);
+  border-radius:999px; padding:8px 16px; font-size:12.5px; letter-spacing:0.3px;
+  transition:background .2s, color .2s;
+}
+.info-social:hover{ background:var(--gold); color:var(--navy); }
 
 /* ============ PRODUCT MODAL (vista expandida) ============ */
 .product-modal{
