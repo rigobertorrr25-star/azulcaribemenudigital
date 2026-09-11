@@ -228,7 +228,7 @@ const MENU_DATA = [
   { id:"kc4", cat:"bar", sub:"cocteles",
     nombre:{ es:"Margarita de Maracuyá", en:"Passion Fruit Margarita", pt:"Margarita de Maracujá" },
     desc:{ es:"Tequila, maracuyá, triple sec y limón.", en:"Tequila, passion fruit, triple sec and lime.", pt:"Tequila, maracujá, triple sec e limão." },
-    precio:40000, img:"bar-margarita-maracuya", img2:"bar-margarita-maracuya-x", tags:[] },
+    precio:40000, img:"bar-margarita-maracuya-v2", img2:"bar-margarita-maracuya-x", tags:[] },
   { id:"kc5", cat:"bar", sub:"cocteles",
     nombre:{ es:"Daiquiri", en:"Daiquiri", pt:"Daiquiri" },
     desc:{ es:"Ron blanco, jugo de limón y azúcar.", en:"White rum, lime juice and sugar.", pt:"Rum branco, suco de limão e açúcar." },
