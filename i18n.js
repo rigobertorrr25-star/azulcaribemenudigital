@@ -127,7 +127,7 @@ const UI = {
     pourEyebrow: "Coquetelaria Autoral",
     pourTitle: "A arte de servir <span>Azul Caribe</span>",
     pourNote: "Descubra-os no cardápio",
-    uncorkHint: "Toque para destampar",
+    uncorkHint: "Toque para destapar",
   },
 };
 
