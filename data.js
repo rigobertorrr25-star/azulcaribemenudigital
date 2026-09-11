@@ -254,7 +254,7 @@ const MENU_DATA = [
   { id:"kp1", cat:"bar", sub:"premium",
     nombre:{ es:"Negroni", en:"Negroni", pt:"Negroni" },
     desc:{ es:"Ginebra, Campari y vermut rojo.", en:"Gin, Campari and sweet vermouth.", pt:"Gin, Campari e vermute tinto." },
-    precio:45000, img:"bar-negroni", img2:"bar-negroni-x", tags:[], badge:"bartender" },
+    precio:45000, img:"bar-negroni-v2", img2:"bar-negroni-x", tags:[], badge:"bartender" },
   { id:"kp2", cat:"bar", sub:"premium",
     nombre:{ es:"Martini", en:"Martini", pt:"Martini" },
     desc:{ es:"Ginebra o vodka con vermut seco.", en:"Gin or vodka with dry vermouth.", pt:"Gin ou vodka com vermute seco." },
