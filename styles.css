@@ -387,39 +387,6 @@ main{max-width:var(--maxw); margin:0 auto; padding:22px 20px 130px; position:rel
   border-radius:999px; display:flex; align-items:center; justify-content:center;
 }
 
-.uncork-hint{
-  position:absolute; right:9px; bottom:9px; z-index:4;
-  width:26px; height:26px; border-radius:999px; border:1.5px solid rgba(212,175,55,0.55);
-  background:rgba(11,19,41,0.72); color:var(--gold); backdrop-filter:blur(2px);
-  display:flex; align-items:center; justify-content:center; pointer-events:none;
-  animation:uncork-hint-pulse 2.6s ease-in-out infinite;
-  transition:opacity .18s ease;
-}
-.card-img-wrap.is-booming .uncork-hint{opacity:0;}
-@keyframes uncork-hint-pulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,0.35);}
-  50%{box-shadow:0 0 0 6px rgba(212,175,55,0);}
-}
-@media (prefers-reduced-motion: reduce){
-  .uncork-hint{animation:none;}
-}
-
-/* ============ EFECTO "EXPLOSIÓN" (cócteles con foto img2) ============
-   Al tocar la foto del cóctel, la <img> cambia a la versión "con
-   explosión" (splash) con un pequeño estallido de escala/brillo, y a la
-   vez se abre la ficha del producto. Vuelve sola a la foto en reposo
-   tras ~1.6 s. */
-.boom-wrap .card-img-wrap{cursor:pointer;}
-.card-img-wrap.is-booming img{ animation:boom-burst .55s cubic-bezier(.2,.9,.25,1.1); }
-@keyframes boom-burst{
-  0%{ transform:scale(1.18); filter:brightness(1.4) saturate(1.3) contrast(1.05); }
-  45%{ transform:scale(0.985); filter:brightness(1.08) saturate(1.1); }
-  100%{ transform:scale(1.12); filter:none; }   /* queda en el zoom de .pressed */
-}
-@media (prefers-reduced-motion: reduce){
-  .card-img-wrap.is-booming img{ animation:none; }
-}
-
 .empty-state{text-align:center; padding:70px 20px; color:var(--gray-dim); font-style:italic;}
 
 /* ============ FLOATING CART (FAB) ============ */

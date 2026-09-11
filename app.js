@@ -272,16 +272,10 @@ function cardHTML(item) {
   const badgeHTML = item.badge ? `<span class="card-badge">${badgeLabel(item.badge)}</span>` : "";
   const qty = qtyForItem(item);
   const qtyHTML = qty > 0 ? `<span class="card-qty-badge">${qty}</span>` : "";
-  const boom = !!item.img2;
-  const boomHTML = boom ? `
-      <div class="uncork-hint" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M13 2 3 14h6l-2 8 10-13h-7z"/></svg>
-      </div>` : "";
   return `
-  <div class="card${boom ? " boom-wrap" : ""}" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
-    <div class="card-img-wrap"${boom ? ` data-boom-src="images/${item.img2}.jpg" data-base-src="images/${item.img}.jpg"` : ""}>
+  <div class="card" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
+    <div class="card-img-wrap">
       <img src="images/${item.img}.jpg" alt="${itemName(item)}" loading="lazy">
-      ${boomHTML}
       ${badgeHTML}${qtyHTML}
     </div>
     <div class="card-body">
@@ -398,43 +392,6 @@ function attachCardEvents() {
     const open = () => openProductModal(card.dataset.id);
     card.addEventListener("click", open);
     card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
-  });
-  initBoomCards();
-}
-
-// ============ EFECTO "EXPLOSIÓN" (cócteles con foto img2) ============
-// Al tocar la foto del cóctel: (1) se abre la ficha del producto (clic normal
-// de la tarjeta) y (2) la miniatura cambia a la foto "con explosión" (splash)
-// con un pequeño estallido. Vuelve sola a la foto en reposo tras ~1.6 s.
-// Se hace intercambiando el src de la <img> (no una segunda imagen), para
-// no pelear con las transiciones que ya tiene .card-img-wrap img.
-function initBoomCards() {
-  document.querySelectorAll(".card-img-wrap[data-boom-src]").forEach(wrap => {
-    const card = wrap.closest(".card");
-    const img = wrap.querySelector("img");
-    if (!img) return;
-    const boomSrc = wrap.dataset.boomSrc;
-    const baseSrc = wrap.dataset.baseSrc;
-    let precargada = null;
-    let timer = null;
-    // Precarga la foto de explosión al primer contacto para que el cambio sea instantáneo.
-    const preload = () => { if (!precargada) { precargada = new Image(); precargada.src = boomSrc; } };
-    wrap.addEventListener("pointerenter", preload, { once: true });
-    wrap.addEventListener("touchstart", preload, { once: true, passive: true });
-    wrap.addEventListener("click", () => {
-      preload();
-      if (wrap.classList.contains("is-booming")) return;
-      wrap.classList.add("is-booming");
-      if (card) card.classList.add("pressed");
-      img.src = boomSrc;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        wrap.classList.remove("is-booming");
-        if (card) card.classList.remove("pressed");
-        img.src = baseSrc;
-      }, 1600);
-      // sin stopPropagation: el clic sigue y abre la ficha del producto.
-    });
   });
 }
 
