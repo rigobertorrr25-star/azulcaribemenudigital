@@ -17,7 +17,7 @@ const MENU_DATA = [
   { id:"d1", cat:"desayuno",
     nombre:{ es:"Tortilla de Queso", en:"Cheese Omelet", pt:"Omelete de Queijo" },
     desc:{ es:"Esponjosa tortilla de queso servida con tocino, salchicha y papas.", en:"Fluffy cheese omelet served with bacon, sausage, and potatoes.", pt:"Omelete fofo de queijo servido com bacon, linguiça e batatas." },
-    precio:24000, img:"desayuno-tortilla", tags:[] },
+    precio:24000, img:"desayuno-tortilla-queso", tags:[] },
   { id:"d4", cat:"desayuno",
     nombre:{ es:"Empanadas de Griot y Queso Costeño", en:"Griot & Costeño Cheese Empanadas", pt:"Empanadas de Griot e Queijo Costeño" },
     desc:{ es:"Empanadas rellenas de cerdo griot y queso costeño.", en:"Empanadas filled with griot pork and coastal cheese.", pt:"Empanadas recheadas com porco griot e queijo costeño." },
@@ -63,7 +63,7 @@ const MENU_DATA = [
   { id:"a5", cat:"aperitivos",
     nombre:{ es:"Papas con Queso", en:"Cheesy Fries (To Share)", pt:"Batatas com Queijo (Para Compartilhar)" },
     desc:{ es:"Con griot, pollo, chorizo, carne o paisa (extra).", en:"Topped with griot, chicken, chorizo, ground beef, or paisa style (extra).", pt:"Com griot, frango, chorizo, carne moída ou estilo paisa (adicional)." },
-    precio:34000, img:"aperitivo-papas-queso", tags:[] },
+    precio:34000, img:"papas-queso-compartir", tags:[] },
 
   // ---- CAFÉ / COFFEE / CAFÉ ----
   { id:"c1", cat:"cafe",
@@ -175,7 +175,7 @@ const MENU_DATA = [
   { id:"m6", cat:"carnes",
     nombre:{ es:"Camarones al Curry con Arroz de Coco", en:"Curry Shrimp with Coconut Rice", pt:"Camarão ao Curry com Arroz de Coco" },
     desc:{ es:"Camarones en salsa cremosa de curry caribeño, servidos sobre arroz de coco.", en:"Shrimp in creamy Caribbean curry sauce, served over coconut rice.", pt:"Camarões em cremoso molho de curry caribenho, servidos sobre arroz de coco." },
-    precio:42000, img:"carnes-arroz-camaron", tags:[], badge:"nuevo" },
+    precio:42000, img:"carnes-camarones-curry-coco", tags:[], badge:"nuevo" },
 
   // ---- ACOMPAÑAMIENTOS / SIDES / ACOMPANHAMENTOS ----
   { id:"s1", cat:"sides",
@@ -201,7 +201,7 @@ const MENU_DATA = [
   { id:"s8", cat:"sides",
     nombre:{ es:"Papas Casco", en:"Wedge Fries", pt:"Batatas Rústicas" },
     desc:{ es:"Papas criollas en casco fritas.", en:"Crispy wedge-cut fried potatoes.", pt:"Batatas rústicas fritas." },
-    precio:8000, img:"lado-papas-fritas", tags:[], badge:"nuevo" },
+    precio:8000, img:"lado-papas-casco", tags:[], badge:"nuevo" },
   { id:"s6", cat:"sides",
     nombre:{ es:"Hogao", en:"Hogao Sauce", pt:"Molho Hogao" },
     desc:{ es:"Salsa tradicional colombiana de tomate y cebolla.", en:"Traditional Colombian tomato and onion sauce.", pt:"Molho tradicional colombiano de tomate e cebola." },
@@ -334,7 +334,7 @@ const MENU_DATA = [
   { id:"z7", cat:"bar", sub:"cerveza",
     nombre:{ es:"Smirnoff Ice Manzana Verde", en:"Smirnoff Ice Green Apple", pt:"Smirnoff Ice Maçã Verde" },
     desc:{ es:"Mezcla lista para tomar de vodka Smirnoff con un toque burbujeante de manzana verde.", en:"Ready-to-drink Smirnoff vodka mix with a bubbly green apple twist.", pt:"Mistura pronta para beber de vodka Smirnoff com um toque borbulhante de maçã verde." },
-    precio:19000, img:"bar-smirnoff-ice", tags:[] },
+    precio:19000, img:"bar-smirnoff-ice-manzana", tags:[] },
   { id:"z8", cat:"bar", sub:"cerveza",
     nombre:{ es:"Refajo", en:"Refajo", pt:"Refajo" },
     desc:{ es:"Mezcla refrescante de cerveza y gaseosa Colombiana.", en:"Refreshing blend of beer and Colombiana soda.", pt:"Mistura refrescante de cerveja com refrigerante Colombiana." },
@@ -360,7 +360,7 @@ const MENU_DATA = [
   { id:"l4", cat:"bar", sub:"licores",
     nombre:{ es:"Johnnie Walker Black", en:"Johnnie Walker Black", pt:"Johnnie Walker Black" },
     desc:{ es:"Whisky escocés mezclado añejado 12 años, ícono mundial de la coctelería.", en:"Blended Scotch whisky aged 12 years, a world icon of fine whisky.", pt:"Whisky escocês misturado envelhecido 12 anos, ícone mundial da coquetelaria." },
-    precio:28000, precioBotella:280000, img:"bar-black-label", tags:[] },
+    precio:28000, precioBotella:280000, img:"bar-johnnie-walker-black", tags:[] },
   { id:"l5", cat:"bar", sub:"licores",
     nombre:{ es:"Buchanan's Master", en:"Buchanan's Master", pt:"Buchanan's Master" },
     desc:{ es:"Whisky escocés premium, mezcla superior con notas dulces y amaderadas.", en:"Premium blended Scotch whisky with sweet, woody notes.", pt:"Whisky escocês premium, mistura superior com notas doces e amadeiradas." },
