@@ -25,18 +25,6 @@ Estos son mis datos:
 
 🙌 Quedo atento/a a la confirmación de disponibilidad. ¡Gracias!`;
 
-// Efecto de "destape" interactivo: al hacer clic directamente sobre la foto
-// del producto, se reproduce un video real (generado con Higgsfield) donde
-// la botella se destapa. SOLO para botellas reales con tapa: cervezas
-// embotelladas y licores. No se aplica a cócteles, vino por copa, sangría
-// ni bebidas servidas en vaso (Refajo/Michelada), porque no tienen tapa.
-const UNCORK_IDS = new Set([
-  "z1", "z2", "z3", "z4", "z5", "z6", "z7", // cervezas embotelladas
-  "l1", "l2", "l3", "l4", "l5", "l6", "l7", // licores
-]);
-// Cada id de UNCORK_IDS tiene su propio video en videos/uncork-<id>.webm|mp4
-function uncorkVideoSrc(id, ext) { return `videos/uncork-${id}.${ext}`; }
-
 const fmt = (n) => "$" + n.toLocaleString("es-CO");
 
 // ============ ESTADO ============
@@ -284,25 +272,15 @@ function cardHTML(item) {
   const badgeHTML = item.badge ? `<span class="card-badge">${badgeLabel(item.badge)}</span>` : "";
   const qty = qtyForItem(item);
   const qtyHTML = qty > 0 ? `<span class="card-qty-badge">${qty}</span>` : "";
-  const uncork = UNCORK_IDS.has(item.id);
-  const uncorkVideoHTML = uncork ? `
-      <video class="uncork-video" muted playsinline preload="none" poster="images/${item.img}.jpg">
-        <source src="${uncorkVideoSrc(item.id, "webm")}" type="video/webm">
-        <source src="${uncorkVideoSrc(item.id, "mp4")}" type="video/mp4">
-      </video>
-      <div class="uncork-hint" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>` : "";
-  const boom = !uncork && !!item.img2;
+  const boom = !!item.img2;
   const boomHTML = boom ? `
       <div class="uncork-hint" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M13 2 3 14h6l-2 8 10-13h-7z"/></svg>
       </div>` : "";
   return `
-  <div class="card${uncork ? " uncork-wrap" : ""}${boom ? " boom-wrap" : ""}" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
-    <div class="card-img-wrap"${uncork ? ` data-uncork-id="${item.id}" title="${t("uncorkHint")}"` : ""}${boom ? ` data-boom-src="images/${item.img2}.jpg" data-base-src="images/${item.img}.jpg"` : ""}>
+  <div class="card${boom ? " boom-wrap" : ""}" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
+    <div class="card-img-wrap"${boom ? ` data-boom-src="images/${item.img2}.jpg" data-base-src="images/${item.img}.jpg"` : ""}>
       <img src="images/${item.img}.jpg" alt="${itemName(item)}" loading="lazy">
-      ${uncorkVideoHTML}
       ${boomHTML}
       ${badgeHTML}${qtyHTML}
     </div>
@@ -421,7 +399,6 @@ function attachCardEvents() {
     card.addEventListener("click", open);
     card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
   });
-  initUncorkVideos();
   initBoomCards();
 }
 
@@ -459,50 +436,6 @@ function initBoomCards() {
       // sin stopPropagation: el clic sigue y abre la ficha del producto.
     });
   });
-}
-
-// ============ EFECTO "DESTAPAR" (solo cervezas embotelladas y licores) ============
-// Al hacer clic sobre la foto de una botella pasan DOS cosas a la vez, igual
-// que con cualquier otro producto del menú: (1) se abre la ficha ampliada
-// del producto con el botón de "Agregar al pedido" (el comportamiento
-// normal de toda tarjeta al hacer clic), y (2) además se reproduce el
-// video real del destape sobre la miniatura de la tarjeta. Ya NO se bloquea
-// la apertura de la ficha al tocar la foto — antes sí se bloqueaba
-// (stopPropagation) y por eso las botellas no se "agrandaban" como el
-// resto de productos; ahora se comportan exactamente igual, con el video
-// como plus.
-function initUncorkVideos() {
-  document.querySelectorAll(".card-img-wrap[data-uncork-id]").forEach(wrap => {
-    const video = wrap.querySelector(".uncork-video");
-    if (!video) return;
-    const card = wrap.closest(".card");
-    wrap.addEventListener("click", () => {
-      playUncorkVideo(wrap, video, card);
-      // sin stopPropagation: el clic sigue su curso normal y abre la ficha
-      // del producto (igual que en cualquier otra tarjeta del menú).
-    });
-    video.addEventListener("ended", () => resetUncorkVideo(wrap, video, card));
-    video.addEventListener("error", () => resetUncorkVideo(wrap, video, card));
-  });
-}
-
-// Al tocar la foto, la tarjeta completa se agranda (mismo efecto visual que
-// al pasar el mouse por encima) mientras dura el video, para que el destape
-// se sienta como un zoom deliberado y no pase desapercibido.
-function playUncorkVideo(wrap, video, card) {
-  if (wrap.classList.contains("is-playing")) return; // ya reproduciendo, ignora clics extra
-  wrap.classList.add("is-playing");
-  if (card) card.classList.add("pressed");
-  try { video.currentTime = 0; } catch (err) { /* aún no cargó metadata, no pasa nada */ }
-  const playPromise = video.play();
-  if (playPromise && playPromise.catch) playPromise.catch(() => resetUncorkVideo(wrap, video, card));
-}
-
-function resetUncorkVideo(wrap, video, card) {
-  wrap.classList.remove("is-playing");
-  if (card) card.classList.remove("pressed");
-  video.pause();
-  try { video.currentTime = 0; } catch (err) { /* no-op */ }
 }
 
 // ============ POUR SCENE: el vaso se "llena" cruzando fotos según el scroll ============

@@ -47,7 +47,6 @@ const UI = {
     pourEyebrow: "Coctelería de autor",
     pourTitle: "El arte de servir <span>Azul Caribe</span>",
     pourNote: "Descúbrelos en la carta",
-    uncorkHint: "Toca para destapar",
   },
   en: {
     tagline: "Caribbean cuisine · Cartagena de Indias, Colombia",
@@ -87,7 +86,6 @@ const UI = {
     pourEyebrow: "Craft Cocktails",
     pourTitle: "The art of serving <span>Azul Caribe</span>",
     pourNote: "Discover them on the menu",
-    uncorkHint: "Tap to uncork",
   },
   pt: {
     tagline: "Cozinha caribenha · Cartagena de Indias, Colômbia",
@@ -127,7 +125,6 @@ const UI = {
     pourEyebrow: "Coquetelaria Autoral",
     pourTitle: "A arte de servir <span>Azul Caribe</span>",
     pourNote: "Descubra-os no cardápio",
-    uncorkHint: "Toque para destapar",
   },
 };
 

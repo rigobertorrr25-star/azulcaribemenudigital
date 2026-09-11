@@ -387,25 +387,6 @@ main{max-width:var(--maxw); margin:0 auto; padding:22px 20px 130px; position:rel
   border-radius:999px; display:flex; align-items:center; justify-content:center;
 }
 
-/* ============ EFECTO "DESTAPAR" (solo cervezas embotelladas y licores) ============
-   Al hacer clic sobre la foto se reproduce un video real (Higgsfield) de la
-   botella destapándose; no hay botón separado, el clic va directo sobre la
-   imagen. El video queda oculto (opacity:0, pointer-events:none) encima de
-   la foto hasta que se activa; al terminar, vuelve a la foto estática. */
-.uncork-wrap .card-img-wrap{cursor:pointer;}
-.uncork-video{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  z-index:1; opacity:0; pointer-events:none;
-  transition:opacity .18s ease, transform .3s cubic-bezier(.4,0,.2,1);
-}
-.card-img-wrap.is-playing .uncork-video{opacity:1;}
-.card-img-wrap.is-playing img{opacity:0;}
-/* Al tocar la foto, toda la tarjeta se agranda (misma sensación que el hover
-   de escritorio) y el video/la foto hacen un zoom extra, para que el
-   destape se note claramente incluso cuando el movimiento del video es
-   sutil. */
-.card.pressed{ z-index:2; }
-.card.pressed .card-img-wrap .uncork-video{ transform:scale(1.16); }
 .uncork-hint{
   position:absolute; right:9px; bottom:9px; z-index:4;
   width:26px; height:26px; border-radius:999px; border:1.5px solid rgba(212,175,55,0.55);
@@ -414,7 +395,6 @@ main{max-width:var(--maxw); margin:0 auto; padding:22px 20px 130px; position:rel
   animation:uncork-hint-pulse 2.6s ease-in-out infinite;
   transition:opacity .18s ease;
 }
-.card-img-wrap.is-playing .uncork-hint,
 .card-img-wrap.is-booming .uncork-hint{opacity:0;}
 @keyframes uncork-hint-pulse{
   0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,0.35);}
