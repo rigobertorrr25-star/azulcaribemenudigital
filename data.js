@@ -380,13 +380,16 @@ const MENU_DATA = [
 ];
 
 const CATEGORIES = [
+  // ---- COMIDAS ----
   { id:"desayuno", nombre:{ es:"Desayuno", en:"Breakfast", pt:"Café da Manhã" } },
   { id:"aperitivos", nombre:{ es:"Aperitivos", en:"Starters", pt:"Aperitivos" } },
-  { id:"cafe", nombre:{ es:"Café", en:"Coffee", pt:"Café" } },
-  { id:"bebidas", nombre:{ es:"Bebidas sin Alcohol", en:"Non-Alcoholic Drinks", pt:"Bebidas sem Álcool" } },
   { id:"platos", nombre:{ es:"Platos Principales", en:"Main Dishes", pt:"Pratos Principais" } },
   { id:"carnes", nombre:{ es:"Carnes y Mariscos", en:"Meats & Seafood", pt:"Carnes e Frutos do Mar" } },
   { id:"sides", nombre:{ es:"Acompañamientos", en:"Sides", pt:"Acompanhamentos" } },
+  // ---- BEBIDAS ----
+  { id:"cafe", nombre:{ es:"Café", en:"Coffee", pt:"Café" } },
+  { id:"bebidas", nombre:{ es:"Bebidas sin Alcohol", en:"Non-Alcoholic Drinks", pt:"Bebidas sem Álcool" } },
+  // ---- ALCOHOL ----
   { id:"bar", nombre:{ es:"Bar & Coctelería", en:"Bar & Cocktails", pt:"Bar & Coquetelaria" } },
 ];
 
