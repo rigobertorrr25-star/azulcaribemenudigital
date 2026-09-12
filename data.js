@@ -141,7 +141,7 @@ const MENU_DATA = [
   { id:"p7", cat:"platos",
     nombre:{ es:"Camarones al Ajillo", en:"Garlic Shrimp", pt:"Camarão ao Alho" },
     desc:{ es:"Salteados en mantequilla, ajo y finas hierbas.", en:"Sautéed in butter, garlic, and fine herbs.", pt:"Salteados na manteiga, alho e ervas finas." },
-    precio:42000, img:"plato-camarones-ajillo", tags:[], badge:"chef" },
+    precio:38000, img:"plato-camarones-ajillo", tags:[], badge:"chef" },
   { id:"p8", cat:"platos",
     nombre:{ es:"Poke Bowl Vegetariano", en:"Vegetarian Poke Bowl", pt:"Poke Bowl Vegetariano" },
     desc:{ es:"Bowl fresco con vegetales de temporada y granos.", en:"Fresh bowl with seasonal vegetables and grains.", pt:"Bowl fresco com vegetais da estação e grãos." },
@@ -171,7 +171,7 @@ const MENU_DATA = [
   { id:"m6", cat:"carnes",
     nombre:{ es:"Camarones al Curry con Arroz de Coco", en:"Curry Shrimp with Coconut Rice", pt:"Camarão ao Curry com Arroz de Coco" },
     desc:{ es:"Camarones en salsa cremosa de curry caribeño, servidos sobre arroz de coco.", en:"Shrimp in creamy Caribbean curry sauce, served over coconut rice.", pt:"Camarões em cremoso molho de curry caribenho, servidos sobre arroz de coco." },
-    precio:42000, img:"carnes-camarones-curry-coco", tags:[], badge:"nuevo" },
+    precio:38000, img:"carnes-camarones-curry-coco", tags:[], badge:"nuevo" },
 
   // ---- ACOMPAÑAMIENTOS / SIDES / ACOMPANHAMENTOS ----
   { id:"s1", cat:"sides",
