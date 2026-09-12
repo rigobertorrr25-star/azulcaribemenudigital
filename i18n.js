@@ -6,6 +6,7 @@ const LANGS = [
   { code: "es", label: "ES", name: "Español" },
   { code: "en", label: "EN", name: "English" },
   { code: "pt", label: "PT", name: "Português" },
+  { code: "fr", label: "FR", name: "Français" },
 ];
 
 const UI = {
@@ -126,6 +127,45 @@ const UI = {
     pourTitle: "A arte de servir <span>Azul Caribe</span>",
     pourNote: "Descubra-os no cardápio",
   },
+  fr: {
+    tagline: "Cuisine caraïbe · Carthagène des Indes, Colombie",
+    venueEyebrow: "Cocktails d'Auteur",
+    infoBtn: "Infos",
+    reserveBtn: "Réserver",
+    searchPlaceholder: "Rechercher dans le menu… (ex. crevettes, café, rhum)",
+    catAll: "Tout",
+    catDestacados: "★ À la Une",
+    destacadosTitle: "★ À la Une",
+    productWord: "produit",
+    productWordPlural: "produits",
+    emptyState: "Nous n'avons trouvé aucun produit avec ces filtres.<br>Essayez d'en retirer un.",
+    addToOrder: "Ajouter à la commande",
+    inOrder: "Dans la commande",
+    trago: "Verre",
+    botella: "Bouteille",
+    yourOrder: "Votre commande",
+    total: "Total",
+    notePlaceholder: "Notes de commande (table, allergies, etc.) — facultatif",
+    sendWhatsapp: "📲 Envoyer la commande via WhatsApp",
+    clearCart: "Vider la commande",
+    emptyCart: "Votre commande est vide.<br>Ajoutez des produits du menu pour commencer.",
+    each: "chacun",
+    remove: "Retirer",
+    confirmClear: "Vider toute la commande ?",
+    footNote: "Prix en pesos colombiens (COP) · Consommez avec modération",
+    toastAdded: "Ajouté à la commande",
+    infoHeader: "Infos",
+    infoWhatsapp: "Commandes par WhatsApp en envoyant votre panier",
+    infoPrices: "Prix en pesos colombiens (COP)",
+    infoCuisine: "Cuisine caraïbe aux touches haïtiennes et nikkei-péruviennes",
+    splashLoading: "Chargement du menu…",
+    splashSub: "Lounge · Bienvenue",
+    statusOpen: "Ouvert maintenant",
+    langBtn: "Langue",
+    pourEyebrow: "Cocktails d'Auteur",
+    pourTitle: "L'art de servir <span>Azul Caribe</span>",
+    pourNote: "Découvrez-les sur la carte",
+  },
 };
 
 // ============ MENSAJES DE WHATSAPP (pedido y reserva) ============
@@ -222,6 +262,36 @@ Aqui estão meus dados:
 
 🙌 Fico no aguardo da confirmação de disponibilidade. Obrigado!`,
   },
+  fr: {
+    orderHeader: "🌴 *Nouvelle commande — Azul Caribe Lounge* 🌊",
+    myOrder: "🧾 *Ma commande*",
+    variantBottle: " (Bouteille)",
+    variantShot: " (Verre)",
+    subtotal: "🧮 Sous-total :",
+    tip: "🙏 Service volontaire (10 %) :",
+    total: "💰 *Total avec service :",
+    tipNote: "_Le service est volontaire ; dites-le-nous si vous préférez ne pas l'inclure._",
+    noteLabel: "📝 *Note :*",
+    orderClosing: "🙌 Merci ! J'attends la confirmation.",
+    reservation: `🌴 Bonjour ! Je souhaite réserver une table au *Azul Caribe Lounge* 🌊
+
+Voici mes informations :
+
+📋 *1. Informations principales*
+👤 Nom complet (titulaire de la réservation) :
+👥 Nombre de personnes :
+📅 Date et heure souhaitées :
+🎉 Motif de la célébration : (Dîner décontracté / Anniversaire de mariage / Réunion d'affaires / Enterrement de vie de garçon/fille / Anniversaire / Autre)
+
+🎂 *2. S'il s'agit d'un anniversaire*
+🥳 Nom de la personne fêtée :
+✨ Préparation spéciale souhaitée : (gâteau maison, décoration à thème, toast surprise, etc.)
+
+🍴 *3. Restrictions alimentaires*
+❗ Allergies ou restrictions d'un invité : (intolérances, végétarien/végan, sans gluten, sans lactose… ou "Aucune")
+
+🙌 J'attends la confirmation de disponibilité. Merci !`,
+  },
 };
 function wa(key) { return (WA[currentLang] && WA[currentLang][key]) || WA.es[key]; }
 
@@ -231,6 +301,7 @@ const BADGE_LABELS = {
   es: { favorito: "Favorito", mustTry: "Imperdible", chef: "Selección del Chef", bartender: "Selección del Bartender", nuevo: "Nuevo" },
   en: { favorito: "Favorite", mustTry: "Must Try", chef: "Chef's Pick", bartender: "Bartender's Pick", nuevo: "New" },
   pt: { favorito: "Favorito", mustTry: "Imperdível", chef: "Escolha do Chef", bartender: "Escolha do Bartender", nuevo: "Novo" },
+  fr: { favorito: "Favori", mustTry: "Incontournable", chef: "Choix du Chef", bartender: "Choix du Barman", nuevo: "Nouveau" },
 };
 
 // ============ IDIOMA ACTUAL ============
