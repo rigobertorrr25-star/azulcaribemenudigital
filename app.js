@@ -3,27 +3,9 @@
 const WHATSAPP_ORDER_NUMBER = "573213296814";       // pedidos (botón 🛒)
 const WHATSAPP_RESERVATION_NUMBER = "573103670548"; // reservas (botón Reservar)
 
-// Mensaje que se abre en WhatsApp al tocar el botón "Reservar" (mismo número
-// que los pedidos). Está redactado en primera persona: lo envía el cliente,
-// que completa cada campo y lo manda.
-const RESERVATION_MESSAGE = `🌴 ¡Hola! Quiero hacer una reserva en *Azul Caribe Lounge* 🌊
-
-Estos son mis datos:
-
-📋 *1. Datos principales*
-👤 Nombre completo (titular de la reserva):
-👥 Número de personas:
-📅 Fecha y hora deseada:
-🎉 Motivo de la celebración: (Cena casual / Aniversario / Reunión de negocios / Despedida de soltero/a / Cumpleaños / Otro)
-
-🎂 *2. Si es un cumpleaños*
-🥳 Nombre de quien cumple años:
-✨ Preparación especial que me gustaría: (pastel de la casa, decoración temática, brindis sorpresa, etc.)
-
-🍽️ *3. Restricciones alimentarias*
-⚠️ Alergias o restricciones de algún asistente: (intolerancias, vegetariano/vegano, sin gluten, sin lactosa… o "Ninguna")
-
-🙌 Quedo atento/a a la confirmación de disponibilidad. ¡Gracias!`;
+// El mensaje de reserva se arma en el idioma actual del sitio (WA.reservation
+// en i18n.js), no siempre en español. Está redactado en primera persona: lo
+// envía el cliente, que completa cada campo y lo manda.
 
 const fmt = (n) => "$" + n.toLocaleString("es-CO");
 
@@ -643,40 +625,40 @@ function itemEmoji(item) {
   }
   return ({
     desayuno: "🍳", aperitivos: "🍤", cafe: "☕",
-    bebidas: "🥤", platos: "🍽️", carnes: "🥩", sides: "🍟",
-  })[item.cat] || "🍽️";
+    bebidas: "🥤", platos: "🍴", carnes: "🥩", sides: "🍟",
+  })[item.cat] || "🍴";
 }
 
-// El mensaje de WhatsApp se envía siempre en español porque lo recibe el
-// personal del lounge (independientemente del idioma que esté viendo el
-// cliente en la pantalla). Si prefieres que siga el idioma del cliente,
-// se puede ajustar fácilmente aquí.
+// El mensaje de WhatsApp se arma en el idioma que el cliente tiene
+// seleccionado en la página (currentLang) — nombres de producto vía
+// itemName(), y el resto de los textos vía wa() (WA en i18n.js).
 function buildWhatsappMessage() {
   const keys = Object.keys(cart).filter(k => cart[k] > 0);
   const totalItems = keys.reduce((n, k) => n + cart[k], 0);
+  const productWord = totalItems === 1 ? t("productWord") : t("productWordPlural");
   let lines = [
-    "🌴 *Nuevo pedido — Azul Caribe Lounge* 🌊",
+    wa("orderHeader"),
     "",
-    `🧾 *Mi pedido* (${totalItems} ${totalItems === 1 ? "producto" : "productos"}):`,
+    `${wa("myOrder")} (${totalItems} ${productWord}):`,
   ];
   keys.forEach(key => {
     const { item, mode } = parseCartKey(key);
     if (!item) return;
     const unit = unitPriceFor(item, mode);
-    const variantLabel = item.precioBotella ? (mode === "botella" ? " (Botella)" : " (Trago)") : "";
-    lines.push(`${itemEmoji(item)} ${cart[key]}x ${item.nombre.es}${variantLabel} — ${fmt(unit * cart[key])}`);
+    const variantLabel = item.precioBotella ? (mode === "botella" ? wa("variantBottle") : wa("variantShot")) : "";
+    lines.push(`${itemEmoji(item)} ${cart[key]}x ${itemName(item)}${variantLabel} — ${fmt(unit * cart[key])}`);
   });
   const subtotal = cartTotal();
   const tip = Math.round(subtotal * 0.10);
   lines.push("");
-  lines.push(`🧮 Subtotal: ${fmt(subtotal)}`);
-  lines.push(`🙏 Servicio voluntario (10%): ${fmt(tip)}`);
-  lines.push(`💰 *Total con servicio: ${fmt(subtotal + tip)}*`);
-  lines.push("_El servicio es voluntario; si prefieres no incluirlo, avísanos._");
+  lines.push(`${wa("subtotal")} ${fmt(subtotal)}`);
+  lines.push(`${wa("tip")} ${fmt(tip)}`);
+  lines.push(`${wa("total")} ${fmt(subtotal + tip)}*`);
+  lines.push(wa("tipNote"));
   const note = document.getElementById("order-note").value.trim();
-  if (note) { lines.push(""); lines.push(`📝 *Nota:* ${note}`); }
+  if (note) { lines.push(""); lines.push(`${wa("noteLabel")} ${note}`); }
   lines.push("");
-  lines.push("🙌 ¡Gracias! Quedo atento/a a la confirmación.");
+  lines.push(wa("orderClosing"));
   return lines.join("\n");
 }
 
@@ -716,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollSpyListener();
 
   document.getElementById("reserve-btn").addEventListener("click", () => {
-    const msg = encodeURIComponent(RESERVATION_MESSAGE);
+    const msg = encodeURIComponent(wa("reservation"));
     window.open(`https://wa.me/${WHATSAPP_RESERVATION_NUMBER}?text=${msg}`, "_blank");
   });
 
