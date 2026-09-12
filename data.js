@@ -276,7 +276,7 @@ const MENU_DATA = [
   { id:"v2", cat:"bar", sub:"vino",
     nombre:{ es:"Sangría (Jarra)", en:"Sangria (Pitcher)", pt:"Sangria (Jarra)" },
     desc:{ es:"Sangría tinta o blanca con fruta fresca.", en:"Red or white house sangria with fresh fruit.", pt:"Sangria tinta ou branca com frutas frescas." },
-    precio:75000, img:"bar-sangria", tags:[] },
+    precio:100000, img:"bar-sangria", tags:[] },
   { id:"v7", cat:"bar", sub:"vino",
     nombre:{ es:"Vino Espumante Frizzantino", en:"Frizzantino Sparkling Wine", pt:"Vinho Espumante Frizzantino" },
     desc:{ es:"Copa individual o botella completa.", en:"Single glass or full bottle.", pt:"Taça individual ou garrafa completa." },
