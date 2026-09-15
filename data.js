@@ -22,7 +22,7 @@ const MENU_DATA = [
     nombre:{ es:"Empanadas de Griot y Queso Costeño", en:"Griot & Costeño Cheese Empanadas", pt:"Empanadas de Griot e Queijo Costeño", fr:"Empanadas de Griot et Fromage Côtier" },
     desc:{ es:"Empanadas rellenas de cerdo griot y queso costeño.", en:"Empanadas filled with griot pork and coastal cheese.", pt:"Empanadas recheadas com porco griot e queijo costeño.", fr:"Empanadas farcies de porc griot et de fromage côtier." },
     precio:26000, img:"desayuno-empanadas", tags:[], badge:"favorito" },
-  { id:"d6", cat:"desayuno",
+  { id:"d6", cat:"desayuno", sub:"adicionales",
     nombre:{ es:"Adicional de Queso", en:"Extra Cheese", pt:"Adicional de Queijo", fr:"Supplément de Fromage" },
     desc:{ es:"Porción extra de queso para acompañar tu desayuno.", en:"Extra portion of cheese to add to your breakfast.", pt:"Porção extra de queijo para acompanhar seu café da manhã.", fr:"Portion supplémentaire de fromage pour accompagner votre petit-déjeuner." },
     precio:5000, img:"aperitivo-papas-queso", tags:[] },
@@ -201,11 +201,7 @@ const MENU_DATA = [
   { id:"s6", cat:"sides",
     nombre:{ es:"Hogao", en:"Hogao Sauce", pt:"Molho Hogao", fr:"Sauce Hogao" },
     desc:{ es:"Salsa tradicional colombiana de tomate y cebolla.", en:"Traditional Colombian tomato and onion sauce.", pt:"Molho tradicional colombiano de tomate e cebola.", fr:"Sauce traditionnelle colombienne à la tomate et à l'oignon." },
-    precio:7000, img:"lado-hogao", tags:[] },
-  { id:"s7", cat:"sides",
-    nombre:{ es:"Ají", en:"Spicy Aji Sauce", pt:"Molho Ají", fr:"Sauce Piquante Ají" },
-    desc:{ es:"Salsa picante de la casa.", en:"House hot sauce.", pt:"Molho picante da casa.", fr:"Sauce piquante maison." },
-    precio:7000, img:"lado-aji", tags:[] },
+    precio:5000, img:"lado-hogao", tags:[] },
 
   // ---- COCTELERÍA CLÁSICA / CLASSIC COCKTAILS / COQUETELARIA CLÁSSICA / COCKTAILS CLASSIQUES ----
   // "img" = foto en reposo · "img2" = foto con la "explosión" (se ve al tocar la tarjeta).
@@ -389,11 +385,12 @@ const CATEGORIES = [
   { id:"bar", nombre:{ es:"Bar & Coctelería", en:"Bar & Cocktails", pt:"Bar & Coquetelaria", fr:"Bar & Cocktails" } },
 ];
 
-// Subgrupos dentro de la categoría "bar"
-const BAR_SUBS = {
+// Subgrupos dentro de una categoría (bar, desayuno, etc.)
+const SUBS = {
   cocteles: { es:"Cócteles", en:"Cocktails", pt:"Coquetéis", fr:"Cocktails" },
   premium: { es:"Coctelería Premium", en:"Premium Cocktails", pt:"Coquetelaria Premium", fr:"Cocktails Premium" },
   vino: { es:"Vino & Sangría", en:"Wine & Sangria", pt:"Vinho & Sangria", fr:"Vin & Sangria" },
   cerveza: { es:"Cerveza", en:"Beer", pt:"Cerveja", fr:"Bière" },
   licores: { es:"Licores", en:"Spirits", pt:"Destilados", fr:"Spiritueux" },
+  adicionales: { es:"Adicionales", en:"Extras", pt:"Adicionais", fr:"Suppléments" },
 };

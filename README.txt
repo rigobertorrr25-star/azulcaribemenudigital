@@ -306,7 +306,7 @@ CÓMO AGREGAR UN CUARTO IDIOMA (ej. francés)
 1. En "i18n.js", agrega su código a LANGS y copia un bloque de UI/
    FILTER_LABELS/TAG_SHORT/BADGE_LABELS traducido.
 2. En "data.js", agrega esa clave (ej. "fr") a cada "nombre" y "desc",
-   y a CATEGORIES / BAR_SUBS.
+   y a CATEGORIES / SUBS.
 Si no agregas la traducción de un producto, el sitio muestra automáticamente
 el texto en español como respaldo (no se rompe nada).
 

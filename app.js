@@ -39,7 +39,7 @@ function qtyForItem(item) {
 function itemName(item) { return item.nombre[currentLang] || item.nombre.es; }
 function desc(item) { return item.desc[currentLang] || item.desc.es; }
 function catName(cat) { return cat.nombre[currentLang] || cat.nombre.es; }
-function subName(subKey) { return (BAR_SUBS[subKey] && BAR_SUBS[subKey][currentLang]) || subKey; }
+function subName(subKey) { return (SUBS[subKey] && SUBS[subKey][currentLang]) || subKey; }
 function badgeLabel(key) { return (BADGE_LABELS[currentLang] && BADGE_LABELS[currentLang][key]) || key; }
 function tagLabel(key) { return (TAG_SHORT[currentLang] && TAG_SHORT[currentLang][key]) || key; }
 function productCountLabel(n) { return `${n} ${n === 1 ? t("productWord") : t("productWordPlural")}`; }
@@ -281,9 +281,10 @@ function destCardHTML(item) {
 }
 
 function renderSection(cat, items, spyId) {
-  if (cat.id === "bar") {
-    const subs = [...new Set(items.map(i => i.sub))];
-    let inner = "";
+  const subs = [...new Set(items.map(i => i.sub).filter(Boolean))];
+  if (subs.length) {
+    const unsubbed = items.filter(i => !i.sub);
+    let inner = unsubbed.length ? `<div class="grid">${unsubbed.map(cardHTML).join("")}</div>` : "";
     subs.forEach(sub => {
       inner += `<div class="section-title" style="margin:24px 0 12px;"><h2 style="font-size:16px;">${subName(sub)}</h2><span class="line"></span></div>`;
       inner += `<div class="grid">${items.filter(i => i.sub === sub).map(cardHTML).join("")}</div>`;
