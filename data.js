@@ -34,10 +34,6 @@ const MENU_DATA = [
     nombre:{ es:"Sándwich a la Plancha", en:"Grilled Ham & Cheese Sandwich", pt:"Sanduíche na Chapa", fr:"Sandwich Grillé" },
     desc:{ es:"Pan tostado a la plancha relleno de jamón y queso derretido, con un toque de salsa dulce y acompañado de fruta tropical fresca.", en:"Toasted pressed sandwich filled with ham and melted cheese, finished with a touch of sweet sauce and served with fresh tropical fruit.", pt:"Pão tostado na chapa recheado com presunto e queijo derretido, com um toque de molho doce e acompanhado de frutas tropicais frescas.", fr:"Sandwich pressé et grillé, garni de jambon et de fromage fondu, relevé d'une touche de sauce sucrée et servi avec des fruits tropicaux frais." },
     precio:22000, img:"desayuno-sandwich", tags:[], badge:"nuevo" },
-  { id:"d12", cat:"desayuno",
-    nombre:{ es:"Poutine Azul Caribe", en:"Azul Caribe Poutine", pt:"Poutine Azul Caribe", fr:"Poutine Azul Caribe" },
-    desc:{ es:"Un clásico de Canadá reinventado en clave caribeña: papas fritas crujientes cubiertas con trozos de queso fresco y una salsa gravy casera de carne, coronadas con hierbas frescas.", en:"A Canadian classic reimagined with a Caribbean touch: crispy fries topped with fresh cheese curds and a rich homemade beef gravy, finished with fresh herbs.", pt:"Um clássico canadense reinventado com toque caribenho: batatas fritas crocantes cobertas com pedaços de queijo fresco e um molho gravy caseiro de carne, finalizado com ervas frescas.", fr:"Un classique canadien réinventé à la caribéenne : frites croustillantes recouvertes de fromage frais en grains et d'une sauce gravy maison à la viande, relevées d'herbes fraîches." },
-    precio:30000, img:"desayuno-poutine", tags:[], badge:"nuevo" },
 
   // ---- APERITIVOS PARA COMPARTIR / STARTERS / APERITIVOS / ENTRÉES ----
   { id:"a1", cat:"aperitivos",
@@ -48,6 +44,14 @@ const MENU_DATA = [
     nombre:{ es:"Empanadas de Griot y Queso Costeño", en:"Griot & Costeño Cheese Empanadas", pt:"Empanadas de Griot e Queijo Costeño", fr:"Empanadas de Griot et Fromage Côtier" },
     desc:{ es:"Empanadas rellenas de cerdo griot y queso costeño.", en:"Empanadas filled with griot pork and coastal cheese.", pt:"Empanadas recheadas com porco griot e queijo costeño.", fr:"Empanadas farcies de porc griot et de fromage côtier." },
     precio:26000, img:"desayuno-empanadas", tags:[], badge:"favorito" },
+  { id:"a6", cat:"aperitivos",
+    nombre:{ es:"Empanadas de Pollo", en:"Chicken Empanadas", pt:"Empanadas de Frango", fr:"Empanadas au Poulet" },
+    desc:{ es:"Empanadas rellenas de pollo desmechado guisado.", en:"Empanadas filled with stewed shredded chicken.", pt:"Empanadas recheadas com frango desfiado refogado.", fr:"Empanadas farcies de poulet effiloché mijoté." },
+    precio:26000, img:"desayuno-empanadas", tags:[] },
+  { id:"a7", cat:"aperitivos",
+    nombre:{ es:"Empanadas de Carne", en:"Beef Empanadas", pt:"Empanadas de Carne", fr:"Empanadas au Bœuf" },
+    desc:{ es:"Empanadas rellenas de carne de res guisada.", en:"Empanadas filled with stewed ground beef.", pt:"Empanadas recheadas com carne bovina refogada.", fr:"Empanadas farcies de bœuf mijoté." },
+    precio:26000, img:"desayuno-empanadas", tags:[] },
   { id:"a2", cat:"aperitivos",
     nombre:{ es:"Aborrajados Haitianos", en:"Haitian Aborrajados", pt:"Aborrajados Haitianos", fr:"Aborrajados Haïtiens" },
     desc:{ es:"Plátano maduro relleno de queso y griot de cerdo.", en:"Sweet plantain stuffed with cheese and pork griot.", pt:"Banana-da-terra madura recheada com queijo e griot de porco.", fr:"Banane plantain mûre farcie de fromage et de griot de porc." },
@@ -150,6 +154,10 @@ const MENU_DATA = [
     nombre:{ es:"Poke Bowl Vegetariano", en:"Vegetarian Poke Bowl", pt:"Poke Bowl Vegetariano", fr:"Poke Bowl Végétarien" },
     desc:{ es:"Bowl fresco con vegetales de temporada y granos.", en:"Fresh bowl with seasonal vegetables and grains.", pt:"Bowl fresco com vegetais da estação e grãos.", fr:"Bol frais aux légumes de saison et céréales." },
     precio:28000, img:"plato-poke-bowl", tags:[] },
+  { id:"d12", cat:"platos",
+    nombre:{ es:"Poutine Azul Caribe", en:"Azul Caribe Poutine", pt:"Poutine Azul Caribe", fr:"Poutine Azul Caribe" },
+    desc:{ es:"Un clásico de Canadá reinventado en clave caribeña: papas fritas crujientes cubiertas con trozos de queso fresco y una salsa gravy casera de carne, coronadas con hierbas frescas.", en:"A Canadian classic reimagined with a Caribbean touch: crispy fries topped with fresh cheese curds and a rich homemade beef gravy, finished with fresh herbs.", pt:"Um clássico canadense reinventado com toque caribenho: batatas fritas crocantes cobertas com pedaços de queijo fresco e um molho gravy caseiro de carne, finalizado com ervas frescas.", fr:"Un classique canadien réinventé à la caribéenne : frites croustillantes recouvertes de fromage frais en grains et d'une sauce gravy maison à la viande, relevées d'herbes fraîches." },
+    precio:30000, img:"desayuno-poutine", tags:[], badge:"nuevo" },
 
   // ---- CARNES Y MARISCOS / MEATS & SEAFOOD / CARNES E FRUTOS DO MAR / VIANDES ET FRUITS DE MER ----
   { id:"m1", cat:"carnes",
