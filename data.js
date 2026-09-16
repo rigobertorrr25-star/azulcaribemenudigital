@@ -34,6 +34,14 @@ const MENU_DATA = [
     nombre:{ es:"Huevos al Gusto", en:"Eggs Your Way", pt:"Ovos ao Seu Gosto", fr:"Œufs à Votre Façon" },
     desc:{ es:"Pericos, fritos u omelette. Acompañados de arepa, pan o patacón.", en:"Scrambled, fried or omelette-style, served with arepa, bread or patacón.", pt:"Mexidos, fritos ou omelete. Acompanhados de arepa, pão ou patacón.", fr:"Brouillés, frits ou en omelette. Accompagnés d'arepa, de pain ou de patacón." },
     precio:15000, img:"desayuno-tortilla", tags:[], badge:"nuevo" },
+  { id:"d11", cat:"desayuno",
+    nombre:{ es:"Sándwich a la Plancha", en:"Grilled Ham & Cheese Sandwich", pt:"Sanduíche na Chapa", fr:"Sandwich Grillé" },
+    desc:{ es:"Pan tostado a la plancha relleno de jamón y queso derretido, con un toque de salsa dulce y acompañado de fruta tropical fresca.", en:"Toasted pressed sandwich filled with ham and melted cheese, finished with a touch of sweet sauce and served with fresh tropical fruit.", pt:"Pão tostado na chapa recheado com presunto e queijo derretido, com um toque de molho doce e acompanhado de frutas tropicais frescas.", fr:"Sandwich pressé et grillé, garni de jambon et de fromage fondu, relevé d'une touche de sauce sucrée et servi avec des fruits tropicaux frais." },
+    precio:22000, img:"desayuno-sandwich", tags:[], badge:"nuevo" },
+  { id:"d12", cat:"desayuno",
+    nombre:{ es:"Poutine Azul Caribe", en:"Azul Caribe Poutine", pt:"Poutine Azul Caribe", fr:"Poutine Azul Caribe" },
+    desc:{ es:"Un clásico de Canadá reinventado en clave caribeña: papas fritas crujientes cubiertas con trozos de queso fresco y una salsa gravy casera de carne, coronadas con hierbas frescas.", en:"A Canadian classic reimagined with a Caribbean touch: crispy fries topped with fresh cheese curds and a rich homemade beef gravy, finished with fresh herbs.", pt:"Um clássico canadense reinventado com toque caribenho: batatas fritas crocantes cobertas com pedaços de queijo fresco e um molho gravy caseiro de carne, finalizado com ervas frescas.", fr:"Un classique canadien réinventé à la caribéenne : frites croustillantes recouvertes de fromage frais en grains et d'une sauce gravy maison à la viande, relevées d'herbes fraîches." },
+    precio:30000, img:"desayuno-poutine", tags:[], badge:"nuevo" },
 
   // ---- APERITIVOS PARA COMPARTIR / STARTERS / APERITIVOS / ENTRÉES ----
   { id:"a1", cat:"aperitivos",
