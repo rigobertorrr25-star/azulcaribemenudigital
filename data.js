@@ -157,7 +157,7 @@ const MENU_DATA = [
   { id:"d12", cat:"platos",
     nombre:{ es:"Poutine Azul Caribe", en:"Azul Caribe Poutine", pt:"Poutine Azul Caribe", fr:"Poutine Azul Caribe" },
     desc:{ es:"Un clásico de Canadá reinventado en clave caribeña: papas fritas crujientes cubiertas con trozos de queso fresco y una salsa gravy casera de carne, coronadas con hierbas frescas.", en:"A Canadian classic reimagined with a Caribbean touch: crispy fries topped with fresh cheese curds and a rich homemade beef gravy, finished with fresh herbs.", pt:"Um clássico canadense reinventado com toque caribenho: batatas fritas crocantes cobertas com pedaços de queijo fresco e um molho gravy caseiro de carne, finalizado com ervas frescas.", fr:"Un classique canadien réinventé à la caribéenne : frites croustillantes recouvertes de fromage frais en grains et d'une sauce gravy maison à la viande, relevées d'herbes fraîches." },
-    precio:30000, img:"desayuno-poutine", tags:[], badge:"nuevo" },
+    precio:38000, img:"desayuno-poutine", tags:[], badge:"nuevo" },
 
   // ---- CARNES Y MARISCOS / MEATS & SEAFOOD / CARNES E FRUTOS DO MAR / VIANDES ET FRUITS DE MER ----
   { id:"m1", cat:"carnes",
