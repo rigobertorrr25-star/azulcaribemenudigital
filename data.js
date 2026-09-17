@@ -78,6 +78,10 @@ const MENU_DATA = [
     nombre:{ es:"Papas con Queso", en:"Cheesy Fries (To Share)", pt:"Batatas com Queijo (Para Compartilhar)", fr:"Frites au Fromage (à Partager)" },
     desc:{ es:"Con griot, pollo, chorizo, carne o paisa (extra).", en:"Topped with griot, chicken, chorizo, ground beef, or paisa style (extra).", pt:"Com griot, frango, chorizo, carne moída ou estilo paisa (adicional).", fr:"Avec griot, poulet, chorizo, bœuf haché ou style paisa (supplément)." },
     precio:34000, img:"papas-queso-compartir", tags:[] },
+  { id:"a8", cat:"aperitivos",
+    nombre:{ es:"Sopa de Vegetales", en:"Vegetable Soup", pt:"Sopa de Legumes", fr:"Soupe de Légumes" },
+    desc:{ es:"Sopa casera de vegetales frescos y granos, ideal para abrir el apetito.", en:"Homemade soup with fresh vegetables and grains, a warm way to start the meal.", pt:"Sopa caseira de vegetais frescos e grãos, ideal para abrir o apetite.", fr:"Soupe maison aux légumes frais et céréales, idéale pour ouvrir l'appétit." },
+    precio:16000, img:"aperitivo-sopa-vegetales", tags:[], badge:"nuevo" },
 
   // ---- CAFÉ / COFFEE / CAFÉ / CAFÉ ----
   { id:"c1", cat:"cafe",
