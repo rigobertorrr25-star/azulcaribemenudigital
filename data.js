@@ -34,6 +34,10 @@ const MENU_DATA = [
     nombre:{ es:"Sándwich a la Plancha", en:"Grilled Ham & Cheese Sandwich", pt:"Sanduíche na Chapa", fr:"Sandwich Grillé" },
     desc:{ es:"Pan tostado a la plancha relleno de jamón y queso derretido, con un toque de salsa dulce y acompañado de fruta tropical fresca.", en:"Toasted pressed sandwich filled with ham and melted cheese, finished with a touch of sweet sauce and served with fresh tropical fruit.", pt:"Pão tostado na chapa recheado com presunto e queijo derretido, com um toque de molho doce e acompanhado de frutas tropicais frescas.", fr:"Sandwich pressé et grillé, garni de jambon et de fromage fondu, relevé d'une touche de sauce sucrée et servi avec des fruits tropicaux frais." },
     precio:22000, img:"desayuno-sandwich", tags:[], badge:"nuevo" },
+  { id:"d13", cat:"desayuno",
+    nombre:{ es:"Ensalada Fresca del Caribe", en:"Fresh Caribbean Salad", pt:"Salada Fresca do Caribe", fr:"Salade Fraîche des Caraïbes" },
+    desc:{ es:"Juliana de vegetales frescos con hierbas y crocantes chips de plátano.", en:"Julienned fresh vegetables with herbs and crispy plantain chips.", pt:"Juliana de vegetais frescos com ervas e crocantes chips de banana-da-terra.", fr:"Julienne de légumes frais aux herbes et chips croustillantes de plantain." },
+    precio:14000, img:"desayuno-ensalada", tags:[], badge:"nuevo" },
 
   // ---- APERITIVOS PARA COMPARTIR / STARTERS / APERITIVOS / ENTRÉES ----
   { id:"a1", cat:"aperitivos",
