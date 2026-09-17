@@ -15,13 +15,17 @@ let searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("azulcaribe_cart") || "{}");
 // priceMode: para items con precio + precioBotella, guarda "unit" o "botella" seleccionado por producto
 let priceMode = JSON.parse(localStorage.getItem("azulcaribe_pricemode") || "{}");
+// saborMode: para items con "sabores" (ej. Empanadas), guarda la key del sabor elegido por producto
+let saborMode = JSON.parse(localStorage.getItem("azulcaribe_sabormode") || "{}");
 let modalItemId = null; // id del producto actualmente abierto en el modal
 let spyEnabled = false; // true cuando se puede resaltar la categoría según el scroll (solo en "Todo", sin búsqueda)
 
 function saveCart() { localStorage.setItem("azulcaribe_cart", JSON.stringify(cart)); }
 function savePriceMode() { localStorage.setItem("azulcaribe_pricemode", JSON.stringify(priceMode)); }
+function saveSaborMode() { localStorage.setItem("azulcaribe_sabormode", JSON.stringify(saborMode)); }
 
 function cartKey(item) {
+  if (item.sabores) return `${item.id}:${saborMode[item.id] || item.sabores[0].key}`;
   if (item.precioBotella) return `${item.id}:${priceMode[item.id] || (item.precio != null ? "unit" : "botella")}`;
   return item.id;
 }
@@ -38,6 +42,20 @@ function qtyForItem(item) {
 }
 function itemName(item) { return item.nombre[currentLang] || item.nombre.es; }
 function desc(item) { return item.desc[currentLang] || item.desc.es; }
+// Para items con "sabores": nombre/descripción según el sabor elegido (clave "mode" del cartKey).
+// Para el resto de items, cae de vuelta a itemName()/desc().
+function saborFor(item, key) {
+  if (!item.sabores) return null;
+  return item.sabores.find(s => s.key === key) || item.sabores[0];
+}
+function variantName(item, mode) {
+  const sabor = saborFor(item, mode);
+  return sabor ? (sabor.nombre[currentLang] || sabor.nombre.es) : itemName(item);
+}
+function variantDesc(item, mode) {
+  const sabor = saborFor(item, mode);
+  return sabor ? (sabor.desc[currentLang] || sabor.desc.es) : desc(item);
+}
 function catName(cat) { return cat.nombre[currentLang] || cat.nombre.es; }
 function subName(subKey) { return (SUBS[subKey] && SUBS[subKey][currentLang]) || subKey; }
 function badgeLabel(key) { return (BADGE_LABELS[currentLang] && BADGE_LABELS[currentLang][key]) || key; }
@@ -457,21 +475,38 @@ function closeProductModal() {
 function renderProductModal() {
   const item = MENU_DATA.find(i => i.id === modalItemId);
   if (!item) return;
-  const mode = priceMode[item.id] || (item.precio != null ? "unit" : "botella");
+  const mode = item.sabores
+    ? (saborMode[item.id] || item.sabores[0].key)
+    : priceMode[item.id] || (item.precio != null ? "unit" : "botella");
   const qty = qtyForItem(item);
   const unitPrice = unitPriceFor(item, mode);
 
   document.getElementById("pm-photo").src = `images/${item.img}.jpg`;
-  document.getElementById("pm-photo").alt = itemName(item);
+  document.getElementById("pm-photo").alt = variantName(item, mode);
   document.getElementById("pm-badge").textContent = item.badge ? badgeLabel(item.badge) : "";
-  document.getElementById("pm-name").textContent = itemName(item);
+  document.getElementById("pm-name").textContent = variantName(item, mode);
   document.getElementById("pm-price").textContent = priceLabelShort(item);
-  document.getElementById("pm-desc").textContent = desc(item);
+  document.getElementById("pm-desc").textContent = variantDesc(item, mode);
   document.getElementById("pm-tags").innerHTML = item.tags.map(k => `<span class="tag">${tagLabel(k)}</span>`).join("");
   document.getElementById("pm-qty").textContent = qty;
 
   const priceSelectEl = document.getElementById("pm-price-select");
-  if (item.precioBotella && item.precio != null) {
+  if (item.sabores) {
+    priceSelectEl.innerHTML = `
+      <div class="price-select" data-id="${item.id}">
+        ${item.sabores.map(s => `
+          <button class="price-pill ${mode === s.key ? "active" : ""}" data-mode="${s.key}">
+            <span class="pp-label">${s.label[currentLang] || s.label.es}</span>
+          </button>`).join("")}
+      </div>`;
+    priceSelectEl.querySelectorAll(".price-pill").forEach(btn => {
+      btn.addEventListener("click", () => {
+        saborMode[item.id] = btn.dataset.mode;
+        saveSaborMode();
+        renderProductModal();
+      });
+    });
+  } else if (item.precioBotella && item.precio != null) {
     priceSelectEl.innerHTML = `
       <div class="price-select" data-id="${item.id}">
         <button class="price-pill ${mode === "unit" ? "active" : ""}" data-mode="unit">
@@ -590,9 +625,9 @@ function renderCart() {
     const variantLabel = item.precioBotella ? (mode === "botella" ? ` · ${t("botella")}` : ` · ${t("trago")}`) : "";
     return `
     <div class="cart-row" data-key="${key}">
-      <img src="images/${item.img}.jpg" alt="${itemName(item)}">
+      <img src="images/${item.img}.jpg" alt="${variantName(item, mode)}">
       <div class="info">
-        <div class="name">${itemName(item)}${variantLabel}</div>
+        <div class="name">${variantName(item, mode)}${variantLabel}</div>
         <div class="unit">${fmt(unit)} ${t("each")}</div>
         <div class="qty-row">
           <button class="qty-btn minus" data-key="${key}">−</button>
@@ -647,7 +682,7 @@ function buildWhatsappMessage() {
     if (!item) return;
     const unit = unitPriceFor(item, mode);
     const variantLabel = item.precioBotella ? (mode === "botella" ? wa("variantBottle") : wa("variantShot")) : "";
-    lines.push(`${itemEmoji(item)} ${cart[key]}x ${itemName(item)}${variantLabel} — ${fmt(unit * cart[key])}`);
+    lines.push(`${itemEmoji(item)} ${cart[key]}x ${variantName(item, mode)}${variantLabel} — ${fmt(unit * cart[key])}`);
   });
   const subtotal = cartTotal();
   const tip = Math.round(subtotal * 0.10);
