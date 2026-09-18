@@ -30,6 +30,7 @@ function cartKey(item) {
   return item.id;
 }
 function unitPriceFor(item, mode) {
+  if (item.sabores) { const s = saborFor(item, mode); return (s && s.precio != null) ? s.precio : item.precio; }
   if (item.precioBotella) return mode === "botella" ? item.precioBotella : item.precio;
   return item.precio;
 }
@@ -485,7 +486,7 @@ function renderProductModal() {
   document.getElementById("pm-photo").alt = variantName(item, mode);
   document.getElementById("pm-badge").textContent = item.badge ? badgeLabel(item.badge) : "";
   document.getElementById("pm-name").textContent = variantName(item, mode);
-  document.getElementById("pm-price").textContent = priceLabelShort(item);
+  document.getElementById("pm-price").textContent = item.sabores ? fmt(unitPrice) : priceLabelShort(item);
   document.getElementById("pm-desc").textContent = variantDesc(item, mode);
   document.getElementById("pm-tags").innerHTML = item.tags.map(k => `<span class="tag">${tagLabel(k)}</span>`).join("");
   document.getElementById("pm-qty").textContent = qty;
@@ -496,7 +497,7 @@ function renderProductModal() {
       <div class="price-select" data-id="${item.id}">
         ${item.sabores.map(s => `
           <button class="price-pill ${mode === s.key ? "active" : ""}" data-mode="${s.key}">
-            <span class="pp-label">${s.label[currentLang] || s.label.es}</span>
+            <span class="pp-label">${s.label[currentLang] || s.label.es}</span><span class="pp-price">${fmt(s.precio != null ? s.precio : item.precio)}</span>
           </button>`).join("")}
       </div>`;
     priceSelectEl.querySelectorAll(".price-pill").forEach(btn => {
