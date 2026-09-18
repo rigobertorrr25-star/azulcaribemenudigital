@@ -124,7 +124,7 @@ const MENU_DATA = [
     precio:14000, img:"bebida-limonada-coco", tags:[] },
   { id:"b3", cat:"bebidas",
     nombre:{ es:"Jugos Naturales (en agua)", en:"Natural Juices (in water)", pt:"Sucos Naturais (na água)", fr:"Jus Naturels (à l'eau)" },
-    desc:{ es:"Maracuyá, mango, piña, fresa, banano, níspero, naranja.", en:"Passion fruit, mango, pineapple, strawberry, banana, loquat, orange.", pt:"Maracujá, manga, abacaxi, morango, banana, nêspera, laranja.", fr:"Fruit de la passion, mangue, ananas, fraise, banane, nèfle, orange." },
+    desc:{ es:"Mango, maracuyá o piña.", en:"Mango, passion fruit, or pineapple.", pt:"Manga, maracujá ou abacaxi.", fr:"Mangue, fruit de la passion ou ananas." },
     precio:13000, img:"bebida-jugos-naturales", tags:[] },
   { id:"b10", cat:"bebidas",
     nombre:{ es:"Jugo en Leche (Mango)", en:"Mango Milk Juice", pt:"Suco de Manga no Leite", fr:"Jus de Mangue au Lait" },
