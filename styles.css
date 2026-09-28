@@ -97,21 +97,6 @@ h1,h2,h3{font-family:var(--display); font-weight:400; letter-spacing:0; text-wra
   .hero-media{justify-self:end;}
 }
 
-/* ============ ESCENA DEL VASO (la mecánica está en app.js) ============ */
-.pour-scroll{position:relative; z-index:5; height:230vh;}
-.pour-stage{--p:0; position:sticky; top:0; height:100vh; height:100svh; min-height:440px; overflow:hidden; background:var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:flex-end;}
-.pour-overlay{position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(180deg, rgba(11,29,51,.45) 0%, rgba(11,29,51,.05) 35%, rgba(11,29,51,.2) 62%, rgba(11,29,51,.9) 100%);}
-.pour-photos{position:absolute; inset:0; z-index:1;}
-.pour-photo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; will-change:opacity, transform; transform:translate3d(0,0,0) scale(calc(1.05 - .05 * var(--p)));}
-.pour-content{position:relative; z-index:3; width:100%; max-width:var(--maxw); padding:0 24px 60px; text-align:center;}
-.pour-eyebrow{color:var(--gold); font-size:13px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; margin-bottom:10px;}
-.pour-title{font-size:clamp(32px,6vw,58px); color:#fff; text-shadow:0 6px 30px rgba(0,0,0,.45);}
-.pour-title span{color:var(--gold);}
-.pour-progress{position:absolute; left:0; right:0; bottom:0; height:4px; z-index:4; background:rgba(255,255,255,.15);}
-.pour-progress-bar{height:100%; width:0%; background:var(--gold);}
-@media (max-width:640px){.pour-scroll{height:200vh;}}
-@media (prefers-reduced-motion:reduce){.pour-photo{transform:none;}}
-
 /* ============ MENÚ ============ */
 .menu{max-width:var(--maxw); margin:0 auto; padding:64px 16px 40px;}
 .menu-head h2{font-size:clamp(34px,6vw,46px);}

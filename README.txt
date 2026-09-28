@@ -8,12 +8,14 @@ QUÉ CAMBIÓ EN v17
   portada en dos columnas con el video del mojito, menú en tarjetas con
   foto cuadrada, precio y botón "Agregar", sección Nosotros, tarjetas de
   contacto y pie. Letras DM Serif Display (títulos) y Fira Sans (textos).
-- La escena del mojito que se llena al bajar sigue igual, entre la portada
-  y el menú.
+- Se quitó la escena del mojito que se llenaba al bajar (las fotos arte-1
+  a arte-4 siguen en images/ por si se quiere volver a usar; el código
+  initPourScene() de app.js no hace nada si la sección no está).
 - Los productos con sabores o con trago/botella muestran "Elegir" y abren
   la ficha; los demás se agregan directo al pedido.
 - Menú: la carne pasó a Platos Principales (pechuga, picanha, bistec y
   lomo saltado); la categoría "Carnes y Mariscos" ahora es "Mariscos".
+  Camarones al Ajillo y Pesca del Día también van en Mariscos.
   La Ensalada Fresca del Caribe pasó a Acompañamientos.
 - Textos nuevos en los 4 idiomas al final de i18n.js.
 
