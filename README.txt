@@ -18,6 +18,11 @@ QUÉ CAMBIÓ EN v17
   Camarones al Ajillo y Pesca del Día también van en Mariscos.
   La Ensalada Fresca del Caribe pasó a Acompañamientos.
 - Textos nuevos en los 4 idiomas al final de i18n.js.
+- Arreglo: al bajar por los productos la página se quedaba "pegada". La
+  barra de categorías se centraba con scrollIntoView y arrastraba la página;
+  ahora centerChip() mueve solo la barra de lado. También se quitó el efecto
+  borroso de las barras fijas (pesado en celulares) y se dio más espacio
+  entre tarjetas en celular.
 
 QUÉ CAMBIÓ EN v16
 -------------------

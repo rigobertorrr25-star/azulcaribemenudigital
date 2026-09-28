@@ -154,6 +154,16 @@ function refreshAll() {
 }
 
 // ============ CATEGORY NAV (estructura tipo Maido: pills en la barra sticky) ============
+// Centra un botón dentro de la barra de categorías moviendo SOLO la barra
+// de lado. (scrollIntoView movía también la página y la dejaba "pegada"
+// al bajar por los productos.)
+function centerChip(btn) {
+  const nav = document.getElementById("catnav");
+  if (!nav || !btn) return;
+  const left = btn.offsetLeft - (nav.clientWidth - btn.offsetWidth) / 2;
+  nav.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+}
+
 function renderCatNav() {
   const nav = document.getElementById("catnav");
   let html = `<button class="catchip ${activeCat === "all" ? "active" : ""}" data-cat="all">${t("catAll")}</button>`;
@@ -169,7 +179,7 @@ function renderCatNav() {
       activeCat = btn.dataset.cat;
       renderCatNav();
       renderGrid();
-      btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      centerChip(btn);
       scrollToMenu();
     });
   });
@@ -385,7 +395,7 @@ function updateScrollSpy() {
   if (nav.querySelector(`.catchip.active[data-cat="${current}"]`)) return; // ya resaltado, no tocar el DOM
   nav.querySelectorAll(".catchip").forEach(btn => btn.classList.toggle("active", btn.dataset.cat === current));
   const activeBtn = nav.querySelector(`.catchip[data-cat="${current}"]`);
-  if (activeBtn) activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  if (activeBtn) centerChip(activeBtn);
 }
 
 function initScrollSpyListener() {
