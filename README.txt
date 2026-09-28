@@ -1,5 +1,19 @@
-AZUL CARIBE LOUNGE — MENÚ DIGITAL (v15)
+AZUL CARIBE LOUNGE — MENÚ DIGITAL (v16)
 =======================================
+
+QUÉ CAMBIÓ EN v16
+-------------------
+- Rediseño completo "Bahía de noche": fondo verde azulado muy oscuro
+  (#05191d), turquesa caribe (#3cc9b8) para botones y dorado del logo
+  (#e2b851) para precios. Títulos en Fraunces y textos en Figtree
+  (Google Fonts).
+- En celular los platos se ven como lista (foto a la izquierda, nombre,
+  descripción y precio); en computador en 2 o 3 columnas.
+- Barra de categorías con subrayado turquesa, ficha del plato que sube
+  desde abajo en celular, carrito y ventana de información con íconos
+  en lugar de emojis.
+- Solo cambiaron styles.css, index.html (letras, íconos, versión ?v=) y
+  el texto del botón de WhatsApp en i18n.js. app.js y data.js siguen iguales.
 
 QUÉ CAMBIÓ EN v15
 -------------------
