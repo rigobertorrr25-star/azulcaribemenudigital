@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#05191d">
+<meta name="theme-color" content="#ffffff">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,47 +14,63 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260921a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Figtree:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20260928a">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=20260929a">
 </head>
 <body>
-<div class="bg-ambience"></div>
 
-<!-- ===== SPLASH SCREEN ===== -->
-<div id="splash">
-  <img class="splash-logo" src="images/logo-palm.png" alt="Azul Caribe Lounge">
-  <div class="splash-title">Azul <span>Caribe</span></div>
-  <div class="splash-sub" id="splash-sub">Lounge · Bienvenidos</div>
-  <div class="splash-loading"><span class="dot-spin"></span> <span id="splash-loading-text">Cargando el menú…</span></div>
-</div>
-
-<!-- ===== HERO / PORTADA (estructura tipo Maido: portada + avatar + info) ===== -->
-<header class="venue-hero" id="venue-hero">
-  <div class="venue-cover">
-    <div class="status-pill"><span class="dot"></span> <span id="status-text">Abierto ahora</span></div>
-    <button class="lang-btn" id="lang-btn" aria-label="Idioma / Language / Idioma">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9s1.3-6.5 3.8-9z"/></svg>
-      <span id="lang-btn-label">ES</span>
-    </button>
-    <div class="lang-menu" id="lang-menu"></div>
-  </div>
-  <div class="venue-card">
-    <img class="venue-logo" src="images/logo-palm.png" alt="Azul Caribe Lounge">
-    <div class="venue-eyebrow" id="venue-eyebrow">Coctelería de autor</div>
-    <h1 class="venue-name">Azul Caribe <span>Lounge</span></h1>
-    <p class="venue-tagline" id="venue-tagline">Cocina caribeña · Cartagena de Indias, Colombia</p>
-    <div class="venue-actions">
-      <button class="reserve-btn" id="reserve-btn">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/></svg>
-        <span id="reserve-btn-label">Reservar</span>
+<!-- ===== BARRA SUPERIOR (como Fidelio: logo, enlaces, idioma y pedido) ===== -->
+<header class="topbar" id="topbar">
+  <div class="topbar-row">
+    <a href="#" class="brand" aria-label="Azul Caribe Lounge">
+      <img src="images/logo-palm.png" alt="" class="brand-logo">
+      <span class="brand-name">Azul Caribe <span>Lounge</span></span>
+    </a>
+    <nav class="topnav" aria-label="Secciones">
+      <a href="#menu" data-i18n="navMenu">Menú</a>
+      <a href="#nosotros" data-i18n="navAbout">Nosotros</a>
+      <a href="#contacto" data-i18n="navContact">Contacto</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="lang-btn" id="lang-btn" aria-label="Idioma / Language / Idioma">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9s1.3-6.5 3.8-9z"/></svg>
+        <span id="lang-btn-label">ES</span>
       </button>
-      <button class="info-btn" id="info-btn">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/></svg>
-        <span id="info-btn-label">Información</span>
+      <div class="lang-menu" id="lang-menu"></div>
+      <button class="cart-btn" id="cart-btn" aria-label="Ver pedido">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg>
+        <span data-i18n="cartBtn">Pedido</span>
+        <span class="cart-count" id="cart-count">0</span>
       </button>
     </div>
   </div>
 </header>
+
+<!-- ===== PORTADA (dos columnas: texto y video) ===== -->
+<section class="hero" id="venue-hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="status"><span class="dot"></span> <span id="status-text">Abierto ahora</span></div>
+      <p class="eyebrow" id="venue-eyebrow">Coctelería de autor</p>
+      <h1 class="hero-title"><span class="t1">Azul Caribe</span><span class="t2">Lounge</span></h1>
+      <p class="hero-tagline" id="venue-tagline">Cocina caribeña · Cartagena de Indias, Colombia</p>
+      <p class="hero-lead" data-i18n="heroText">Cocina caribeña con toques haitianos y peruanos, café desde el desayuno y cócteles de autor en La Matuna. Mira la carta, arma tu pedido y envíalo por WhatsApp.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary" data-i18n="heroCta">Ver el menú</a>
+        <button class="btn btn-gold" id="reserve-btn">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/></svg>
+          <span id="reserve-btn-label">Reservar</span>
+        </button>
+        <button class="btn btn-outline" id="info-btn">
+          <span id="info-btn-label">Información</span>
+        </button>
+      </div>
+    </div>
+    <div class="hero-media">
+      <video class="hero-video" src="videos/mojito-pour.mp4" poster="images/pour-full.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Mojito servido en la barra de Azul Caribe"></video>
+    </div>
+  </div>
+</section>
 
 <!-- ===== POUR SCENE: el vaso se "llena" cruzando 4 fotos según el scroll =====
      Bidireccional y sin bloqueo: #pour-scroll es un tramo alto; .pour-stage
@@ -79,31 +95,78 @@
   </div>
 </section>
 
-<!-- ===== STICKY NAV: buscador + categorías (tipo Maido) ===== -->
-<div class="sticky-nav" id="sticky-nav">
-  <div class="sticky-nav-row">
-    <button class="icon-btn" id="search-toggle" aria-label="Buscar">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </button>
-    <div class="nav-scroll-wrap" id="nav-scroll-wrap">
-      <nav class="catnav" id="catnav"></nav>
+<!-- ===== MENÚ ===== -->
+<section class="menu" id="menu">
+  <div class="menu-head">
+    <h2 data-i18n="menuTitle">Nuestro menú</h2>
+    <p data-i18n="menuSub">Platos y bebidas con foto y precio en pesos colombianos.</p>
+  </div>
+  <div class="sticky-nav" id="sticky-nav">
+    <div class="sticky-nav-row">
+      <button class="icon-btn" id="search-toggle" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <div class="nav-scroll-wrap" id="nav-scroll-wrap">
+        <nav class="catnav" id="catnav"></nav>
+      </div>
+    </div>
+    <div class="search-row" id="search-row">
+      <input type="text" id="search-input" placeholder="Buscar en el menú… (ej. camarones, café, ron)">
     </div>
   </div>
-  <div class="search-row" id="search-row">
-    <input type="text" id="search-input" placeholder="Buscar en el menú… (ej. camarones, café, ron)">
+  <main id="menu-section">
+    <div id="menu-content"></div>
+  </main>
+</section>
+
+<!-- ===== NOSOTROS ===== -->
+<section class="about" id="nosotros">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="eyebrow" data-i18n="aboutEyebrow">Nuestra cocina</p>
+      <h2 data-i18n="aboutTitle">El Caribe en una mesa de La Matuna</h2>
+      <p class="about-lead" data-i18n="aboutText">En Azul Caribe se cruzan tres cocinas: la del Caribe colombiano, la haitiana y la peruana.</p>
+      <ul class="about-list">
+        <li data-i18n="aboutB1">Desayunos, platos fuertes y aperitivos para compartir</li>
+        <li data-i18n="aboutB2">Café, jugos naturales y limonadas</li>
+        <li data-i18n="aboutB3">Coctelería de autor, vinos y cervezas</li>
+      </ul>
+    </div>
+    <div class="about-media">
+      <img src="images/plato-griot-pikliz.jpg" alt="Griot con pikliz" loading="lazy">
+      <img src="images/aperitivo-ceviche.jpg" alt="Ceviche mixto" loading="lazy">
+      <img src="images/carnes-lomo-saltado.jpg" alt="Lomo saltado" loading="lazy">
+      <img src="images/plato-pescado-frito.jpg" alt="Pesca del día" loading="lazy">
+    </div>
   </div>
-</div>
+</section>
 
-<main id="menu-section">
-  <div id="menu-content"></div>
-</main>
-
-<!-- ===== FLOATING CART (FAB) ===== -->
-<div class="fab-total" id="fab-total"></div>
-<button class="fab-cart hidden" id="cart-btn" aria-label="Ver pedido">
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg>
-  <span class="fab-badge" id="cart-count">0</span>
-</button>
+<!-- ===== CONTACTO ===== -->
+<section class="contact" id="contacto">
+  <h2 data-i18n="contactTitle">Contacto y reservas</h2>
+  <div class="contact-grid">
+    <a class="contact-card" href="https://www.google.com/maps/search/?api=1&query=Edificio%20San%20Jos%C3%A9%2C%20CL1%2035%2310-170%20LOC1%2C%20La%20Matuna%2C%20Cartagena" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      <strong data-i18n="cAddress">Dirección</strong>
+      <span>Edificio San José, CL1 35 #10-170, Loc. 1 · La Matuna, Cartagena</span>
+    </a>
+    <button class="contact-card" id="contact-reserve">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/></svg>
+      <strong data-i18n="cReserve">Reservas</strong>
+      <span>WhatsApp 310 367 0548</span>
+    </button>
+    <a class="contact-card" href="https://wa.me/573213296814" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.7L4 19.5z"/></svg>
+      <strong data-i18n="cOrders">Pedidos</strong>
+      <span>WhatsApp 321 329 6814</span>
+    </a>
+    <a class="contact-card" href="https://www.instagram.com/azulcaribelounge/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      <strong>Instagram</strong>
+      <span>@azulcaribelounge</span>
+    </a>
+  </div>
+</section>
 
 <footer>
   <img class="foot-logo" src="images/logo-palm.png" alt="">
@@ -187,8 +250,8 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="i18n.js?v=20260928a"></script>
-<script src="data.js?v=20260928a"></script>
-<script src="app.js?v=20260928a"></script>
+<script src="i18n.js?v=20260929a"></script>
+<script src="data.js?v=20260929a"></script>
+<script src="app.js?v=20260929a"></script>
 </body>
 </html>

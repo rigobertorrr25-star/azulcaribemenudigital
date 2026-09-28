@@ -315,3 +315,57 @@ function setLang(lang) {
   localStorage.setItem("azulcaribe_lang", lang);
   document.documentElement.lang = lang;
 }
+
+// ============ TEXTOS DEL DISEÑO v17 (portada, menú, nosotros y contacto) ============
+Object.assign(UI.es, {
+  navMenu: "Menú", navAbout: "Nosotros", navContact: "Contacto", cartBtn: "Pedido",
+  heroText: "Cocina caribeña con toques haitianos y peruanos, café desde el desayuno y cócteles de autor en La Matuna. Mira la carta, arma tu pedido y envíalo por WhatsApp.",
+  heroCta: "Ver el menú",
+  menuTitle: "Nuestro menú", menuSub: "Platos y bebidas con foto y precio en pesos colombianos.",
+  addBtn: "Agregar", chooseBtn: "Elegir",
+  aboutEyebrow: "Nuestra cocina", aboutTitle: "El Caribe en una mesa de La Matuna",
+  aboutText: "En Azul Caribe se cruzan tres cocinas: la del Caribe colombiano, la haitiana y la peruana. Aquí encuentras griot con pikliz, ceviche mixto, lomo saltado y pesca del día; en la barra, mojitos, margaritas de maracuyá y clásicos como el Negroni.",
+  aboutB1: "Desayunos, platos fuertes y aperitivos para compartir",
+  aboutB2: "Café, jugos naturales y limonadas",
+  aboutB3: "Coctelería de autor, vinos y cervezas",
+  contactTitle: "Contacto y reservas", cAddress: "Dirección", cReserve: "Reservas", cOrders: "Pedidos",
+});
+Object.assign(UI.en, {
+  navMenu: "Menu", navAbout: "About", navContact: "Contact", cartBtn: "Order",
+  heroText: "Caribbean cooking with Haitian and Peruvian touches, coffee from breakfast on and signature cocktails in La Matuna. Browse the menu, build your order and send it on WhatsApp.",
+  heroCta: "See the menu",
+  menuTitle: "Our menu", menuSub: "Dishes and drinks with photos and prices in Colombian pesos.",
+  addBtn: "Add", chooseBtn: "Choose",
+  aboutEyebrow: "Our kitchen", aboutTitle: "The Caribbean at a table in La Matuna",
+  aboutText: "Three kitchens meet at Azul Caribe: Colombian Caribbean, Haitian and Peruvian. You'll find griot with pikliz, mixed ceviche, lomo saltado and the catch of the day; at the bar, mojitos, passion fruit margaritas and classics like the Negroni.",
+  aboutB1: "Breakfast, mains and starters to share",
+  aboutB2: "Coffee, fresh juices and lemonades",
+  aboutB3: "Signature cocktails, wine and beer",
+  contactTitle: "Contact & reservations", cAddress: "Address", cReserve: "Reservations", cOrders: "Orders",
+});
+Object.assign(UI.pt, {
+  navMenu: "Cardápio", navAbout: "Sobre nós", navContact: "Contato", cartBtn: "Pedido",
+  heroText: "Cozinha caribenha com toques haitianos e peruanos, café desde o café da manhã e coquetéis autorais em La Matuna. Veja o cardápio, monte seu pedido e envie pelo WhatsApp.",
+  heroCta: "Ver o cardápio",
+  menuTitle: "Nosso cardápio", menuSub: "Pratos e bebidas com foto e preço em pesos colombianos.",
+  addBtn: "Adicionar", chooseBtn: "Escolher",
+  aboutEyebrow: "Nossa cozinha", aboutTitle: "O Caribe em uma mesa de La Matuna",
+  aboutText: "No Azul Caribe se encontram três cozinhas: a do Caribe colombiano, a haitiana e a peruana. Aqui você encontra griot com pikliz, ceviche misto, lomo saltado e o peixe do dia; no bar, mojitos, margaritas de maracujá e clássicos como o Negroni.",
+  aboutB1: "Café da manhã, pratos principais e aperitivos para dividir",
+  aboutB2: "Café, sucos naturais e limonadas",
+  aboutB3: "Coquetelaria autoral, vinhos e cervejas",
+  contactTitle: "Contato e reservas", cAddress: "Endereço", cReserve: "Reservas", cOrders: "Pedidos",
+});
+Object.assign(UI.fr, {
+  navMenu: "Menu", navAbout: "À propos", navContact: "Contact", cartBtn: "Commande",
+  heroText: "Cuisine caribéenne aux touches haïtiennes et péruviennes, café dès le petit-déjeuner et cocktails signature à La Matuna. Parcourez la carte, composez votre commande et envoyez-la sur WhatsApp.",
+  heroCta: "Voir le menu",
+  menuTitle: "Notre menu", menuSub: "Plats et boissons avec photo et prix en pesos colombiens.",
+  addBtn: "Ajouter", chooseBtn: "Choisir",
+  aboutEyebrow: "Notre cuisine", aboutTitle: "Les Caraïbes à une table de La Matuna",
+  aboutText: "Trois cuisines se croisent chez Azul Caribe : celle des Caraïbes colombiennes, l'haïtienne et la péruvienne. Vous y trouverez du griot au pikliz, un ceviche mixte, du lomo saltado et la pêche du jour ; au bar, des mojitos, des margaritas au fruit de la passion et des classiques comme le Negroni.",
+  aboutB1: "Petits-déjeuners, plats et entrées à partager",
+  aboutB2: "Café, jus naturels et limonades",
+  aboutB3: "Cocktails signature, vins et bières",
+  contactTitle: "Contact et réservations", cAddress: "Adresse", cReserve: "Réservations", cOrders: "Commandes",
+});

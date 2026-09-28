@@ -66,6 +66,7 @@ function productCountLabel(n) { return `${n} ${n === 1 ? t("productWord") : t("p
 // ============ SPLASH SCREEN ============
 function hideSplash() {
   const splash = document.getElementById("splash");
+  if (!splash) return;
   splash.classList.add("hide");
   setTimeout(() => splash.remove(), 700);
 }
@@ -101,6 +102,10 @@ function applyStaticTranslations() {
   setText("lang-btn-label", currentLang.toUpperCase());
   setText("pour-eyebrow", t("pourEyebrow"));
   setHTML("pour-title", t("pourTitle"));
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const v = t(el.dataset.i18n);
+    if (v) el.textContent = v;
+  });
 }
 
 // ============ SELECTOR DE IDIOMA ============
@@ -269,25 +274,34 @@ function sectionHeaderHTML(title, count, spyId) {
   return `<div class="section-title"${spyAttr}><h2>${title}</h2><span class="count">${productCountLabel(count)}</span><span class="line"></span></div>`;
 }
 
+// Tarjeta al estilo Fidelio: foto cuadrada arriba, nombre, etiqueta,
+// descripción y, abajo, el precio con el botón "Agregar". Los productos con
+// sabores o con precio por trago/botella abren la ficha para elegir.
+function hasVariants(item) { return !!(item.sabores || (item.precioBotella && item.precio != null)); }
 function cardHTML(item) {
   const badgeHTML = item.badge ? `<span class="card-badge">${badgeLabel(item.badge)}</span>` : "";
   const qty = qtyForItem(item);
   const qtyHTML = qty > 0 ? `<span class="card-qty-badge">${qty}</span>` : "";
+  const addLabel = hasVariants(item) ? t("chooseBtn") : t("addBtn");
   return `
-  <div class="card" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
+  <article class="card" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
     <div class="card-img-wrap">
       <img src="images/${item.img}.jpg" alt="${itemName(item)}" loading="lazy">
-      ${badgeHTML}${qtyHTML}
+      ${qtyHTML}
     </div>
     <div class="card-body">
-      <div class="card-title-line">
-        <span class="card-name">${itemName(item)}</span>
+      <h3 class="card-name">${itemName(item)}</h3>
+      ${badgeHTML}
+      <p class="card-desc">${desc(item)}</p>
+      <div class="card-foot">
         <span class="card-price">${priceLabelShort(item)}</span>
+        <button class="card-add" data-add="${item.id}" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          ${addLabel}
+        </button>
       </div>
-      <div class="card-desc">${desc(item)}</div>
-      <div class="card-tags">${item.tags.map(k => `<span class="tag">${tagLabel(k)}</span>`).join("")}</div>
     </div>
-  </div>`;
+  </article>`;
 }
 
 function destCardHTML(item) {
@@ -326,13 +340,7 @@ function renderGrid() {
   let html = "";
 
   // ---- Carrusel de Destacados (solo cuando no hay categoría/búsqueda/filtro activos) ----
-  if (activeCat === "all" && !searchTerm.trim()) {
-    const dest = getDestacados();
-    if (dest.length) {
-      html += `<div class="section-title"><h2>${t("destacadosTitle")}</h2><span class="line"></span></div>`;
-      html += `<div class="destacados-scroll">${dest.map(destCardHTML).join("")}</div>`;
-    }
-  }
+  // (El diseño tipo Fidelio no lleva carrusel: los destacados se ven con su botón de categoría.)
 
   if (activeCat === "destacados") {
     html += `<div class="section-title"><h2>${t("destacadosTitle")}</h2><span class="count">${productCountLabel(items.length)}</span><span class="line"></span></div>`;
@@ -389,11 +397,25 @@ function initScrollSpyListener() {
   }, { passive: true });
 }
 
+function addOneToCart(id) {
+  const item = MENU_DATA.find(i => i.id === id);
+  if (!item) return;
+  if (hasVariants(item)) { openProductModal(id); return; }
+  const key = cartKey(item);
+  cart[key] = (cart[key] || 0) + 1;
+  saveCart(); renderGrid(); renderCart();
+  showToast(t("toastAdded"));
+  updateCartUI(true);
+}
+
 function attachCardEvents() {
+  document.querySelectorAll(".card-add").forEach(btn => {
+    btn.addEventListener("click", (e) => { e.stopPropagation(); addOneToCart(btn.dataset.add); });
+  });
   document.querySelectorAll(".card, .dest-card").forEach(card => {
     const open = () => openProductModal(card.dataset.id);
     card.addEventListener("click", open);
-    card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+    card.addEventListener("keydown", (e) => { if (e.target !== card) return; if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
   });
 }
 
@@ -598,9 +620,11 @@ function updateCartUI(justAdded) {
   const fabTotal = document.getElementById("fab-total");
 
   badge.textContent = count;
-  fab.classList.toggle("hidden", count === 0);
-  fabTotal.classList.toggle("show", count > 0);
-  fabTotal.textContent = fmt(cartTotal());
+  fab.classList.toggle("has-items", count > 0);
+  if (fabTotal) {
+    fabTotal.classList.toggle("show", count > 0);
+    fabTotal.textContent = fmt(cartTotal());
+  }
 
   if (justAdded !== undefined && count > 0) {
     badge.classList.remove("pop");
@@ -734,10 +758,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initPourScene();
   initScrollSpyListener();
 
-  document.getElementById("reserve-btn").addEventListener("click", () => {
+  const reserve = () => {
     const msg = encodeURIComponent(wa("reservation"));
     window.open(`https://wa.me/${WHATSAPP_RESERVATION_NUMBER}?text=${msg}`, "_blank");
-  });
+  };
+  document.getElementById("reserve-btn").addEventListener("click", reserve);
+  const contactReserve = document.getElementById("contact-reserve");
+  if (contactReserve) contactReserve.addEventListener("click", reserve);
 
   document.getElementById("cart-btn").addEventListener("click", openDrawer);
   document.getElementById("close-drawer").addEventListener("click", closeDrawer);

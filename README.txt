@@ -1,5 +1,21 @@
-AZUL CARIBE LOUNGE — MENÚ DIGITAL (v16)
+AZUL CARIBE LOUNGE — MENÚ DIGITAL (v17)
 =======================================
+
+QUÉ CAMBIÓ EN v17
+-------------------
+- Diseño en fondo blanco con la estructura de la página de Fidelio: barra
+  superior (logo, Menú / Nosotros / Contacto, idioma y botón Pedido),
+  portada en dos columnas con el video del mojito, menú en tarjetas con
+  foto cuadrada, precio y botón "Agregar", sección Nosotros, tarjetas de
+  contacto y pie. Letras DM Serif Display (títulos) y Fira Sans (textos).
+- La escena del mojito que se llena al bajar sigue igual, entre la portada
+  y el menú.
+- Los productos con sabores o con trago/botella muestran "Elegir" y abren
+  la ficha; los demás se agregan directo al pedido.
+- Menú: la carne pasó a Platos Principales (pechuga, picanha, bistec y
+  lomo saltado); la categoría "Carnes y Mariscos" ahora es "Mariscos".
+  La Ensalada Fresca del Caribe pasó a Acompañamientos.
+- Textos nuevos en los 4 idiomas al final de i18n.js.
 
 QUÉ CAMBIÓ EN v16
 -------------------
