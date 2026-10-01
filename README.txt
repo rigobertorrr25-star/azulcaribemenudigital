@@ -18,8 +18,10 @@ QUÉ CAMBIÓ EN v17
   Camarones al Ajillo y Pesca del Día también van en Mariscos.
   La Ensalada Fresca del Caribe pasó a Acompañamientos.
 - Textos nuevos en los 4 idiomas al final de i18n.js.
-- Enlace a Tripadvisor: franja dorada de reseñas en Contacto y botón en la
-  ventana de Información (index.html).
+- Reseñas: franja dorada en Contacto con botones a Google y Tripadvisor, y
+  botones de los dos en la ventana de Información (index.html). El enlace
+  de Google es una búsqueda; si el cliente pasa el enlace "Pedir reseñas"
+  de su perfil de Google (g.page/r/...), conviene cambiarlo.
 - Dirección corregida: Edificio San José, 9 Av. Venezuela, CL1 35 #10-170,
   LOC1, Cartagena de Indias, Bolívar (tarjeta de contacto, ventana de
   información y enlace de Google Maps en index.html).

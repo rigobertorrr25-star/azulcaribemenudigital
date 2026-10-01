@@ -375,3 +375,9 @@ Object.assign(UI.es, { reviewText: "¿Te gustó tu visita? Déjanos tu reseña e
 Object.assign(UI.en, { reviewText: "Enjoyed your visit? Leave us a review on Tripadvisor", reviewBtn: "See on Tripadvisor" });
 Object.assign(UI.pt, { reviewText: "Gostou da visita? Deixe sua avaliação no Tripadvisor", reviewBtn: "Ver no Tripadvisor" });
 Object.assign(UI.fr, { reviewText: "Vous avez aimé votre visite ? Laissez-nous un avis sur Tripadvisor", reviewBtn: "Voir sur Tripadvisor" });
+
+// Franja de reseñas con Google y Tripadvisor
+Object.assign(UI.es, { reviewText: "¿Te gustó tu visita? Déjanos tu reseña", reviewGoogle: "Reseña en Google" });
+Object.assign(UI.en, { reviewText: "Enjoyed your visit? Leave us a review", reviewGoogle: "Review on Google" });
+Object.assign(UI.pt, { reviewText: "Gostou da visita? Deixe sua avaliação", reviewGoogle: "Avaliar no Google" });
+Object.assign(UI.fr, { reviewText: "Vous avez aimé votre visite ? Laissez-nous un avis", reviewGoogle: "Avis sur Google" });

@@ -184,7 +184,9 @@ main#menu-section{padding-bottom:40px;}
 
 /* Franja de reseñas (Tripadvisor), como la de Google en Fidelio */
 .review-banner{margin-top:24px; display:flex; flex-direction:column; align-items:center; gap:16px; padding:28px 24px; border-radius:var(--r); background:var(--gold); color:var(--ink); text-align:center; transition:transform .2s ease;}
-.review-banner:hover{transform:scale(1.01);}
+.review-actions{display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
+.review-btn{gap:8px; transition:transform .15s ease;}
+.review-btn:hover{transform:scale(1.04);}
 .review-left{display:flex; flex-direction:column; align-items:center; gap:10px;}
 .review-stars{display:flex; gap:2px;}
 .review-text{font-family:var(--display); font-size:22px; line-height:1.2;}
