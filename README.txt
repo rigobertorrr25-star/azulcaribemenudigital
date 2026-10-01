@@ -18,6 +18,8 @@ QUÉ CAMBIÓ EN v17
   Camarones al Ajillo y Pesca del Día también van en Mariscos.
   La Ensalada Fresca del Caribe pasó a Acompañamientos.
 - Textos nuevos en los 4 idiomas al final de i18n.js.
+- Enlace a Tripadvisor: franja dorada de reseñas en Contacto y botón en la
+  ventana de Información (index.html).
 - Dirección corregida: Edificio San José, 9 Av. Venezuela, CL1 35 #10-170,
   LOC1, Cartagena de Indias, Bolívar (tarjeta de contacto, ventana de
   información y enlace de Google Maps en index.html).

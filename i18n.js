@@ -369,3 +369,9 @@ Object.assign(UI.fr, {
   aboutB3: "Cocktails signature, vins et bières",
   contactTitle: "Contact et réservations", cAddress: "Adresse", cReserve: "Réservations", cOrders: "Commandes",
 });
+
+// Franja de reseñas en Tripadvisor
+Object.assign(UI.es, { reviewText: "¿Te gustó tu visita? Déjanos tu reseña en Tripadvisor", reviewBtn: "Ver en Tripadvisor" });
+Object.assign(UI.en, { reviewText: "Enjoyed your visit? Leave us a review on Tripadvisor", reviewBtn: "See on Tripadvisor" });
+Object.assign(UI.pt, { reviewText: "Gostou da visita? Deixe sua avaliação no Tripadvisor", reviewBtn: "Ver no Tripadvisor" });
+Object.assign(UI.fr, { reviewText: "Vous avez aimé votre visite ? Laissez-nous un avis sur Tripadvisor", reviewBtn: "Voir sur Tripadvisor" });
