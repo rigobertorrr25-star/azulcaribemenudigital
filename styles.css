@@ -296,3 +296,6 @@ textarea.note:focus{border-color:var(--caribe); background:#fff;}
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms !important; animation-duration:.01ms !important; scroll-behavior:auto !important;}
 }
+
+/* Acceso a la historia (biblia) */
+.about-story{margin-top:26px;}

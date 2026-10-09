@@ -800,3 +800,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const minTime = new Promise(res => setTimeout(res, 1400));
   Promise.all([minTime]).then(hideSplash);
 });
+
+// Al abrir la historia, que arranque en el idioma de la carta (español o inglés)
+document.querySelectorAll('a.story-link').forEach(a=>a.addEventListener('click',()=>{try{localStorage.setItem('acl-lang',currentLang==='es'?'es':'en')}catch(e){}}));

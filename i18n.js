@@ -318,7 +318,7 @@ function setLang(lang) {
 
 // ============ TEXTOS DEL DISEÑO v17 (portada, menú, nosotros y contacto) ============
 Object.assign(UI.es, {
-  navMenu: "Menú", navAbout: "Nosotros", navContact: "Contacto", cartBtn: "Pedido",
+  navMenu: "Menú", navAbout: "Nosotros", navStory: "Historia", storyBtn: "Conoce nuestra historia", navContact: "Contacto", cartBtn: "Pedido",
   heroText: "Cocina caribeña con raíces haitianas, colombianas y canadienses, café desde el desayuno y cócteles de autor en La Matuna. Mira la carta, arma tu pedido y envíalo por WhatsApp.",
   heroCta: "Ver el menú",
   menuTitle: "Nuestro menú", menuSub: "Platos y bebidas con foto y precio en pesos colombianos.",
@@ -331,7 +331,7 @@ Object.assign(UI.es, {
   contactTitle: "Contacto y reservas", cAddress: "Dirección", cReserve: "Reservas", cOrders: "Pedidos",
 });
 Object.assign(UI.en, {
-  navMenu: "Menu", navAbout: "About", navContact: "Contact", cartBtn: "Order",
+  navMenu: "Menu", navAbout: "About", navStory: "Our story", storyBtn: "Read our story", navContact: "Contact", cartBtn: "Order",
   heroText: "Caribbean cooking with Haitian, Colombian and Canadian roots, coffee from breakfast on and signature cocktails in La Matuna. Browse the menu, build your order and send it on WhatsApp.",
   heroCta: "See the menu",
   menuTitle: "Our menu", menuSub: "Dishes and drinks with photos and prices in Colombian pesos.",
@@ -344,7 +344,7 @@ Object.assign(UI.en, {
   contactTitle: "Contact & reservations", cAddress: "Address", cReserve: "Reservations", cOrders: "Orders",
 });
 Object.assign(UI.pt, {
-  navMenu: "Cardápio", navAbout: "Sobre nós", navContact: "Contato", cartBtn: "Pedido",
+  navMenu: "Cardápio", navAbout: "Sobre nós", navStory: "Nossa história", storyBtn: "Conheça nossa história", navContact: "Contato", cartBtn: "Pedido",
   heroText: "Cozinha caribenha com raízes haitianas, colombianas e canadenses, café desde o café da manhã e coquetéis autorais em La Matuna. Veja o cardápio, monte seu pedido e envie pelo WhatsApp.",
   heroCta: "Ver o cardápio",
   menuTitle: "Nosso cardápio", menuSub: "Pratos e bebidas com foto e preço em pesos colombianos.",
@@ -357,7 +357,7 @@ Object.assign(UI.pt, {
   contactTitle: "Contato e reservas", cAddress: "Endereço", cReserve: "Reservas", cOrders: "Pedidos",
 });
 Object.assign(UI.fr, {
-  navMenu: "Menu", navAbout: "À propos", navContact: "Contact", cartBtn: "Commande",
+  navMenu: "Menu", navAbout: "À propos", navStory: "Notre histoire", storyBtn: "Découvrez notre histoire", navContact: "Contact", cartBtn: "Commande",
   heroText: "Cuisine caribéenne aux racines haïtiennes, colombiennes et canadiennes, café dès le petit-déjeuner et cocktails signature à La Matuna. Parcourez la carte, composez votre commande et envoyez-la sur WhatsApp.",
   heroCta: "Voir le menu",
   menuTitle: "Notre menu", menuSub: "Plats et boissons avec photo et prix en pesos colombiens.",
