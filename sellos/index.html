@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b1d33">
+<title>Tarjeta de sellos — Azul Caribe Lounge</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Tarjeta de sellos: misma marca de la carta (azul noche, azul caribe, dorado del logo). */
+:root{--bg:#f3f7fb;--card:#0b1d33;--ink:#0b1d33;--muted:#5b6b80;--line:#e3e9f1;--caribe:#0a6fa8;--caribe-dark:#085a88;--gold:#e0b43c;--gold-soft:rgba(224,180,60,.16);--white:#fff;--danger:#c2412d;
+--display:'DM Serif Display',Georgia,serif;--text:'Fira Sans','Segoe UI',system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.5;padding:max(16px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom))}
+.wrap{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.brand img{width:38px;height:38px;border-radius:10px;background:var(--card);padding:6px}
+.brand b{font-family:var(--display);font-weight:400;font-size:21px;line-height:1}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+.lang button{border:0;background:transparent;padding:7px 12px;font:600 13px var(--text);color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.card{background:radial-gradient(120% 90% at 50% 0%,#17365c,var(--card) 62%);color:#fff;border-radius:24px;padding:24px 20px 22px;box-shadow:0 18px 40px rgba(11,29,51,.22)}
+.card h1{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;text-wrap:balance}
+.card .sub{color:#c6d1de;font-size:15px;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px 10px;margin:22px 0 6px}
+.slot{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.dot{width:100%;max-width:56px;aspect-ratio:1;border-radius:50%;border:2px dashed rgba(255,255,255,.3);display:grid;place-items:center;font:600 14px var(--text);color:rgba(255,255,255,.45);position:relative}
+.dot.milestone{border-color:var(--gold);color:var(--gold)}
+.dot.on{border:0;background:var(--gold);color:var(--card)}
+.dot.on img{width:62%;filter:brightness(0) saturate(100%) invert(9%) sepia(29%) saturate(2700%) hue-rotate(190deg)}
+.dot.new{animation:stamp .55s cubic-bezier(.2,1.4,.4,1)}
+@keyframes stamp{0%{transform:scale(1.9) rotate(-18deg);opacity:0}60%{opacity:1}100%{transform:none}}
+.lab{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:.02em;text-align:center;min-height:15px}
+.progress{margin-top:12px;font-size:15px;color:#e6edf5}
+.progress b{color:var(--gold)}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;height:52px;border:0;border-radius:999px;font:600 16px var(--text);cursor:pointer;transition:transform .15s,background .2s}
+.btn:active{transform:scale(.98)}
+.btn-gold{background:var(--gold);color:var(--card);margin-top:18px}
+.btn-gold:disabled{opacity:.45;cursor:default}
+.btn-blue{background:var(--caribe);color:#fff}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.note{font-size:13px;color:#c6d1de;margin-top:10px;text-align:center;min-height:20px}
+.win{background:#fff;border:2px solid var(--gold);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.win h2{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.15}
+.win p{color:var(--muted);font-size:15px}
+section.box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px}
+section.box h2{font-family:var(--display);font-weight:400;font-size:21px;margin-bottom:10px}
+.rew{list-style:none;display:flex;flex-direction:column;gap:10px}
+.rew li{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
+.rew .n{width:44px;height:44px;border-radius:50%;background:var(--gold-soft);color:var(--ink);display:grid;place-items:center;font:700 15px var(--text)}
+.rew .t{min-width:0}.rew .t b{display:block;font-weight:600}.rew .t span{font-size:13px;color:var(--muted)}
+.tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--bg);color:var(--muted);white-space:nowrap}
+.tag.ready{background:var(--gold);color:var(--card)}.tag.used{background:#e8f3ea;color:#2e6b3c}
+.rules{font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:6px;padding-left:18px}
+.legal{font-size:12px;color:var(--muted);text-align:center}
+.foot{display:flex;justify-content:center}
+.foot a{color:var(--caribe);font-weight:600;text-decoration:none}
+dialog{border:0;border-radius:24px;padding:24px 20px;width:min(92vw,400px);margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(11,29,51,.55)}
+dialog h2{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.15}
+dialog p{color:var(--muted);font-size:15px;margin:6px 0 16px}
+.pin{display:flex;gap:10px;justify-content:center;margin-bottom:10px}
+.pin input{width:56px;height:64px;border:2px solid var(--line);border-radius:14px;text-align:center;font:700 26px var(--text);color:var(--ink);background:#fff}
+.pin input:focus{outline:none;border-color:var(--caribe)}
+.err{color:var(--danger);font-size:14px;text-align:center;min-height:21px;margin-bottom:6px}
+.row{display:flex;flex-direction:column;gap:10px}
+:focus-visible{outline:3px solid var(--caribe);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.dot.new{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="../"><img src="../images/logo-palm.png" alt=""><b>Azul Caribe</b></a>
+    <div class="lang" role="group" aria-label="Idioma / Language"><button data-l="es" aria-pressed="true">ES</button><button data-l="en" aria-pressed="false">EN</button></div>
+  </header>
+
+  <div class="card">
+    <h1 data-t="title"></h1>
+    <p class="sub" data-t="sub"></p>
+    <div class="grid" id="grid" aria-live="polite"></div>
+    <p class="progress" id="progress"></p>
+    <button class="btn btn-gold" id="stampBtn" data-t="stampBtn"></button>
+    <p class="note" id="note"></p>
+  </div>
+
+  <div class="win" id="win" hidden>
+    <h2 id="winTitle"></h2>
+    <p id="winText"></p>
+    <button class="btn btn-blue" id="redeemBtn" data-t="redeemBtn"></button>
+  </div>
+
+  <section class="box">
+    <h2 data-t="rewardsTitle"></h2>
+    <ul class="rew" id="rew"></ul>
+  </section>
+
+  <section class="box">
+    <h2 data-t="howTitle"></h2>
+    <ul class="rules" id="rules"></ul>
+  </section>
+
+  <p class="legal">El exceso de alcohol es perjudicial para la salud. Prohíbase el expendio de bebidas embriagantes a menores de edad.</p>
+  <div class="foot"><a href="../" data-t="menuLink"></a></div>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <form method="dialog" id="dlgForm">
+    <h2 id="dlgTitle"></h2>
+    <p id="dlgText"></p>
+    <div class="pin" id="pin">
+      <input id="p1" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="1">
+      <input id="p2" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="2">
+      <input id="p3" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="3">
+      <input id="p4" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="4">
+    </div>
+    <p class="err" id="err"></p>
+    <div class="row">
+      <button class="btn btn-blue" id="okBtn" type="submit" value="ok" data-t="confirm"></button>
+      <button class="btn btn-ghost" id="cancelBtn" type="button" data-t="cancel"></button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const SALT='5889e6b7a971d8c0', HASH='c92151ebafb6c3189e2bc16fdc8dc05d16ffcc19f9f93bc28c030390e87cf79f';
+const GOAL=10, COOLDOWN_H=3;
+const MS=[{n:4,k:'off'},{n:7,k:'coffee'},{n:10,k:'cocktail'}];
+const T={
+ es:{title:'Tu tarjeta de sellos',sub:'10 visitas, 3 premios. Pide tu sello cada vez que vengas.',stampBtn:'Pedir mi sello',
+  progress:(s,r)=>r?`Llevas <b>${s} de ${GOAL}</b> sellos. Te faltan <b>${r.left}</b> para ${r.name}.`:`Llevas <b>${s} de ${GOAL}</b> sellos. ¡Completaste la tarjeta!`,
+  off:'el 10 % de descuento',coffee:'un café gratis',cocktail:'un cóctel gratis',
+  rOff:'10 % de descuento',rOffD:'En la cuenta de esa visita',rCoffee:'Café gratis',rCoffeeD:'Americano, capuchino o latte',rCocktail:'Cóctel gratis',rCocktailD:'Cualquiera de hasta $32.000 · solo mayores de 18',
+  lock:'Bloqueado',ready:'¡Listo!',used:'Canjeado',
+  winT:{off:'¡Ganaste 10 % de descuento!',coffee:'¡Ganaste un café gratis!',cocktail:'¡Ganaste un cóctel gratis!'},
+  winP:'Muéstrale esta pantalla al mesero. Él escribe su código para canjearlo.',redeemBtn:'Canjear ahora',
+  rewardsTitle:'Premios',howTitle:'Cómo funciona',menuLink:'Ver la carta',
+  rules:['Pide un sello cada vez que vengas y consumas. El mesero lo pone con su código.','Máximo un sello cada 3 horas.','Los premios se canjean en el local, mostrando esta pantalla.','Al canjear el cóctel, empiezas una tarjeta nueva.','Tu tarjeta se guarda en este celular. Si borras los datos del navegador o cambias de celular, se pierde.'],
+  dlgStamp:'Código del mesero',dlgStampP:'Entrégale el celular al mesero para que ponga tu sello.',dlgRedeem:'Canjear premio',dlgRedeemP:'El mesero escribe su código para entregarte el premio.',
+  confirm:'Confirmar',cancel:'Cancelar',bad:'Código incorrecto. Intenta otra vez.',locked:m=>`Demasiados intentos. Espera ${m} min.`,
+  wait:h=>`Ya recibiste un sello hace poco. El siguiente, en tu próxima visita (en ${h}).`,full:'Canjea tu cóctel para empezar una tarjeta nueva.',
+  stamped:'¡Sello puesto! Gracias por venir.',redeemed:'Premio canjeado. ¡Disfrútalo!',cards:n=>`Tarjetas completadas: ${n}`},
+ en:{title:'Your stamp card',sub:'10 visits, 3 rewards. Ask for a stamp every time you come.',stampBtn:'Get my stamp',
+  progress:(s,r)=>r?`You have <b>${s} of ${GOAL}</b> stamps. <b>${r.left}</b> more for ${r.name}.`:`You have <b>${s} of ${GOAL}</b> stamps. Card complete!`,
+  off:'10% off',coffee:'a free coffee',cocktail:'a free cocktail',
+  rOff:'10% off',rOffD:'On that visit\'s bill',rCoffee:'Free coffee',rCoffeeD:'Americano, cappuccino or latte',rCocktail:'Free cocktail',rCocktailD:'Any up to COP 32,000 · 18+ only',
+  lock:'Locked',ready:'Ready!',used:'Redeemed',
+  winT:{off:'You earned 10% off!',coffee:'You earned a free coffee!',cocktail:'You earned a free cocktail!'},
+  winP:'Show this screen to your server. They enter their code to redeem it.',redeemBtn:'Redeem now',
+  rewardsTitle:'Rewards',howTitle:'How it works',menuLink:'See the menu',
+  rules:['Ask for a stamp every time you visit and order. Your server adds it with their code.','One stamp every 3 hours at most.','Rewards are redeemed at the venue by showing this screen.','When you redeem the cocktail, a new card starts.','Your card is saved on this phone. If you clear your browser data or change phones, it is lost.'],
+  dlgStamp:'Server code',dlgStampP:'Hand your phone to your server so they can add your stamp.',dlgRedeem:'Redeem reward',dlgRedeemP:'Your server enters their code to give you the reward.',
+  confirm:'Confirm',cancel:'Cancel',bad:'Wrong code. Try again.',locked:m=>`Too many tries. Wait ${m} min.`,
+  wait:h=>`You got a stamp recently. The next one on your next visit (in ${h}).`,full:'Redeem your cocktail to start a new card.',
+  stamped:'Stamp added! Thanks for coming.',redeemed:'Reward redeemed. Enjoy!',cards:n=>`Completed cards: ${n}`}
+};
+const KEY='acl-sellos-v1';
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!Array.isArray(S.stamps))S={stamps:[],redeemed:{},cards:0,fails:0,lockUntil:0};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+let L='es';try{const a=localStorage.getItem('acl-sellos-lang')||localStorage.getItem('azulcaribe_lang');if(a)L=a==='es'?'es':'en';else if(!/^es/i.test(navigator.language))L='en'}catch(e){}
+const $=id=>document.getElementById(id);
+const t=()=>T[L];
+const logo='../images/logo-palm.png';
+function nextMs(){return MS.find(m=>S.stamps.length<m.n)}
+function readyMs(){return MS.find(m=>S.stamps.length>=m.n&&!S.redeemed[m.n])}
+function fmtH(ms){const m=Math.ceil(ms/60000);return m>=60?`${Math.floor(m/60)} h ${m%60} min`:`${m} min`}
+function render(newIdx){
+  document.documentElement.lang=L;
+  document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t()[el.dataset.t]);
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===L)));
+  const n=S.stamps.length, g=$('grid'); g.innerHTML='';
+  for(let i=1;i<=GOAL;i++){
+    const m=MS.find(x=>x.n===i), on=i<=n;
+    const s=document.createElement('div');s.className='slot';
+    s.innerHTML=`<div class="dot${m?' milestone':''}${on?' on':''}${newIdx===i?' new':''}">${on?`<img src="${logo}" alt="">`:i}</div><span class="lab">${m?(m.k==='off'?'10 %':m.k==='coffee'?(L==='es'?'Café':'Coffee'):(L==='es'?'Cóctel':'Cocktail')):''}</span>`;
+    s.setAttribute('aria-label',`${i}${on?' ✓':''}`);g.appendChild(s);
+  }
+  const nx=nextMs();
+  $('progress').innerHTML=t().progress(n,nx?{left:nx.n-n,name:t()[nx.k]}:null)+(S.cards?` <br><span style="font-size:13px;color:#c6d1de">${t().cards(S.cards)}</span>`:'');
+  const r=readyMs();
+  $('win').hidden=!r;
+  if(r){$('winTitle').textContent=t().winT[r.k];$('winText').textContent=t().winP}
+  const full=n>=GOAL, last=S.stamps[S.stamps.length-1]||0, left=last+COOLDOWN_H*3600e3-Date.now();
+  $('stampBtn').disabled=full;
+  $('note').textContent=full?t().full:(left>0?t().wait(fmtH(left)):'');
+  const rows=[['off','rOff','rOffD'],['coffee','rCoffee','rCoffeeD'],['cocktail','rCocktail','rCocktailD']];
+  $('rew').innerHTML=MS.map((m,i)=>{const st=S.redeemed[m.n]?'used':(n>=m.n?'ready':'lock');return `<li><span class="n">${m.n}</span><span class="t"><b>${t()[rows[i][1]]}</b><span>${t()[rows[i][2]]}</span></span><span class="tag ${st==='lock'?'':st}">${t()[st]}</span></li>`}).join('');
+  $('rules').innerHTML=t().rules.map(x=>`<li>${x}</li>`).join('');
+}
+async function check(code){
+  const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(SALT+code));
+  return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('')===HASH;
+}
+const pins=['p1','p2','p3','p4'].map($);
+pins.forEach((p,i)=>{p.addEventListener('input',()=>{p.value=p.value.replace(/\D/g,'').slice(-1);if(p.value&&pins[i+1])pins[i+1].focus()});
+  p.addEventListener('keydown',e=>{if(e.key==='Backspace'&&!p.value&&pins[i-1])pins[i-1].focus()})});
+let mode='stamp';
+function openDlg(m){
+  mode=m;$('dlgTitle').textContent=m==='stamp'?t().dlgStamp:t().dlgRedeem;$('dlgText').textContent=m==='stamp'?t().dlgStampP:t().dlgRedeemP;
+  pins.forEach(p=>p.value='');$('err').textContent='';
+  if(S.lockUntil>Date.now())$('err').textContent=t().locked(Math.ceil((S.lockUntil-Date.now())/60000));
+  $('dlg').showModal();setTimeout(()=>pins[0].focus(),50);
+}
+$('stampBtn').addEventListener('click',()=>{
+  const last=S.stamps[S.stamps.length-1]||0;
+  if(last+COOLDOWN_H*3600e3>Date.now()){render();return}
+  openDlg('stamp');
+});
+$('redeemBtn').addEventListener('click',()=>openDlg('redeem'));
+$('cancelBtn').addEventListener('click',()=>$('dlg').close());
+$('dlgForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(S.lockUntil>Date.now()){$('err').textContent=t().locked(Math.ceil((S.lockUntil-Date.now())/60000));return}
+  const code=pins.map(p=>p.value).join('');
+  if(code.length<4||!(await check(code))){
+    S.fails=(S.fails||0)+1;if(S.fails>=5){S.lockUntil=Date.now()+10*60e3;S.fails=0}save();
+    $('err').textContent=S.lockUntil>Date.now()?t().locked(10):t().bad;pins.forEach(p=>p.value='');pins[0].focus();return;
+  }
+  S.fails=0;let idx=null;
+  if(mode==='stamp'){if(S.stamps.length<GOAL){S.stamps.push(Date.now());idx=S.stamps.length}}
+  else{const r=readyMs();if(r){S.redeemed[r.n]=Date.now();if(r.n===GOAL){S.cards=(S.cards||0)+1;S.stamps=[];S.redeemed={}}}}
+  save();$('dlg').close();render(idx);
+  $('note').textContent=mode==='stamp'?t().stamped:t().redeemed;
+});
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{L=b.dataset.l;try{localStorage.setItem('acl-sellos-lang',L)}catch(e){}render()}));
+render();
+</script>
+</body>
+</html>
