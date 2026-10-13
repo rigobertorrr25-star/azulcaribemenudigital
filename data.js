@@ -217,7 +217,7 @@ const MENU_DATA = [
   { id:"s8", cat:"sides",
     nombre:{ es:"Papas Casco", en:"Wedge Fries", pt:"Batatas Rústicas", fr:"Pommes de Terre Rustiques" },
     desc:{ es:"Papas criollas en casco fritas.", en:"Crispy wedge-cut fried potatoes.", pt:"Batatas rústicas fritas.", fr:"Pommes de terre créoles frites en quartiers." },
-    precio:7000, img:"lado-papas-casco-v4", tags:[], badge:"nuevo" },
+    precio:7000, img:"lado-papas-casco-v5", tags:[], badge:"nuevo" },
   { id:"s9", cat:"sides",
     nombre:{ es:"Adicional de Queso", en:"Extra Cheese", pt:"Adicional de Queijo", fr:"Supplément de Fromage" },
     desc:{ es:"Porción extra de queso para acompañar tu plato.", en:"Extra portion of cheese to add to your dish.", pt:"Porção extra de queijo para acompanhar seu prato.", fr:"Portion supplémentaire de fromage pour accompagner votre plat." },
