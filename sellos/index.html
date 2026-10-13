@@ -143,10 +143,10 @@ const MS=[{n:4,k:'off'},{n:7,k:'coffee'},{n:10,k:'cocktail'}];
 const T={
  es:{title:'Tu tarjeta de sellos',sub:'10 visitas, 3 premios. Pide tu sello cada vez que vengas.',stampBtn:'Pedir mi sello',
   progress:(s,r)=>r?`Llevas <b>${s} de ${GOAL}</b> sellos. Te faltan <b>${r.left}</b> para ${r.name}.`:`Llevas <b>${s} de ${GOAL}</b> sellos. ¡Completaste la tarjeta!`,
-  off:'el 10 % de descuento',coffee:'un café gratis',cocktail:'un cóctel gratis',
-  rOff:'10 % de descuento',rOffD:'En la cuenta de esa visita',rCoffee:'Café gratis',rCoffeeD:'Americano, capuchino o latte',rCocktail:'Cóctel gratis',rCocktailD:'El que quieras de la carta · solo mayores de 18',
+  off:'el 20 % de descuento',coffee:'un café gratis',cocktail:'un cóctel gratis',
+  rOff:'20 % de descuento',rOffD:'En la cuenta de esa visita',rCoffee:'Café gratis',rCoffeeD:'Americano, capuchino o latte',rCocktail:'Cóctel gratis',rCocktailD:'El que quieras de la carta · solo mayores de 18',
   lock:'Bloqueado',ready:'¡Listo!',used:'Canjeado',
-  winT:{off:'¡Ganaste 10 % de descuento!',coffee:'¡Ganaste un café gratis!',cocktail:'¡Ganaste un cóctel gratis!'},
+  winT:{off:'¡Ganaste 20 % de descuento!',coffee:'¡Ganaste un café gratis!',cocktail:'¡Ganaste un cóctel gratis!'},
   winP:'Muéstrale esta pantalla al mesero. Él escribe su código para canjearlo.',redeemBtn:'Canjear ahora',
   rewardsTitle:'Premios',howTitle:'Cómo funciona',menuLink:'Ver la carta',
   rules:['Pide un sello cada vez que vengas y consumas. El mesero lo pone con su código.','Máximo un sello cada 3 horas.','Los premios se canjean en el local, mostrando esta pantalla.','Cada visita se marca con un sello. Cuando canjeas un premio, en su casilla aparece la palmera.','Después del cóctel, tu siguiente sello empieza una tarjeta nueva.','Tu tarjeta se guarda en este celular. Si borras los datos del navegador o cambias de celular, se pierde.'],
@@ -156,10 +156,10 @@ const T={
   stamped:'¡Sello puesto! Gracias por venir.',redeemed:'Premio canjeado. ¡Disfrútalo!',cards:n=>`Tarjetas completadas: ${n}`},
  en:{title:'Your stamp card',sub:'10 visits, 3 rewards. Ask for a stamp every time you come.',stampBtn:'Get my stamp',
   progress:(s,r)=>r?`You have <b>${s} of ${GOAL}</b> stamps. <b>${r.left}</b> more for ${r.name}.`:`You have <b>${s} of ${GOAL}</b> stamps. Card complete!`,
-  off:'10% off',coffee:'a free coffee',cocktail:'a free cocktail',
-  rOff:'10% off',rOffD:'On that visit\'s bill',rCoffee:'Free coffee',rCoffeeD:'Americano, cappuccino or latte',rCocktail:'Free cocktail',rCocktailD:'Any one on the menu · 18+ only',
+  off:'20% off',coffee:'a free coffee',cocktail:'a free cocktail',
+  rOff:'20% off',rOffD:'On that visit\'s bill',rCoffee:'Free coffee',rCoffeeD:'Americano, cappuccino or latte',rCocktail:'Free cocktail',rCocktailD:'Any one on the menu · 18+ only',
   lock:'Locked',ready:'Ready!',used:'Redeemed',
-  winT:{off:'You earned 10% off!',coffee:'You earned a free coffee!',cocktail:'You earned a free cocktail!'},
+  winT:{off:'You earned 20% off!',coffee:'You earned a free coffee!',cocktail:'You earned a free cocktail!'},
   winP:'Show this screen to your server. They enter their code to redeem it.',redeemBtn:'Redeem now',
   rewardsTitle:'Rewards',howTitle:'How it works',menuLink:'See the menu',
   rules:['Ask for a stamp every time you visit and order. Your server adds it with their code.','One stamp every 3 hours at most.','Rewards are redeemed at the venue by showing this screen.','Each visit gets a check mark. When you redeem a reward, the palm appears in its box.','After the cocktail, your next stamp starts a new card.','Your card is saved on this phone. If you clear your browser data or change phones, it is lost.'],
@@ -189,7 +189,7 @@ function render(newIdx){
     const m=MS.find(x=>x.n===i), on=i<=n;
     const s=document.createElement('div');s.className='slot';
     const used=m&&S.redeemed[i], ready=m&&on&&!used;
-    s.innerHTML=`<div class="dot${m?' milestone':''}${on?' on':''}${used?' prize':''}${ready?' ready':''}${newIdx===i?' new':''}">${used?`<img src="${logo}" alt="">`:on?CHECK:i}</div><span class="lab">${m?(m.k==='off'?'10 %':m.k==='coffee'?(L==='es'?'Café':'Coffee'):(L==='es'?'Cóctel':'Cocktail')):''}</span>`;
+    s.innerHTML=`<div class="dot${m?' milestone':''}${on?' on':''}${used?' prize':''}${ready?' ready':''}${newIdx===i?' new':''}">${used?`<img src="${logo}" alt="">`:on?CHECK:i}</div><span class="lab">${m?(m.k==='off'?'20 %':m.k==='coffee'?(L==='es'?'Café':'Coffee'):(L==='es'?'Cóctel':'Cocktail')):''}</span>`;
     s.setAttribute('aria-label',`${i}${on?' ✓':''}`);g.appendChild(s);
   }
   const nx=nextMs();
