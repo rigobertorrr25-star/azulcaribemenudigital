@@ -137,7 +137,7 @@ dialog p{color:var(--muted);font-size:15px;margin:6px 0 16px}
 </dialog>
 
 <script>
-const SALT='5889e6b7a971d8c0', HASH='c92151ebafb6c3189e2bc16fdc8dc05d16ffcc19f9f93bc28c030390e87cf79f';
+const SALT='5889e6b7a971d8c0', STAFF={"c92151ebafb6c3189e2bc16fdc8dc05d16ffcc19f9f93bc28c030390e87cf79f": "Admin", "b6bcdd07e632d541417d792aaab0ad35768568f7319077656faa72372ecf8e03": "Lore", "df6cac4a1e3ddabf05a5c98e86861845e8eaf82f612ced47193eb843dd408c3d": "Vere"}; // hash del código → nombre del mesero
 const GOAL=10, TEST=true, COOLDOWN_H=TEST?0:3; // TEST: prueba sin espera; volver a false al terminar
 const MS=[{n:4,k:'off'},{n:7,k:'coffee'},{n:10,k:'cocktail'}];
 const T={
@@ -206,7 +206,7 @@ function render(newIdx){
 }
 async function check(code){
   const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(SALT+code));
-  return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('')===HASH;
+  return STAFF[[...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('')]||null;
 }
 const pins=['p1','p2','p3','p4'].map($);
 pins.forEach((p,i)=>{p.addEventListener('input',()=>{p.value=p.value.replace(/\D/g,'').slice(-1);if(p.value&&pins[i+1])pins[i+1].focus()});
@@ -229,15 +229,16 @@ $('dlgForm').addEventListener('submit',async e=>{
   e.preventDefault();
   if(S.lockUntil>Date.now()){$('err').textContent=t().locked(Math.ceil((S.lockUntil-Date.now())/60000));return}
   const code=pins.map(p=>p.value).join('');
-  if(code.length<4||!(await check(code))){
+  const who=code.length<4?null:await check(code);
+  if(!who){
     S.fails=(S.fails||0)+1;if(S.fails>=5){S.lockUntil=Date.now()+10*60e3;S.fails=0}save();
     $('err').textContent=S.lockUntil>Date.now()?t().locked(10):t().bad;pins.forEach(p=>p.value='');pins[0].focus();return;
   }
   S.fails=0;let idx=null;
-  if(mode==='stamp'){if(S.stamps.length>=GOAL&&S.redeemed[GOAL]){S.stamps=[];S.redeemed={}}if(S.stamps.length<GOAL){S.stamps.push(Date.now());idx=S.stamps.length}}
-  else{const r=readyMs();if(r){S.redeemed[r.n]=Date.now();if(r.n===GOAL)S.cards=(S.cards||0)+1}}
+  if(mode==='stamp'){if(S.stamps.length>=GOAL&&S.redeemed[GOAL]){S.stamps=[];S.redeemed={};S.by=[]}if(S.stamps.length<GOAL){S.stamps.push(Date.now());(S.by=S.by||[]).push(who);idx=S.stamps.length}}
+  else{const r=readyMs();if(r){S.redeemed[r.n]=Date.now();(S.redBy=S.redBy||{})[r.n]=who;if(r.n===GOAL)S.cards=(S.cards||0)+1}}
   save();$('dlg').close();render(idx);
-  $('note').textContent=mode==='stamp'?t().stamped:t().redeemed;
+  $('note').textContent=(mode==='stamp'?t().stamped:t().redeemed)+(who!=='Admin'?' · '+who:'');
 });
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{L=b.dataset.l;try{localStorage.setItem('acl-sellos-lang',L)}catch(e){}render()}));
 if(TEST){const b=document.createElement('div');b.className='test';b.innerHTML='Modo prueba: sin espera entre sellos <button type="button">Reiniciar</button>';document.querySelector('.card').before(b);b.querySelector('button').onclick=()=>{S={stamps:[],redeemed:{},cards:0,fails:0,lockUntil:0};save();render()}}
