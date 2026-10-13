@@ -35,6 +35,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .dot{width:100%;max-width:56px;aspect-ratio:1;border-radius:50%;border:2px dashed rgba(255,255,255,.3);display:grid;place-items:center;font:600 14px var(--text);color:rgba(255,255,255,.45);position:relative}
 .dot.milestone{border-color:var(--gold);color:var(--gold)}
 .dot.on{border:0;background:var(--gold);color:var(--card)}
+.dot.on svg{width:58%;height:58%}
+.dot.ready{box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 18px 4px rgba(224,179,65,.75);animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 6px 1px rgba(224,179,65,.4)}}
+.dot.prize{box-shadow:0 0 0 3px #fff}
+.test{background:#b42318;color:#fff;font:600 13px var(--text);text-align:center;padding:8px 12px;border-radius:12px;margin-bottom:12px}
+.test button{background:#fff;color:#b42318;border:0;border-radius:8px;font:600 12px var(--text);padding:4px 10px;margin-left:8px;cursor:pointer}
 .dot.on img{width:62%;filter:brightness(0) saturate(100%) invert(9%) sepia(29%) saturate(2700%) hue-rotate(190deg)}
 .dot.new{animation:stamp .55s cubic-bezier(.2,1.4,.4,1)}
 @keyframes stamp{0%{transform:scale(1.9) rotate(-18deg);opacity:0}60%{opacity:1}100%{transform:none}}
@@ -132,7 +138,7 @@ dialog p{color:var(--muted);font-size:15px;margin:6px 0 16px}
 
 <script>
 const SALT='5889e6b7a971d8c0', HASH='c92151ebafb6c3189e2bc16fdc8dc05d16ffcc19f9f93bc28c030390e87cf79f';
-const GOAL=10, COOLDOWN_H=3;
+const GOAL=10, TEST=true, COOLDOWN_H=TEST?0:3; // TEST: prueba sin espera; volver a false al terminar
 const MS=[{n:4,k:'off'},{n:7,k:'coffee'},{n:10,k:'cocktail'}];
 const T={
  es:{title:'Tu tarjeta de sellos',sub:'10 visitas, 3 premios. Pide tu sello cada vez que vengas.',stampBtn:'Pedir mi sello',
@@ -143,10 +149,10 @@ const T={
   winT:{off:'¡Ganaste 10 % de descuento!',coffee:'¡Ganaste un café gratis!',cocktail:'¡Ganaste un cóctel gratis!'},
   winP:'Muéstrale esta pantalla al mesero. Él escribe su código para canjearlo.',redeemBtn:'Canjear ahora',
   rewardsTitle:'Premios',howTitle:'Cómo funciona',menuLink:'Ver la carta',
-  rules:['Pide un sello cada vez que vengas y consumas. El mesero lo pone con su código.','Máximo un sello cada 3 horas.','Los premios se canjean en el local, mostrando esta pantalla.','Al canjear el cóctel, empiezas una tarjeta nueva.','Tu tarjeta se guarda en este celular. Si borras los datos del navegador o cambias de celular, se pierde.'],
+  rules:['Pide un sello cada vez que vengas y consumas. El mesero lo pone con su código.','Máximo un sello cada 3 horas.','Los premios se canjean en el local, mostrando esta pantalla.','Cada visita se marca con un sello. Cuando canjeas un premio, en su casilla aparece la palmera.','Después del cóctel, tu siguiente sello empieza una tarjeta nueva.','Tu tarjeta se guarda en este celular. Si borras los datos del navegador o cambias de celular, se pierde.'],
   dlgStamp:'Código del mesero',dlgStampP:'Entrégale el celular al mesero para que ponga tu sello.',dlgRedeem:'Canjear premio',dlgRedeemP:'El mesero escribe su código para entregarte el premio.',
   confirm:'Confirmar',cancel:'Cancelar',bad:'Código incorrecto. Intenta otra vez.',locked:m=>`Demasiados intentos. Espera ${m} min.`,
-  wait:h=>`Ya recibiste un sello hace poco. El siguiente, en tu próxima visita (en ${h}).`,full:'Canjea tu cóctel para empezar una tarjeta nueva.',
+  wait:h=>`Ya recibiste un sello hace poco. El siguiente, en tu próxima visita (en ${h}).`,full:'Canjea tu cóctel para empezar una tarjeta nueva.',done:'¡Tarjeta completa! Con tu próximo sello empiezas una nueva.',
   stamped:'¡Sello puesto! Gracias por venir.',redeemed:'Premio canjeado. ¡Disfrútalo!',cards:n=>`Tarjetas completadas: ${n}`},
  en:{title:'Your stamp card',sub:'10 visits, 3 rewards. Ask for a stamp every time you come.',stampBtn:'Get my stamp',
   progress:(s,r)=>r?`You have <b>${s} of ${GOAL}</b> stamps. <b>${r.left}</b> more for ${r.name}.`:`You have <b>${s} of ${GOAL}</b> stamps. Card complete!`,
@@ -156,13 +162,13 @@ const T={
   winT:{off:'You earned 10% off!',coffee:'You earned a free coffee!',cocktail:'You earned a free cocktail!'},
   winP:'Show this screen to your server. They enter their code to redeem it.',redeemBtn:'Redeem now',
   rewardsTitle:'Rewards',howTitle:'How it works',menuLink:'See the menu',
-  rules:['Ask for a stamp every time you visit and order. Your server adds it with their code.','One stamp every 3 hours at most.','Rewards are redeemed at the venue by showing this screen.','When you redeem the cocktail, a new card starts.','Your card is saved on this phone. If you clear your browser data or change phones, it is lost.'],
+  rules:['Ask for a stamp every time you visit and order. Your server adds it with their code.','One stamp every 3 hours at most.','Rewards are redeemed at the venue by showing this screen.','Each visit gets a check mark. When you redeem a reward, the palm appears in its box.','After the cocktail, your next stamp starts a new card.','Your card is saved on this phone. If you clear your browser data or change phones, it is lost.'],
   dlgStamp:'Server code',dlgStampP:'Hand your phone to your server so they can add your stamp.',dlgRedeem:'Redeem reward',dlgRedeemP:'Your server enters their code to give you the reward.',
   confirm:'Confirm',cancel:'Cancel',bad:'Wrong code. Try again.',locked:m=>`Too many tries. Wait ${m} min.`,
-  wait:h=>`You got a stamp recently. The next one on your next visit (in ${h}).`,full:'Redeem your cocktail to start a new card.',
+  wait:h=>`You got a stamp recently. The next one on your next visit (in ${h}).`,full:'Redeem your cocktail to start a new card.',done:'Card complete! Your next stamp starts a new one.',
   stamped:'Stamp added! Thanks for coming.',redeemed:'Reward redeemed. Enjoy!',cards:n=>`Completed cards: ${n}`}
 };
-const KEY='acl-sellos-v1';
+const KEY=TEST?'acl-sellos-prueba':'acl-sellos-v2';
 let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 if(!S||!Array.isArray(S.stamps))S={stamps:[],redeemed:{},cards:0,fails:0,lockUntil:0};
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
@@ -170,6 +176,7 @@ let L='es';try{const a=localStorage.getItem('acl-sellos-lang')||localStorage.get
 const $=id=>document.getElementById(id);
 const t=()=>T[L];
 const logo='../images/logo-palm.png';
+const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 function nextMs(){return MS.find(m=>S.stamps.length<m.n)}
 function readyMs(){return MS.find(m=>S.stamps.length>=m.n&&!S.redeemed[m.n])}
 function fmtH(ms){const m=Math.ceil(ms/60000);return m>=60?`${Math.floor(m/60)} h ${m%60} min`:`${m} min`}
@@ -181,7 +188,8 @@ function render(newIdx){
   for(let i=1;i<=GOAL;i++){
     const m=MS.find(x=>x.n===i), on=i<=n;
     const s=document.createElement('div');s.className='slot';
-    s.innerHTML=`<div class="dot${m?' milestone':''}${on?' on':''}${newIdx===i?' new':''}">${on?`<img src="${logo}" alt="">`:i}</div><span class="lab">${m?(m.k==='off'?'10 %':m.k==='coffee'?(L==='es'?'Café':'Coffee'):(L==='es'?'Cóctel':'Cocktail')):''}</span>`;
+    const used=m&&S.redeemed[i], ready=m&&on&&!used;
+    s.innerHTML=`<div class="dot${m?' milestone':''}${on?' on':''}${used?' prize':''}${ready?' ready':''}${newIdx===i?' new':''}">${used?`<img src="${logo}" alt="">`:on?CHECK:i}</div><span class="lab">${m?(m.k==='off'?'10 %':m.k==='coffee'?(L==='es'?'Café':'Coffee'):(L==='es'?'Cóctel':'Cocktail')):''}</span>`;
     s.setAttribute('aria-label',`${i}${on?' ✓':''}`);g.appendChild(s);
   }
   const nx=nextMs();
@@ -189,9 +197,9 @@ function render(newIdx){
   const r=readyMs();
   $('win').hidden=!r;
   if(r){$('winTitle').textContent=t().winT[r.k];$('winText').textContent=t().winP}
-  const full=n>=GOAL, last=S.stamps[S.stamps.length-1]||0, left=last+COOLDOWN_H*3600e3-Date.now();
+  const done=n>=GOAL&&S.redeemed[GOAL], full=n>=GOAL&&!done, last=S.stamps[S.stamps.length-1]||0, left=last+COOLDOWN_H*3600e3-Date.now();
   $('stampBtn').disabled=full;
-  $('note').textContent=full?t().full:(left>0?t().wait(fmtH(left)):'');
+  $('note').textContent=done?t().done:full?t().full:(left>0?t().wait(fmtH(left)):'');
   const rows=[['off','rOff','rOffD'],['coffee','rCoffee','rCoffeeD'],['cocktail','rCocktail','rCocktailD']];
   $('rew').innerHTML=MS.map((m,i)=>{const st=S.redeemed[m.n]?'used':(n>=m.n?'ready':'lock');return `<li><span class="n">${m.n}</span><span class="t"><b>${t()[rows[i][1]]}</b><span>${t()[rows[i][2]]}</span></span><span class="tag ${st==='lock'?'':st}">${t()[st]}</span></li>`}).join('');
   $('rules').innerHTML=t().rules.map(x=>`<li>${x}</li>`).join('');
@@ -226,12 +234,13 @@ $('dlgForm').addEventListener('submit',async e=>{
     $('err').textContent=S.lockUntil>Date.now()?t().locked(10):t().bad;pins.forEach(p=>p.value='');pins[0].focus();return;
   }
   S.fails=0;let idx=null;
-  if(mode==='stamp'){if(S.stamps.length<GOAL){S.stamps.push(Date.now());idx=S.stamps.length}}
-  else{const r=readyMs();if(r){S.redeemed[r.n]=Date.now();if(r.n===GOAL){S.cards=(S.cards||0)+1;S.stamps=[];S.redeemed={}}}}
+  if(mode==='stamp'){if(S.stamps.length>=GOAL&&S.redeemed[GOAL]){S.stamps=[];S.redeemed={}}if(S.stamps.length<GOAL){S.stamps.push(Date.now());idx=S.stamps.length}}
+  else{const r=readyMs();if(r){S.redeemed[r.n]=Date.now();if(r.n===GOAL)S.cards=(S.cards||0)+1}}
   save();$('dlg').close();render(idx);
   $('note').textContent=mode==='stamp'?t().stamped:t().redeemed;
 });
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{L=b.dataset.l;try{localStorage.setItem('acl-sellos-lang',L)}catch(e){}render()}));
+if(TEST){const b=document.createElement('div');b.className='test';b.innerHTML='Modo prueba: sin espera entre sellos <button type="button">Reiniciar</button>';document.querySelector('.card').before(b);b.querySelector('button').onclick=()=>{S={stamps:[],redeemed:{},cards:0,fails:0,lockUntil:0};save();render()}}
 render();
 </script>
 </body>
