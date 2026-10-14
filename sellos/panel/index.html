@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1d33">
+<title>Panel de sellos — Azul Caribe Lounge</title>
+<link rel="icon" type="image/png" href="../../favicon.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Panel del dueño: misma marca de la tarjeta (azul noche, azul caribe, dorado del logo). */
+:root{--bg:#f3f7fb;--surface:#fff;--card:#0b1d33;--ink:#0b1d33;--muted:#5b6b80;--line:#e3e9f1;--caribe:#0a6fa8;--gold:#e0b43c;--gold-soft:rgba(224,180,60,.16);--ok:#2e6b3c;--ok-soft:#e8f3ea;--danger:#c2412d;
+--display:'DM Serif Display',Georgia,serif;--text:'Fira Sans','Segoe UI',system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.5;padding:max(16px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom))}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{width:38px;height:38px;border-radius:10px;background:var(--card);padding:6px;flex:none}
+.brand b{font-family:var(--display);font-weight:400;font-size:21px;line-height:1.05;display:block}
+.brand small{display:block;color:var(--muted);font-size:12.5px}
+button{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 20px;border:0;border-radius:999px;font:600 15px var(--text);cursor:pointer;background:var(--caribe);color:#fff;white-space:nowrap}
+.btn.gold{background:var(--gold);color:var(--card)}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn.small{height:36px;padding:0 14px;font-size:13.5px}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.danger{color:var(--danger)}
+input{font:500 16px var(--text);color:var(--ink)}
+.field{display:flex;flex-direction:column;gap:6px;font-size:13.5px;font-weight:600}
+.field input{height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;background:#fff}
+.field input:focus{outline:none;border-color:var(--caribe)}
+:focus-visible{outline:3px solid var(--caribe);outline-offset:2px}
+.err{color:var(--danger);font-size:14px;min-height:20px}
+.ok{color:var(--ok);font-size:14px;min-height:20px}
+.login{max-width:420px;margin:8vh auto 0;background:radial-gradient(120% 90% at 50% 0%,#17365c,var(--card) 62%);color:#fff;border-radius:24px;padding:28px 22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 40px rgba(11,29,51,.22)}
+.login h1{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1}
+.login p{color:#c6d1de}
+.login .field{color:#e6edf5}
+.login .field input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+.login .field input:focus{border-color:var(--gold)}
+.login .err{color:#ffb4a6}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+#app{display:flex;flex-direction:column;gap:16px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.panel{display:flex;flex-direction:column;gap:16px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.box h2{font-family:var(--display);font-weight:400;font-size:21px;line-height:1.2;margin-bottom:4px}
+.box .hint{color:var(--muted);font-size:13.5px;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.kpi span{display:block;color:var(--muted);font-size:13px}
+.kpi b{display:block;font:600 30px/1.15 var(--text);font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi small{color:var(--muted);font-size:12.5px}
+.kpi.hl{background:var(--card);border-color:var(--card);color:#fff}
+.kpi.hl span,.kpi.hl small{color:#c6d1de}
+.kpi.hl b{color:var(--gold)}
+.grid2{display:grid;gap:16px}
+@media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
+/* Gráfica de sellos por día: una sola serie, columnas finas desde la base, valor del día al hover. */
+.chart{position:relative;margin-top:6px}
+.plot{padding-right:28px;display:grid;grid-template-columns:repeat(14,1fr);align-items:end;height:150px;border-bottom:1px solid var(--line);position:relative}
+.gridline{position:absolute;left:0;right:0;border-top:1px dashed #edf1f6;pointer-events:none}
+.gridline em{position:absolute;right:0;top:-9px;font:500 11px var(--text);font-style:normal;color:var(--muted);background:var(--surface);padding-left:4px}
+.col{height:100%;display:flex;align-items:flex-end;justify-content:center;cursor:default;position:relative;outline-offset:-2px}
+.col i{display:block;width:min(18px,62%);background:var(--caribe);border-radius:4px 4px 0 0;min-height:0}
+.col.today i{background:var(--card)}
+.col:hover i,.col:focus i{filter:brightness(1.15)}
+.col .v{position:absolute;font:600 12px var(--text);color:var(--ink);transform:translateY(-4px)}
+.xaxis{padding-right:28px;display:grid;grid-template-columns:repeat(14,1fr);margin-top:6px;font-size:11px;color:var(--muted);text-align:center}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12.5px;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-100%);z-index:2}
+.rows{list-style:none;display:flex;flex-direction:column}
+.rows li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.rows li:first-child{border-top:0}
+.rows .num{font-weight:700;font-variant-numeric:tabular-nums}
+.rows .sub{display:block;color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12.5px;font-weight:600;color:var(--muted);padding:0 0 8px}
+td{padding:10px 0;border-top:1px solid var(--line)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:200px;height:46px;border:1.5px solid var(--line);border-radius:999px;padding:0 18px;background:#fff}
+.search:focus{outline:none;border-color:var(--caribe)}
+.clist{list-style:none;display:grid;gap:10px}
+@media(min-width:720px){.clist{grid-template-columns:1fr 1fr}}
+.cli{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.cli .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.cli b{font-size:16px}
+.cli a{color:var(--caribe);font-weight:600;text-decoration:none;font-size:14px;white-space:nowrap}
+.meter{display:flex;gap:3px}
+.meter i{flex:1;height:8px;border-radius:4px;background:#e8edf3}
+.meter i.on{background:var(--gold)}
+.cli .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--gold);color:var(--card);align-self:flex-start}
+.chip.off{background:var(--bg);color:var(--muted)}
+.feed{list-style:none;display:flex;flex-direction:column}
+.feed li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.feed li:first-child{border-top:0}
+.ico{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--gold-soft)}
+.ico svg{width:18px;height:18px}
+.ico.redeem{background:var(--ok-soft);color:var(--ok)}
+.ico.recover{background:#e6f1f8;color:var(--caribe)}
+.feed time{display:block;color:var(--muted);font-size:12.5px}
+.staff{list-style:none;display:flex;flex-direction:column}
+.staff li{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line)}
+.staff li:first-child{border-top:0}
+.staff .who b{display:block}
+.staff .who span{color:var(--muted);font-size:13px}
+.staff .acts{display:flex;gap:8px;flex-wrap:wrap}
+.form{display:grid;gap:12px}
+@media(min-width:720px){.form.inline{grid-template-columns:1fr 1fr auto;align-items:end}}
+.empty{color:var(--muted);text-align:center;padding:18px 0}
+.status{text-align:center;color:var(--muted);padding:30px 0}
+dialog{border:0;border-radius:22px;padding:22px 20px;width:min(92vw,400px);margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(11,29,51,.55)}
+dialog h2{font-family:var(--display);font-weight:400;font-size:22px;margin-bottom:4px}
+dialog p{color:var(--muted);font-size:14px;margin-bottom:12px}
+dialog .row{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><img src="../../images/logo-palm.png" alt=""><div><b>Azul Caribe</b><small>Panel de la tarjeta de sellos</small></div></div>
+    <button class="btn ghost small" id="logout" hidden>Salir</button>
+  </header>
+
+  <form class="login" id="login" hidden novalidate>
+    <h1>Entra a tu panel</h1>
+    <p>Mira tus clientes, los sellos y premios de cada día y maneja los códigos de tus meseros.</p>
+    <label class="field">Clave del dueño<input id="key" type="password" autocomplete="current-password" required></label>
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="btn gold" type="submit">Entrar</button>
+  </form>
+
+  <p class="status" id="status" hidden></p>
+
+  <div id="app" hidden>
+    <nav class="tabs" role="tablist" aria-label="Secciones">
+      <button role="tab" data-tab="resumen" aria-selected="true">Resumen</button>
+      <button role="tab" data-tab="clientes" aria-selected="false">Clientes</button>
+      <button role="tab" data-tab="actividad" aria-selected="false">Actividad</button>
+      <button role="tab" data-tab="meseros" aria-selected="false">Meseros</button>
+      <button role="tab" data-tab="cuenta" aria-selected="false">Cuenta</button>
+    </nav>
+
+    <section class="panel" id="tab-resumen" role="tabpanel">
+      <div class="kpis" id="kpis"></div>
+      <div class="box">
+        <h2>Sellos por día</h2>
+        <p class="hint">Últimos 14 días. Cada sello es una visita con consumo.</p>
+        <div class="chart" id="chart"></div>
+        <table class="sr" id="chartTable"></table>
+      </div>
+      <div class="grid2">
+        <div class="box"><h2>Premios canjeados</h2><p class="hint">Últimos 30 días.</p><ul class="rows" id="rewards"></ul></div>
+        <div class="box"><h2>Meseros</h2><p class="hint">Sellos y canjes de los últimos 30 días.</p><table id="staffStats"></table></div>
+      </div>
+    </section>
+
+    <section class="panel" id="tab-clientes" role="tabpanel" hidden>
+      <div class="toolbar">
+        <input class="search" id="q" type="search" placeholder="Buscar por nombre o celular" aria-label="Buscar cliente">
+        <button class="btn ghost" id="csv">Descargar Excel</button>
+      </div>
+      <p class="hint" id="ccount" style="color:var(--muted);font-size:13.5px"></p>
+      <ul class="clist" id="clist"></ul>
+    </section>
+
+    <section class="panel" id="tab-actividad" role="tabpanel" hidden>
+      <div class="box"><h2>Últimos movimientos</h2><p class="hint">Quién puso cada sello y quién entregó cada premio.</p><ul class="feed" id="feed"></ul></div>
+    </section>
+
+    <section class="panel" id="tab-meseros" role="tabpanel" hidden>
+      <div class="box">
+        <h2>Tus meseros</h2>
+        <p class="hint">Cada mesero pone sellos y entrega premios con su propio código. Si alguien se va, dale de baja: su código deja de funcionar enseguida.</p>
+        <ul class="staff" id="staff"></ul>
+      </div>
+      <div class="box">
+        <h2>Agregar mesero</h2>
+        <form class="form inline" id="addStaff" novalidate>
+          <label class="field">Nombre<input id="sName" maxlength="60" required></label>
+          <label class="field">Código (4 a 8 números)<input id="sPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" required></label>
+          <button class="btn" type="submit">Agregar</button>
+        </form>
+        <p class="err" id="sErr" role="alert"></p><p class="ok" id="sOk" role="status"></p>
+      </div>
+    </section>
+
+    <section class="panel" id="tab-cuenta" role="tabpanel" hidden>
+      <div class="box">
+        <h2>Cambiar tu clave</h2>
+        <p class="hint">Es la clave con la que entras a este panel. Usa al menos 8 caracteres y no se la des a los meseros.</p>
+        <form class="form" id="keyForm" novalidate style="max-width:420px">
+          <label class="field">Clave actual<input id="kCur" type="password" autocomplete="current-password" required></label>
+          <label class="field">Clave nueva<input id="kNew" type="password" autocomplete="new-password" minlength="8" required></label>
+          <button class="btn" type="submit">Guardar clave nueva</button>
+        </form>
+        <p class="err" id="kErr" role="alert"></p><p class="ok" id="kOk" role="status"></p>
+      </div>
+      <div class="box">
+        <h2>Datos de tus clientes</h2>
+        <p class="hint" style="margin:0">Tus clientes aceptaron que guardes su nombre y celular para la tarjeta y para escribirles sobre premios y promociones (Ley 1581 de 2012). Si alguno pide que lo borren, escríbele a R3 Innovación.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="dlgForm" novalidate>
+    <h2 id="dTitle"></h2>
+    <p id="dText"></p>
+    <label class="field" id="dField"><span id="dLabel">Código nuevo</span><input id="dPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off"></label>
+    <p class="err" id="dErr" role="alert"></p>
+    <div class="row"><button class="btn ghost" type="button" id="dCancel">Cancelar</button><button class="btn" type="submit" id="dOk">Guardar</button></div>
+  </form>
+</dialog>
+
+<script>
+const API='https://3r-api.onrender.com/api/v1', SLUG='azul-caribe';
+const KEY='acl-panel-token';
+const $=id=>document.getElementById(id);
+const store={get(){try{return localStorage.getItem(KEY)}catch(e){return null}},set(v){try{v?localStorage.setItem(KEY,v):localStorage.removeItem(KEY)}catch(e){}}};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=new Intl.NumberFormat('es-CO');
+const TZ='America/Bogota';
+
+async function api(path,{method='GET',body,raw}={}){
+  const headers={'content-type':'application/json'};const tok=store.get();if(tok)headers.authorization='Bearer '+tok;
+  let res;
+  try{res=await fetch(`${API}/loyalty/${SLUG}/owner${path}`,{method,headers,body:body?JSON.stringify(body):undefined})}
+  catch(e){throw new Error('No pudimos conectarnos. Revisa tu internet y vuelve a intentar.')}
+  if(raw&&res.ok)return res;
+  const data=await res.json().catch(()=>null);
+  if(res.status===401&&data&&data.code==='OWNER_SESSION'){store.set(null);showLogin('Tu sesión terminó. Entra otra vez con tu clave.');throw new Error('')}
+  if(!res.ok){const m=data&&(Array.isArray(data.message)?data.message[0]:data.message);throw new Error(m||'Algo salió mal. Intenta otra vez.')}
+  return data;
+}
+
+function showLogin(msg){$('app').hidden=true;$('logout').hidden=true;$('status').hidden=true;$('login').hidden=false;$('loginErr').textContent=msg||'';$('key').value='';setTimeout(()=>$('key').focus(),30)}
+function showApp(){$('login').hidden=true;$('status').hidden=true;$('app').hidden=false;$('logout').hidden=false}
+
+$('login').addEventListener('submit',async e=>{
+  e.preventDefault();const key=$('key').value;const btn=e.currentTarget.querySelector('button');
+  if(!key){$('loginErr').textContent='Escribe tu clave.';return}
+  btn.disabled=true;$('loginErr').textContent='';
+  try{
+    const res=await fetch(`${API}/loyalty/${SLUG}/owner/login`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({key})});
+    const data=await res.json().catch(()=>null);
+    if(!res.ok)throw new Error(res.status===429?'Demasiados intentos. Espera un minuto.':(data&&data.message)||'Clave incorrecta');
+    store.set(data.token);showApp();openTab('resumen');
+  }catch(x){$('loginErr').textContent=x.message==='Failed to fetch'?'No pudimos conectarnos. Revisa tu internet.':x.message}
+  finally{btn.disabled=false}
+});
+$('logout').onclick=()=>{store.set(null);showLogin()};
+
+// ── Pestañas ──
+let current='resumen';
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>openTab(b.dataset.tab)));
+function openTab(name){
+  current=name;
+  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  document.querySelectorAll('[role=tabpanel]').forEach(p=>p.hidden=p.id!=='tab-'+name);
+  ({resumen:loadSummary,clientes:loadCustomers,actividad:loadFeed,meseros:loadStaff,cuenta:async()=>{}})[name]().catch(x=>x.message&&alert(x.message));
+}
+
+// ── Fechas ──
+const fmtDay=d=>new Intl.DateTimeFormat('es-CO',{timeZone:TZ,weekday:'short',day:'numeric',month:'short'}).format(d);
+function ago(iso){
+  if(!iso)return 'Sin visitas';
+  const d=new Date(iso),mins=Math.round((Date.now()-d)/60000);
+  if(mins<1)return 'Hace un momento';if(mins<60)return `Hace ${mins} min`;
+  const h=Math.round(mins/60);if(h<24)return `Hace ${h} h`;
+  const days=Math.round(h/24);if(days===1)return 'Ayer';if(days<30)return `Hace ${days} días`;
+  return new Intl.DateTimeFormat('es-CO',{timeZone:TZ,day:'numeric',month:'short',year:'numeric'}).format(d);
+}
+const when=iso=>new Intl.DateTimeFormat('es-CO',{timeZone:TZ,day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}).format(new Date(iso));
+
+// ── Resumen ──
+async function loadSummary(){
+  const s=await api('/summary');
+  const k=(label,value,small,hl)=>`<div class="kpi${hl?' hl':''}"><span>${label}</span><b>${nf.format(value)}</b>${small?`<small>${small}</small>`:''}</div>`;
+  $('kpis').innerHTML=k('Sellos hoy',s.stamps.today,'visitas con consumo',true)
+    +k('Sellos en 7 días',s.stamps.last7,`${nf.format(s.stamps.last30)} en 30 días`)
+    +k('Clientes con tarjeta',s.customers,`${nf.format(s.newCustomers30)} nuevos en 30 días`)
+    +k('Premios esperando',s.waitingReward,'clientes con premio sin canjear');
+  drawChart(s.stampsByDay);
+  $('rewards').innerHTML=s.redemptions30.map(r=>`<li><span>${esc(r.label)}<span class="sub">Sello ${r.at}</span></span><span class="num">${nf.format(r.count)}</span></li>`).join('');
+  const st=s.staff.filter(x=>x.isActive||x.stamps30||x.redeems30);
+  $('staffStats').innerHTML=st.length?`<thead><tr><th>Mesero</th><th class="n">Sellos</th><th class="n">Canjes</th></tr></thead><tbody>${st.map(x=>`<tr><td>${esc(x.name)}${x.isActive?'':' <small style="color:var(--muted)">(de baja)</small>'}</td><td class="n">${nf.format(x.stamps30)}</td><td class="n">${nf.format(x.redeems30)}</td></tr>`).join('')}</tbody>`:'<tbody><tr><td class="empty">Todavía no hay meseros. Agrégalos en la pestaña Meseros.</td></tr></tbody>';
+}
+// Escala en números enteros: dos líneas guía (la mitad y el tope), sin decimales.
+function niceMax(v){if(v<=4)return 4;const half=v/2;if(half<=10)return 2*Math.ceil(half);const p=Math.pow(10,Math.floor(Math.log10(half)));const n=half/p;return 2*(n<=2?2:n<=5?5:10)*p}
+function drawChart(days){
+  const max=niceMax(Math.max(...days.map(d=>d.count),1));
+  const dates=days.map(d=>new Date(d.date+'T12:00:00-05:00'));
+  const ticks=[max/2,max].map(v=>`<div class="gridline" style="bottom:${v/max*100}%"><em>${nf.format(v)}</em></div>`).join('');
+  const cols=days.map((d,i)=>{
+    const today=i===days.length-1, h=d.count/max*100;
+    const label=`${fmtDay(dates[i])}: ${d.count} ${d.count===1?'sello':'sellos'}`;
+    return `<div class="col${today?' today':''}" tabindex="0" aria-label="${esc(label)}" data-tip="${esc(label)}"><i style="height:${h}%"></i>${today&&d.count?`<span class="v" style="bottom:${h}%">${d.count}</span>`:''}</div>`;
+  }).join('');
+  const xs=days.map((d,i)=>`<span>${i%2===days.length%2||i===days.length-1?(i===days.length-1?'Hoy':dates[i].toLocaleDateString('es-CO',{timeZone:TZ,day:'numeric'})):''}</span>`).join('');
+  $('chart').innerHTML=`<div class="plot">${ticks}${cols}</div><div class="xaxis">${xs}</div><div class="tip" id="tip" hidden></div>`;
+  $('chartTable').innerHTML='<caption>Sellos por día</caption><tr><th>Día</th><th>Sellos</th></tr>'+days.map((d,i)=>`<tr><td>${fmtDay(dates[i])}</td><td>${d.count}</td></tr>`).join('');
+  const tip=$('tip'),box=$('chart');
+  box.querySelectorAll('.col').forEach(c=>{
+    const on=()=>{const r=c.getBoundingClientRect(),b=box.getBoundingClientRect();tip.textContent=c.dataset.tip;tip.hidden=false;
+      const x=Math.min(Math.max(r.left-b.left+r.width/2,70),b.width-70);tip.style.left=x+'px';tip.style.top=(c.querySelector('i').getBoundingClientRect().top-b.top-8)+'px'};
+    const off=()=>tip.hidden=true;
+    c.addEventListener('mouseenter',on);c.addEventListener('focus',on);c.addEventListener('mouseleave',off);c.addEventListener('blur',off);
+    c.addEventListener('touchstart',on,{passive:true});
+  });
+}
+
+// ── Clientes ──
+let qTimer;
+$('q').addEventListener('input',()=>{clearTimeout(qTimer);qTimer=setTimeout(()=>loadCustomers().catch(()=>{}),250)});
+async function loadCustomers(){
+  const q=$('q').value.trim();
+  const list=await api('/customers'+(q?`?q=${encodeURIComponent(q)}`:''));
+  $('ccount').textContent=q?`${list.length} ${list.length===1?'resultado':'resultados'}`:`${list.length} ${list.length===1?'cliente':'clientes'} con tarjeta`;
+  $('clist').innerHTML=list.length?list.map(c=>{
+    const meter=Array.from({length:c.goal},(_,i)=>`<i${i<c.stamps?' class="on"':''}></i>`).join('');
+    const phone=c.phone.startsWith('57')&&c.phone.length===12?`${c.phone.slice(2,5)} ${c.phone.slice(5,8)} ${c.phone.slice(8)}`:'+'+c.phone;
+    return `<li class="cli"><div class="top"><b>${esc(c.name)}</b><a href="https://wa.me/${esc(c.phone)}" target="_blank" rel="noopener">${esc(phone)}</a></div>
+      <div class="meter" aria-label="${c.stamps} de ${c.goal} sellos">${meter}</div>
+      ${c.ready?`<span class="chip">Premio por canjear: ${esc(c.ready)}</span>`:''}
+      <div class="meta"><span>${c.stamps} de ${c.goal} sellos</span><span>${c.visits} ${c.visits===1?'visita':'visitas'}</span><span>${c.redemptions} ${c.redemptions===1?'premio':'premios'}</span><span>${ago(c.lastVisitAt)}</span></div></li>`;
+  }).join(''):`<li class="empty">${q?'Nadie coincide con esa búsqueda.':'Todavía no hay clientes. Aparecen aquí cuando crean su tarjeta.'}</li>`;
+}
+$('csv').addEventListener('click',async()=>{
+  const b=$('csv');b.disabled=true;
+  try{const res=await api('/customers.csv',{raw:true});const blob=await res.blob();const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download=`clientes-azul-caribe-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+  catch(x){x.message&&alert(x.message)}finally{b.disabled=false}
+});
+
+// ── Actividad ──
+const ICON={stamp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+ redeem:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zm0 0c2-4 6-4 6-1.5S15 8 12 8z"/></svg>',
+ recover:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>'};
+async function loadFeed(){
+  const ev=await api('/events?limit=150');
+  $('feed').innerHTML=ev.length?ev.map(e=>{
+    const who=e.staff?`<b>${esc(e.staff)}</b>`:'Un mesero que ya no está';
+    const txt=e.kind==='stamp'?`${who} puso un sello a ${esc(e.customer)}`:e.kind==='redeem'?`${who} entregó <b>${esc(e.reward)}</b> a ${esc(e.customer)}`:`${who} pasó la tarjeta de ${esc(e.customer)} a otro celular`;
+    return `<li><span class="ico ${e.kind}">${ICON[e.kind]||''}</span><span>${txt}<time datetime="${e.at}">${when(e.at)}</time></span></li>`;
+  }).join(''):'<li class="empty" style="display:block">Todavía no hay movimientos.</li>';
+}
+
+// ── Meseros ──
+let staffList=[];
+async function loadStaff(){
+  staffList=await api('/staff');
+  $('staff').innerHTML=staffList.length?staffList.map(s=>`<li><span class="who"><b>${esc(s.name)}</b><span>${s.isActive?'Activo':'De baja: su código no funciona'}</span></span>
+    <span class="acts">${s.isActive?`<button class="btn ghost small" data-act="pin" data-id="${s.id}">Cambiar código</button><button class="btn ghost small danger" data-act="off" data-id="${s.id}">Dar de baja</button>`:`<button class="btn ghost small" data-act="on" data-id="${s.id}">Volver a activar</button>`}</span></li>`).join(''):'<li class="empty" style="display:block">Agrega a tus meseros abajo.</li>';
+}
+$('staff').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-act]');if(!b)return;const s=staffList.find(x=>x.id===b.dataset.id);if(!s)return;
+  if(b.dataset.act==='off')ask({title:`Dar de baja a ${s.name}`,text:'Su código deja de funcionar enseguida. Su nombre sigue en el historial.',pin:false,ok:'Dar de baja',run:()=>api(`/staff/${s.id}`,{method:'PATCH',body:{isActive:false}})});
+  if(b.dataset.act==='pin')ask({title:`Código nuevo para ${s.name}`,text:'El código anterior deja de funcionar.',pin:true,ok:'Guardar',run:pin=>api(`/staff/${s.id}`,{method:'PATCH',body:{pin}})});
+  if(b.dataset.act==='on')ask({title:`Volver a activar a ${s.name}`,text:'Ponle un código nuevo para que vuelva a poner sellos.',pin:true,ok:'Activar',run:pin=>api(`/staff/${s.id}`,{method:'PATCH',body:{isActive:true,pin}})});
+});
+$('addStaff').addEventListener('submit',async e=>{
+  e.preventDefault();const name=$('sName').value.trim(),pin=$('sPin').value.trim();$('sErr').textContent='';$('sOk').textContent='';
+  if(name.length<2){$('sErr').textContent='Escribe el nombre del mesero.';return}
+  if(!/^\d{4,8}$/.test(pin)){$('sErr').textContent='El código debe tener entre 4 y 8 números.';return}
+  const b=e.currentTarget.querySelector('button');b.disabled=true;
+  try{await api('/staff',{method:'POST',body:{name,pin}});$('sName').value='';$('sPin').value='';$('sOk').textContent=`Listo: ${name} ya puede poner sellos con su código.`;await loadStaff()}
+  catch(x){$('sErr').textContent=x.message}finally{b.disabled=false}
+});
+[$('sPin'),$('dPin')].forEach(i=>i.addEventListener('input',()=>{i.value=i.value.replace(/\D/g,'').slice(0,8)}));
+
+let pending=null;
+function ask(o){pending=o;$('dTitle').textContent=o.title;$('dText').textContent=o.text;$('dField').hidden=!o.pin;$('dPin').value='';$('dErr').textContent='';$('dOk').textContent=o.ok;$('dlg').showModal();if(o.pin)setTimeout(()=>$('dPin').focus(),40)}
+$('dCancel').onclick=()=>$('dlg').close();
+$('dlgForm').addEventListener('submit',async e=>{
+  e.preventDefault();if(!pending)return;const pin=$('dPin').value.trim();
+  if(pending.pin&&!/^\d{4,8}$/.test(pin)){$('dErr').textContent='El código debe tener entre 4 y 8 números.';return}
+  $('dOk').disabled=true;
+  try{await pending.run(pin);$('dlg').close();await loadStaff()}catch(x){$('dErr').textContent=x.message}finally{$('dOk').disabled=false}
+});
+
+// ── Cuenta ──
+$('keyForm').addEventListener('submit',async e=>{
+  e.preventDefault();$('kErr').textContent='';$('kOk').textContent='';const current=$('kCur').value,next=$('kNew').value;
+  if(!current){$('kErr').textContent='Escribe tu clave actual.';return}
+  if(next.length<8){$('kErr').textContent='La clave nueva debe tener al menos 8 caracteres.';return}
+  const b=e.currentTarget.querySelector('button');b.disabled=true;
+  try{await api('/key',{method:'POST',body:{current,next}});$('kCur').value='';$('kNew').value='';$('kOk').textContent='Listo: desde ahora entras con la clave nueva.'}
+  catch(x){$('kErr').textContent=x.message}finally{b.disabled=false}
+});
+
+// ── Arranque ──
+if(store.get()){showApp();openTab('resumen')}else showLogin();
+</script>
+</body>
+</html>
