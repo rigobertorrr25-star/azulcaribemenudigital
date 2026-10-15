@@ -88,6 +88,10 @@ fsBtn.addEventListener('click',async()=>{
 document.addEventListener('fullscreenchange',()=>{fsBtn.hidden=!!document.fullscreenElement});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')keepAwake()});
 keepAwake();
+// Mantiene despierto el servidor de sellos (el plan gratuito se duerme a los 15 min sin uso)
+// para que la tarjeta del cliente abra al instante mientras la tablet está prendida.
+const ping=()=>fetch('https://threer-api-79ux.onrender.com/api/v1/health',{mode:'no-cors',cache:'no-store'}).catch(()=>{});
+ping();setInterval(ping,10*60*1000);
 </script>
 </body>
 </html>

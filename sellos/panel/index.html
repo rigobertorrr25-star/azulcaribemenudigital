@@ -238,8 +238,10 @@ const TZ='America/Bogota';
 async function api(path,{method='GET',body,raw}={}){
   const headers={'content-type':'application/json'};const tok=store.get();if(tok)headers.authorization='Bearer '+tok;
   let res;
-  try{res=await fetch(`${API}/loyalty/${SLUG}/owner${path}`,{method,headers,body:body?JSON.stringify(body):undefined})}
+  const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),70000);
+  try{res=await fetch(`${API}/loyalty/${SLUG}/owner${path}`,{method,headers,body:body?JSON.stringify(body):undefined,signal:ctl.signal})}
   catch(e){throw new Error('No pudimos conectarnos. Revisa tu internet y vuelve a intentar.')}
+  finally{clearTimeout(timer)}
   if(raw&&res.ok)return res;
   const data=await res.json().catch(()=>null);
   if(res.status===401&&data&&data.code==='OWNER_SESSION'){store.set(null);showLogin('Tu sesión terminó. Entra otra vez con tu clave.');throw new Error('')}

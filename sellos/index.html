@@ -211,7 +211,7 @@ const T={
   confirm:'Confirmar',cancel:'Cancelar',needPin:'Escribe el código.',
   wait:h=>`Ya recibiste un sello hace poco. El siguiente, en tu próxima visita (en ${h}).`,full:'Canjea tu último premio para empezar una tarjeta nueva.',done:'¡Tarjeta completa! Con tu próximo sello empiezas una nueva.',
   stamped:w=>`¡Sello puesto! Gracias por venir.${w?' · '+w:''}`,redeemed:w=>`Premio canjeado. ¡Disfrútalo!${w?' · '+w:''}`,cards:n=>`Tarjetas completadas: ${n}`,
-  loading:'Cargando tu tarjeta…',offline:'No pudimos conectarnos. Revisa tu internet y vuelve a intentar.',retry:'Reintentar',generic:'Algo salió mal. Intenta otra vez.'},
+  loading:'Cargando tu tarjeta…',waking:'Estamos despertando el sistema de sellos. Puede tardar hasta un minuto, no cierres la página…',offline:'No pudimos conectarnos. Revisa tu internet y vuelve a intentar.',retry:'Reintentar',generic:'Algo salió mal. Intenta otra vez.'},
  en:{title:'Your stamp card',sub:(g,r)=>`${g} visits, ${r} rewards. Ask for a stamp every time you come.`,stampBtn:'Get my stamp',hello:n=>`Hi, ${n}`,
   progress:(s,g,r)=>r?`You have <b>${s} of ${g}</b> stamps. <b>${r.left}</b> more for ${r.name}.`:`You have <b>${s} of ${g}</b> stamps. Card complete!`,
   lock:'Locked',ready:'Ready!',used:'Redeemed',
@@ -230,7 +230,7 @@ const T={
   confirm:'Confirm',cancel:'Cancel',needPin:'Enter the code.',
   wait:h=>`You got a stamp recently. The next one on your next visit (in ${h}).`,full:'Redeem your last reward to start a new card.',done:'Card complete! Your next stamp starts a new one.',
   stamped:w=>`Stamp added! Thanks for coming.${w?' · '+w:''}`,redeemed:w=>`Reward redeemed. Enjoy!${w?' · '+w:''}`,cards:n=>`Completed cards: ${n}`,
-  loading:'Loading your card…',offline:'We couldn\'t connect. Check your internet and try again.',retry:'Try again',generic:'Something went wrong. Try again.'}
+  loading:'Loading your card…',waking:'Waking up the stamp system. It can take up to a minute, please keep this page open…',offline:'We couldn\'t connect. Check your internet and try again.',retry:'Try again',generic:'Something went wrong. Try again.'}
 };
 // Mensajes del servidor por código, para mostrarlos también en inglés.
 const SERVER_EN={BAD_PIN:'Wrong code. Try again.',TOO_SOON:'You got a stamp recently. The next one on your next visit.',CARD_FULL:'Redeem your last reward to start a new card.',
@@ -242,14 +242,17 @@ let L='es';try{const a=localStorage.getItem('acl-sellos-lang')||localStorage.get
 const t=()=>T[L];
 const logo='../images/logo-palm.png';
 const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-let program=null, card=null, view='loading', newIdx=null, lastNote='';
+let program=null, card=null, view='loading', newIdx=null, lastNote='', waking=false;
 
-async function api(path,{method='GET',body,auth=true}={}){
+async function api(path,{method='GET',body,auth=true,timeout=method==='GET'?25000:70000}={}){
   const headers={'content-type':'application/json'};const tok=store.get();
   if(auth&&tok)headers.authorization='Bearer '+tok;
   let res;
-  try{res=await fetch(`${API}/loyalty/${SLUG}${path}`,{method,headers,body:body?JSON.stringify(body):undefined})}
+  // Límite de espera: si el servidor no contesta (por ejemplo, está despertando), no se queda cargando para siempre.
+  const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),timeout);
+  try{res=await fetch(`${API}/loyalty/${SLUG}${path}`,{method,headers,body:body?JSON.stringify(body):undefined,signal:ctl.signal})}
   catch(e){const err=new Error(t().offline);err.offline=true;throw err}
+  finally{clearTimeout(timer)}
   const data=await res.json().catch(()=>null);
   if(!res.ok){const err=new Error(errText(data));err.code=data&&data.code;err.status=res.status;throw err}
   return data;
@@ -271,7 +274,7 @@ function render(){
   document.documentElement.lang=L;
   document.querySelectorAll('[data-t]').forEach(el=>{const v=t()[el.dataset.t];if(typeof v==='string')el.textContent=v});
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===L)));
-  if(view==='loading'){$('status').textContent=t().loading}
+  if(view==='loading'){$('status').textContent=waking?t().waking:t().loading}
   if(view==='offline'){$('status').innerHTML=`${t().offline} <button class="link" id="retry" type="button">${t().retry}</button>`;$('retry').onclick=boot}
   if(view!=='cardView'||!card)return;
   const goal=card.program.goal, n=card.stamps, rw=card.rewards;
@@ -297,15 +300,24 @@ function render(){
   $('rules').innerHTML=t().rules(cooldownText(card.program.cooldownMinutes)).map(x=>`<li>${x}</li>`).join('');
 }
 
+// El servidor gratuito se duerme cuando nadie lo usa; la primera visita lo despierta y puede tardar cerca de un minuto.
 async function boot(){
-  show('loading');render();
+  waking=false;show('loading');render();
+  const slow=setTimeout(()=>{waking=true;if(view==='loading')render()},4000);
   try{
     if(store.get()){
-      try{card=await api('/card');show('cardView');render();return}
-      catch(e){if(e.status===401){store.set(null)}else throw e}
-    }
+      for(let i=0;;i++){
+        try{card=await api('/card');show('cardView');render();return}
+        catch(e){
+          if(e.status===401){store.set(null);break}
+          if(!e.offline&&!(e.status>=500)||i>=2)throw e;
+          waking=true;render();await new Promise(r=>setTimeout(r,3000));
+        }
+      }
+    }else{api('',{auth:false}).catch(()=>{})} // despierta el servidor mientras la persona llena el formulario
     show('join');render();
   }catch(e){show('offline');render()}
+  finally{clearTimeout(slow);waking=false}
 }
 
 $('toRecover').onclick=()=>{$('recErr').textContent='';show('recover');render();$('rPhone').focus()};
