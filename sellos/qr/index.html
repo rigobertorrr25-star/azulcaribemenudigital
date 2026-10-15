@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1d33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Escanea y junta sellos — Azul Caribe Lounge</title>
+<link rel="icon" type="image/png" href="../../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Pantalla para las tablets del local: el cliente escanea el QR y abre su tarjeta de sellos. */
+:root{--navy:#0b1d33;--gold:#e0b43c;--sky:#c6d1de;--display:'DM Serif Display',Georgia,serif;--text:'Fira Sans','Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:radial-gradient(120% 90% at 30% 0%,#17365c,var(--navy) 62%);color:#fff;font-family:var(--text);overflow:hidden;cursor:default;user-select:none;-webkit-user-select:none}
+.wrap{height:100%;display:flex;align-items:center;justify-content:center;gap:6vmin;padding:5vmin 6vmin}
+.qr{flex:none;background:#fff;border-radius:3.5vmin;padding:3vmin;box-shadow:0 3vmin 8vmin rgba(0,0,0,.35)}
+.qr img{display:block;width:min(62vh,42vw);height:min(62vh,42vw)}
+.txt{max-width:46vw;display:flex;flex-direction:column;gap:2.4vmin}
+.brand{display:flex;align-items:center;gap:2vmin}
+.brand img{width:7vmin;height:7vmin}
+.brand b{font-family:var(--display);font-weight:400;font-size:4.6vmin;line-height:1}
+h1{font-family:var(--display);font-weight:400;font-size:7.2vmin;line-height:1.02}
+h1 small{display:block;font-family:var(--text);font-size:3vmin;font-weight:500;color:var(--sky);margin-top:1.4vmin;line-height:1.3}
+.steps b{font-weight:500}
+.steps{display:flex;flex-direction:column;gap:1.1vmin;font-size:2.6vmin;color:#e6edf5;line-height:1.3}
+.steps p{display:grid;grid-template-columns:4.6vmin 1fr;column-gap:1.8vmin;align-items:start}
+.steps span{grid-row:span 2;display:grid;place-items:center;width:4.6vmin;height:4.6vmin;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;font-size:2.4vmin}
+.steps em{font-style:normal;color:var(--sky);font-size:2.2vmin;display:block}
+.prizes{display:flex;gap:1.6vmin}
+.prizes div{flex:1;border:.35vmin solid rgba(224,180,60,.7);border-radius:2vmin;padding:1.8vmin 1.6vmin;text-align:center}
+.prizes b{display:block;font-family:var(--display);font-weight:400;font-size:5vmin;color:var(--gold);line-height:1}
+.prizes span{display:block;font-size:2.4vmin;font-weight:600;margin-top:.6vmin;line-height:1.2}
+.prizes i{display:block;font-style:normal;font-size:1.9vmin;color:var(--sky);margin-top:.3vmin}
+.url{font-size:2.6vmin;color:var(--gold);font-weight:600}
+.legal{font-size:1.7vmin;color:var(--sky);opacity:.8}
+.fs{position:fixed;right:2vmin;bottom:2vmin;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:1.4vmin;padding:1.4vmin 2.2vmin;font:600 2vmin var(--text);cursor:pointer}
+/* Pantallas 4:3 (iPad y similares): menos QR y más espacio para el texto */
+@media (orientation:landscape) and (max-aspect-ratio:3/2){
+  .wrap{gap:4vmin;padding:4vmin 5vmin}
+  .qr img{width:min(56vh,38vw);height:min(56vh,38vw)}
+  .txt{max-width:54vw;gap:2vmin}
+  h1{font-size:6.4vmin}
+}
+@media (orientation:portrait){
+  .wrap{flex-direction:column;gap:4vmin;padding:6vmin 7vmin}
+  .qr img{width:min(64vw,44vh);height:min(64vw,44vh)}
+  .txt{max-width:none;align-items:center;text-align:center}
+  .steps{align-items:flex-start;text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="qr"><img src="qr-sellos.png" alt="Código QR de la tarjeta de sellos"></div>
+  <div class="txt">
+    <div class="brand"><img src="../../images/logo-palm.png" alt=""><b>Azul Caribe Lounge</b></div>
+    <h1>Escanea y junta sellos<small>Scan to collect stamps and earn rewards</small></h1>
+    <div class="steps">
+      <p><span>1</span><b>Abre la cámara de tu celular y apunta al código.</b><em>Open your phone camera and point it at the code.</em></p>
+      <p><span>2</span><b>Crea tu tarjeta con tu nombre y celular.</b><em>Create your card with your name and number.</em></p>
+      <p><span>3</span><b>Pídele tu sello al mesero en cada visita.</b><em>Ask your server for a stamp on every visit.</em></p>
+    </div>
+    <div class="prizes">
+      <div><b>4</b><span>20 % de descuento</span><i>20% off</i></div>
+      <div><b>7</b><span>Café gratis</span><i>Free coffee</i></div>
+      <div><b>10</b><span>Cóctel gratis</span><i>Free cocktail</i></div>
+    </div>
+    <p class="url">azulcaribelounge.com/sellos</p>
+    <p class="legal">Cóctel solo para mayores de 18 años. El exceso de alcohol es perjudicial para la salud. Prohíbase el expendio de bebidas embriagantes a menores de edad.</p>
+  </div>
+</div>
+<button class="fs" id="fs" type="button">Pantalla completa</button>
+<script>
+// Pantalla completa y pantalla siempre encendida, para dejar la tablet fija en la mesa o el mostrador.
+const fsBtn=document.getElementById('fs');
+let lock=null;
+async function keepAwake(){try{if('wakeLock' in navigator){lock=await navigator.wakeLock.request('screen')}}catch(e){}}
+fsBtn.addEventListener('click',async()=>{
+  try{await (document.documentElement.requestFullscreen?.()||document.documentElement.webkitRequestFullscreen?.())}catch(e){}
+  keepAwake();
+});
+document.addEventListener('fullscreenchange',()=>{fsBtn.hidden=!!document.fullscreenElement});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')keepAwake()});
+keepAwake();
+</script>
+</body>
+</html>
