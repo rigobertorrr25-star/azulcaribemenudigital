@@ -803,3 +803,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Al abrir la historia, que arranque en el idioma de la carta (español o inglés)
 document.querySelectorAll('a.story-link').forEach(a=>a.addEventListener('click',()=>{try{localStorage.setItem('acl-lang',currentLang==='es'?'es':'en')}catch(e){}}));
+
+// La tarjeta de sellos abre en el idioma de la carta (solo tiene español e inglés).
+document.querySelectorAll('a.stamps-link').forEach(a=>a.addEventListener('click',()=>{try{localStorage.setItem('acl-sellos-lang',currentLang==='es'?'es':'en')}catch(e){}}));

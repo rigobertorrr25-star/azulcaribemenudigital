@@ -299,3 +299,5 @@ textarea.note:focus{border-color:var(--caribe); background:#fff;}
 
 /* Acceso a la historia (biblia) */
 .about-story{margin-top:26px;}
+.stamps-btn{margin-left:10px;}
+@media (max-width:560px){.stamps-btn{margin-left:0;margin-top:10px;}}
