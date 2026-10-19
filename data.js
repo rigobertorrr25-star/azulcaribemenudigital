@@ -166,6 +166,28 @@ const MENU_DATA = [
     nombre:{ es:"Ensalada Fresca del Caribe", en:"Fresh Caribbean Salad", pt:"Salada Fresca do Caribe", fr:"Salade Fraîche des Caraïbes" },
     desc:{ es:"Juliana de vegetales frescos con hierbas y crocantes chips de plátano.", en:"Julienned fresh vegetables with herbs and crispy plantain chips.", pt:"Juliana de vegetais frescos com ervas e crocantes chips de banana-da-terra.", fr:"Julienne de légumes frais aux herbes et chips croustillantes de plantain." },
     precio:14000, img:"desayuno-ensalada", tags:[], badge:"nuevo" },
+  { id:"d14", cat:"platos",
+    nombre:{ es:"Hamburguesa", en:"Burger", pt:"Hambúrguer", fr:"Burger" },
+    desc:{ es:"Sola o en combo con 250 g de papas fritas y refresco.", en:"On its own or as a combo with 250 g of fries and a soda.", pt:"Sozinho ou no combo com 250 g de batata frita e refrigerante.", fr:"Seul ou en menu avec 250 g de frites et une boisson gazeuse." },
+    precio:24000, img:"plato-hamburguesa", tags:[], badge:"nuevo",
+    sabores:[
+      { key:"sola", precio:24000,
+        label:{ es:"Sola", en:"Burger only", pt:"Só o hambúrguer", fr:"Burger seul" },
+        nombre:{ es:"Hamburguesa", en:"Burger", pt:"Hambúrguer", fr:"Burger" },
+        desc:{ es:"Hamburguesa de la casa.", en:"House burger.", pt:"Hambúrguer da casa.", fr:"Burger maison." } },
+      { key:"combo", precio:30000,
+        label:{ es:"Combo", en:"Combo", pt:"Combo", fr:"Menu" },
+        nombre:{ es:"Combo Hamburguesa", en:"Burger Combo", pt:"Combo Hambúrguer", fr:"Menu Burger" },
+        desc:{ es:"Hamburguesa con 250 g de papas fritas y refresco.", en:"Burger with 250 g of fries and a soda.", pt:"Hambúrguer com 250 g de batata frita e refrigerante.", fr:"Burger avec 250 g de frites et une boisson gazeuse." } },
+      { key:"queso", precio:32000,
+        label:{ es:"Combo con queso", en:"Cheese combo", pt:"Combo com queijo", fr:"Menu avec fromage" },
+        nombre:{ es:"Combo Hamburguesa con Queso", en:"Cheeseburger Combo", pt:"Combo Hambúrguer com Queijo", fr:"Menu Cheeseburger" },
+        desc:{ es:"Hamburguesa con queso, 250 g de papas fritas y refresco.", en:"Cheeseburger with 250 g of fries and a soda.", pt:"Hambúrguer com queijo, 250 g de batata frita e refrigerante.", fr:"Cheeseburger avec 250 g de frites et une boisson gazeuse." } }
+    ] },
+  { id:"d15", cat:"platos",
+    nombre:{ es:"Alitas de Pollo", en:"Chicken Wings", pt:"Asinhas de Frango", fr:"Ailes de Poulet" },
+    desc:{ es:"Alitas bañadas en salsa con ajonjolí, con 250 g de papas fritas.", en:"Saucy wings with sesame seeds, served with 250 g of fries.", pt:"Asinhas no molho com gergelim, com 250 g de batata frita.", fr:"Ailes nappées de sauce au sésame, avec 250 g de frites." },
+    precio:18000, img:"plato-alitas", tags:[], badge:"nuevo" },
 
   // ---- CARNES Y MARISCOS / MEATS & SEAFOOD / CARNES E FRUTOS DO MAR / VIANDES ET FRUITS DE MER ----
   { id:"m1", cat:"platos",
