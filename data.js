@@ -161,7 +161,7 @@ const MENU_DATA = [
   { id:"d12", cat:"platos",
     nombre:{ es:"Poutine Azul Caribe", en:"Azul Caribe Poutine", pt:"Poutine Azul Caribe", fr:"Poutine Azul Caribe" },
     desc:{ es:"Un clásico de Canadá reinventado en clave caribeña: papas fritas crujientes cubiertas con trozos de queso fresco y una salsa gravy casera de carne, coronadas con hierbas frescas.", en:"A Canadian classic reimagined with a Caribbean touch: crispy fries topped with fresh cheese curds and a rich homemade beef gravy, finished with fresh herbs.", pt:"Um clássico canadense reinventado com toque caribenho: batatas fritas crocantes cobertas com pedaços de queijo fresco e um molho gravy caseiro de carne, finalizado com ervas frescas.", fr:"Un classique canadien réinventé à la caribéenne : frites croustillantes recouvertes de fromage frais en grains et d'une sauce gravy maison à la viande, relevées d'herbes fraîches." },
-    precio:38000, img:"plato-salchipapa-piedra", tags:[], badge:"nuevo" },
+    precio:38000, img:"plato-poutine-piedra", tags:[], badge:"nuevo" },
   { id:"d13", cat:"platos",
     nombre:{ es:"Ensalada Fresca del Caribe", en:"Fresh Caribbean Salad", pt:"Salada Fresca do Caribe", fr:"Salade Fraîche des Caraïbes" },
     desc:{ es:"Juliana de vegetales frescos con hierbas y crocantes chips de plátano.", en:"Julienned fresh vegetables with herbs and crispy plantain chips.", pt:"Juliana de vegetais frescos com ervas e crocantes chips de banana-da-terra.", fr:"Julienne de légumes frais aux herbes et chips croustillantes de plantain." },
