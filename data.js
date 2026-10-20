@@ -141,7 +141,7 @@ const MENU_DATA = [
   { id:"p2", cat:"platos",
     nombre:{ es:"Griot con Chicharrón", en:"Griot with Chicharrón", pt:"Griot com Chicharrón", fr:"Griot au Chicharrón" },
     desc:{ es:"Cerdo marinado y frito, servido con chicharrón.", en:"Fried marinated pork chunks served with crispy pork chicharrón.", pt:"Porco marinado e frito, servido com chicharrón (torresmo crocante).", fr:"Porc mariné et frit, servi avec du chicharrón (couenne de porc croustillante)." },
-    precio:28000, img:"plato-griot-chicharron-piedra", tags:[] },
+    precio:28000, img:"plato-griot-chicharron", tags:[] },
   { id:"p4", cat:"platos",
     nombre:{ es:"Sancocho", en:"Sancocho", pt:"Sancocho", fr:"Sancocho" },
     desc:{ es:"Sopa tradicional colombiana con carne y verduras, servida bien caliente.", en:"Traditional Colombian soup with meat and vegetables, served piping hot.", pt:"Sopa tradicional colombiana com carne e legumes, servida bem quente.", fr:"Soupe traditionnelle colombienne à la viande et aux légumes, servie bien chaude." },
