@@ -139,7 +139,7 @@ const MENU_DATA = [
     desc:{ es:"Plátano maduro frito, acompañado de carne y chicharrón tradicional.", en:"Fried ripe plantain served with meat and traditional crispy pork chicharrón.", pt:"Banana-da-terra madura frita, acompanhada de carne e chicharrón tradicional (torresmo crocante).", fr:"Plantain mûr frit, servi avec de la viande et du chicharrón traditionnel (couenne de porc croustillante)." },
     precio:30000, img:"plato-bandeja-fritay-piedra", tags:[] },
   { id:"p2", cat:"platos",
-    nombre:{ es:"Griot con Chicharrón", en:"Griot with Chicharrón", pt:"Griot com Chicharrón", fr:"Griot au Chicharrón" },
+    nombre:{ es:"Griot", en:"Griot", pt:"Griot", fr:"Griot" },
     desc:{ es:"Cerdo marinado y frito, servido con chicharrón.", en:"Fried marinated pork chunks served with crispy pork chicharrón.", pt:"Porco marinado e frito, servido com chicharrón (torresmo crocante).", fr:"Porc mariné et frit, servi avec du chicharrón (couenne de porc croustillante)." },
     precio:28000, img:"plato-griot-real-piedra", tags:[] },
   { id:"p4", cat:"platos",
