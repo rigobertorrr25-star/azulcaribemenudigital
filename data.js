@@ -16,7 +16,7 @@ const MENU_DATA = [
   // ---- DESAYUNO / MORNING / CAFÉ DA MANHÃ / PETIT-DÉJEUNER ----
   { id:"d1", cat:"desayuno",
     nombre:{ es:"Omelet", en:"Omelet", pt:"Omelete", fr:"Omelette" },
-    desc:{ es:"Omelet de queso acompañado de papas casco y fruta.", en:"Cheese omelet served with potato wedges and fruit.", pt:"Omelete de queijo acompanhado de batatas rústicas e fruta.", fr:"Omelette au fromage servie avec des pommes de terre en quartiers et des fruits." },
+    desc:{ es:"Omelet relleno de salchicha y queso, con papas casco y piña fresca.", en:"Omelet filled with sausage and cheese, with potato wedges and fresh pineapple.", pt:"Omelete recheado com linguiça e queijo, com batatas rústicas e abacaxi fresco.", fr:"Omelette garnie de saucisse et de fromage, avec pommes de terre en quartiers et ananas frais." },
     precio:18000, img:"desayuno-omelet-real2-piedra", tags:[] },
   { id:"d7", cat:"desayuno",
     nombre:{ es:"Desayuno Completo", en:"Full Breakfast", pt:"Café da Manhã Completo", fr:"Petit-Déjeuner Complet" },
@@ -136,11 +136,11 @@ const MENU_DATA = [
   // ---- PLATOS PRINCIPALES / MAIN DISHES / PRATOS PRINCIPAIS / PLATS PRINCIPAUX ----
   { id:"p1", cat:"platos",
     nombre:{ es:"Bandeja de Plátano Fritay", en:"Fritay Plantain Platter", pt:"Bandeja de Banana Fritay", fr:"Plateau de Plantain Fritay" },
-    desc:{ es:"Plátano maduro frito, acompañado de carne y chicharrón tradicional.", en:"Fried ripe plantain served with meat and traditional crispy pork chicharrón.", pt:"Banana-da-terra madura frita, acompanhada de carne e chicharrón tradicional (torresmo crocante).", fr:"Plantain mûr frit, servi avec de la viande et du chicharrón traditionnel (couenne de porc croustillante)." },
+    desc:{ es:"Para compartir: griot de cerdo, buñuelos, patacones, ensalada fresca y pikliz.", en:"To share: fried pork griot, fritters, tostones, fresh salad and pikliz.", pt:"Para compartilhar: griot de porco, bolinhos fritos, tostones, salada fresca e pikliz.", fr:"À partager : griot de porc, beignets, bananes pesées, salade fraîche et pikliz." },
     precio:30000, img:"plato-fritay-real-piedra", tags:[] },
   { id:"p2", cat:"platos",
     nombre:{ es:"Griot", en:"Griot", pt:"Griot", fr:"Griot" },
-    desc:{ es:"Cerdo marinado y frito, servido con chicharrón.", en:"Fried marinated pork chunks served with crispy pork chicharrón.", pt:"Porco marinado e frito, servido com chicharrón (torresmo crocante).", fr:"Porc mariné et frit, servi avec du chicharrón (couenne de porc croustillante)." },
+    desc:{ es:"Cerdo marinado y frito al estilo haitiano, con ají encurtido, arroz, patacones y pikliz.", en:"Haitian-style marinated fried pork with pickled peppers, rice, tostones and pikliz.", pt:"Porco marinado e frito ao estilo haitiano, com pimenta em conserva, arroz, tostones e pikliz.", fr:"Porc mariné et frit à l'haïtienne, avec piments marinés, riz, bananes pesées et pikliz." },
     precio:28000, img:"plato-griot-real-piedra", tags:[] },
   { id:"p4", cat:"platos",
     nombre:{ es:"Sancocho", en:"Sancocho", pt:"Sancocho", fr:"Sancocho" },
