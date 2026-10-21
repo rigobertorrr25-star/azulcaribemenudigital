@@ -15,9 +15,9 @@
 const MENU_DATA = [
   // ---- DESAYUNO / MORNING / CAFÉ DA MANHÃ / PETIT-DÉJEUNER ----
   { id:"d1", cat:"desayuno",
-    nombre:{ es:"Tortilla de Queso", en:"Cheese Omelet", pt:"Omelete de Queijo", fr:"Omelette au Fromage" },
-    desc:{ es:"Esponjosa tortilla de queso servida con tocino, salchicha y papas.", en:"Fluffy cheese omelet served with bacon, sausage, and potatoes.", pt:"Omelete fofo de queijo servido com bacon, linguiça e batatas.", fr:"Omelette moelleuse au fromage servie avec bacon, saucisse et pommes de terre." },
-    precio:18000, img:"desayuno-tortilla-queso-piedra", tags:[] },
+    nombre:{ es:"Omelet", en:"Omelet", pt:"Omelete", fr:"Omelette" },
+    desc:{ es:"Omelet de queso acompañado de papas casco y fruta.", en:"Cheese omelet served with potato wedges and fruit.", pt:"Omelete de queijo acompanhado de batatas rústicas e fruta.", fr:"Omelette au fromage servie avec des pommes de terre en quartiers et des fruits." },
+    precio:18000, img:"desayuno-omelet-real-piedra", tags:[] },
   { id:"d7", cat:"desayuno",
     nombre:{ es:"Desayuno Completo", en:"Full Breakfast", pt:"Café da Manhã Completo", fr:"Petit-Déjeuner Complet" },
     desc:{ es:"Huevos revueltos, chorizo, tocino y sándwich de jamón y queso a la plancha, acompañado de un bowl de fruta fresca.", en:"Scrambled eggs, sausage, bacon, and a grilled ham and cheese sandwich, served with a fresh fruit bowl.", pt:"Ovos mexidos, linguiça, bacon e sanduíche de presunto e queijo na chapa, acompanhado de um bowl de fruta fresca.", fr:"Œufs brouillés, saucisse, bacon et sandwich au jambon et fromage grillé, servi avec un bol de fruits frais." },
