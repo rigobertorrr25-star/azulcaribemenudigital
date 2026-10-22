@@ -153,7 +153,7 @@ const MENU_DATA = [
   { id:"p7", cat:"carnes",
     nombre:{ es:"Camarones al Ajillo", en:"Garlic Shrimp", pt:"Camarão ao Alho", fr:"Crevettes à l'Ail" },
     desc:{ es:"Salteados en mantequilla, ajo y finas hierbas.", en:"Sautéed in butter, garlic, and fine herbs.", pt:"Salteados na manteiga, alho e ervas finas.", fr:"Sautées au beurre, à l'ail et aux fines herbes." },
-    precio:35000, img:"plato-camarones-ajillo-piedra", tags:[], badge:"chef" },
+    precio:35000, img:"plato-ajillo-real-piedra", tags:[], badge:"chef" },
   { id:"p8", cat:"platos",
     nombre:{ es:"Poke Bowl Vegetariano", en:"Vegetarian Poke Bowl", pt:"Poke Bowl Vegetariano", fr:"Poke Bowl Végétarien" },
     desc:{ es:"Bowl fresco con vegetales de temporada y granos.", en:"Fresh bowl with seasonal vegetables and grains.", pt:"Bowl fresco com vegetais da estação e grãos.", fr:"Bol frais aux légumes de saison et céréales." },
