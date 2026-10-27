@@ -267,6 +267,21 @@ const MENU_DATA = [
     desc:{ es:"Salsa tradicional colombiana de tomate y cebolla.", en:"Traditional Colombian tomato and onion sauce.", pt:"Molho tradicional colombiano de tomate e cebola.", fr:"Sauce traditionnelle colombienne à la tomate et à l'oignon." },
     precio:4000, img:"lado-hogao-piedra", tags:[] },
 
+  { id:"po1", cat:"postres",
+    nombre:{ es:"Torta de la Casa", en:"House Cake", pt:"Bolo da Casa", fr:"Gâteau Maison" },
+    desc:{ es:"Porción de torta de chocolate o de zanahoria con nueces.", en:"A slice of chocolate cake or carrot cake with walnuts.", pt:"Fatia de bolo de chocolate ou de cenoura com nozes.", fr:"Part de gâteau au chocolat ou de gâteau aux carottes et aux noix." },
+    precio:15000, img:"postre-tortas-piedra", tags:[], badge:"nuevo",
+    sabores:[
+      { key:"chocolate", precio:15000,
+        label:{ es:"Chocolate", en:"Chocolate", pt:"Chocolate", fr:"Chocolat" },
+        nombre:{ es:"Torta de Chocolate", en:"Chocolate Cake", pt:"Bolo de Chocolate", fr:"Gâteau au Chocolat" },
+        desc:{ es:"Bizcocho de chocolate en capas con cobertura de ganache de chocolate.", en:"Layered chocolate sponge with chocolate ganache frosting.", pt:"Bolo de chocolate em camadas com cobertura de ganache.", fr:"Génoise au chocolat en couches, nappée de ganache au chocolat." } },
+      { key:"zanahoria", precio:15000,
+        label:{ es:"Zanahoria", en:"Carrot", pt:"Cenoura", fr:"Carotte" },
+        nombre:{ es:"Torta de Zanahoria", en:"Carrot Cake", pt:"Bolo de Cenoura", fr:"Gâteau aux Carottes" },
+        desc:{ es:"Torta de zanahoria con nueces, rellena y cubierta con crema de queso.", en:"Carrot cake with walnuts, filled and topped with cream cheese frosting.", pt:"Bolo de cenoura com nozes, recheado e coberto com creme de queijo.", fr:"Gâteau aux carottes et aux noix, fourré et nappé de crème au fromage." } },
+    ] },
+
   // ---- COCTELERÍA CLÁSICA / CLASSIC COCKTAILS / COQUETELARIA CLÁSSICA / COCKTAILS CLASSIQUES ----
   // "img" = foto en reposo · "img2" = foto con la "explosión" (se ve al tocar la tarjeta).
   { id:"kc1", cat:"bar", sub:"cocteles",
@@ -442,6 +457,7 @@ const CATEGORIES = [
   { id:"platos", nombre:{ es:"Platos Principales", en:"Main Dishes", pt:"Pratos Principais", fr:"Plats Principaux" } },
   { id:"carnes", nombre:{ es:"Mariscos", en:"Seafood", pt:"Frutos do Mar", fr:"Fruits de Mer" } },
   { id:"sides", nombre:{ es:"Acompañamientos", en:"Sides", pt:"Acompanhamentos", fr:"Accompagnements" } },
+  { id:"postres", nombre:{ es:"Postres", en:"Desserts", pt:"Sobremesas", fr:"Desserts" } },
   // ---- BEBIDAS ----
   { id:"cafe", nombre:{ es:"Café", en:"Coffee", pt:"Café", fr:"Café" } },
   { id:"bebidas", nombre:{ es:"Bebidas sin Alcohol", en:"Non-Alcoholic Drinks", pt:"Bebidas sem Álcool", fr:"Boissons sans Alcool" } },

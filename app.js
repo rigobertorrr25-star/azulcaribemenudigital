@@ -696,7 +696,7 @@ function itemEmoji(item) {
   }
   return ({
     desayuno: "🍳", aperitivos: "🍤", cafe: "☕",
-    bebidas: "🥤", platos: "🍴", carnes: "🥩", sides: "🍟",
+    bebidas: "🥤", platos: "🍴", carnes: "🥩", sides: "🍟", postres: "🍰",
   })[item.cat] || "🍴";
 }
 
