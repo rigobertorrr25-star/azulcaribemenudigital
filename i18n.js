@@ -318,7 +318,7 @@ function setLang(lang) {
 
 // ============ TEXTOS DEL DISEÑO v17 (portada, menú, nosotros y contacto) ============
 Object.assign(UI.es, {
-  navMenu: "Menú", navAbout: "Nosotros", navStory: "Historia", storyBtn: "Conoce nuestra historia", navStamps: "Sellos", stampsBtn: "Tarjeta de sellos: gana premios", navContact: "Contacto", cartBtn: "Pedido",
+  navLounge: "El Lounge", navRewards: "Premios", navLocation: "Ubicación", reserveTable: "Reservar mesa", exploreMenu: "Explorar el menú", heroSub: "Alma Haitiana, Ritmo Caribeño y Coctelería de Autor · Cartagena", loungeTitle: "Entra al lounge", tasteTitle: "Un sabor de nuestra cocina y bar", fullMenuBtn: "Ver menú completo y precios", navMenu: "Menú", navAbout: "Nosotros", navStory: "Historia", storyBtn: "Conoce nuestra historia", navStamps: "Sellos", stampsBtn: "Tarjeta de sellos: gana premios", navContact: "Contacto", cartBtn: "Pedido",
   heroText: "Cocina caribeña con raíces haitianas, colombianas y canadienses, café desde el desayuno y cócteles de autor en La Matuna. Mira la carta, arma tu pedido y envíalo por WhatsApp.",
   heroCta: "Ver el menú",
   menuTitle: "Nuestro menú", menuSub: "Platos y bebidas con foto y precio en pesos colombianos.",
@@ -328,10 +328,10 @@ Object.assign(UI.es, {
   aboutB1: "Desayunos, platos fuertes y aperitivos para compartir",
   aboutB2: "Café, jugos naturales y limonadas",
   aboutB3: "Coctelería de autor, vinos y cervezas",
-  contactTitle: "Contacto y reservas", cAddress: "Dirección", cReserve: "Reservas", cOrders: "Pedidos",
+  contactTitle: "Ubicación y reservas", cAddress: "Dirección", cReserve: "Reservas", cOrders: "Pedidos",
 });
 Object.assign(UI.en, {
-  navMenu: "Menu", navAbout: "About", navStory: "Our story", storyBtn: "Read our story", navStamps: "Rewards", stampsBtn: "Stamp card: earn rewards", navContact: "Contact", cartBtn: "Order",
+  navLounge: "The Lounge", navRewards: "Rewards", navLocation: "Location", reserveTable: "Reserve a table", exploreMenu: "Explore the menu", heroSub: "Haitian Soul, Caribbean Rhythm & Signature Cocktails · Cartagena", loungeTitle: "Step inside the lounge", tasteTitle: "A taste of the kitchen & bar", fullMenuBtn: "View full menu & prices", navMenu: "Menu", navAbout: "About", navStory: "Our story", storyBtn: "Read our story", navStamps: "Rewards", stampsBtn: "Stamp card: earn rewards", navContact: "Contact", cartBtn: "Order",
   heroText: "Caribbean cooking with Haitian, Colombian and Canadian roots, coffee from breakfast on and signature cocktails in La Matuna. Browse the menu, build your order and send it on WhatsApp.",
   heroCta: "See the menu",
   menuTitle: "Our menu", menuSub: "Dishes and drinks with photos and prices in Colombian pesos.",
@@ -341,10 +341,10 @@ Object.assign(UI.en, {
   aboutB1: "Breakfast, mains and starters to share",
   aboutB2: "Coffee, fresh juices and lemonades",
   aboutB3: "Signature cocktails, wine and beer",
-  contactTitle: "Contact & reservations", cAddress: "Address", cReserve: "Reservations", cOrders: "Orders",
+  contactTitle: "Location & reservations", cAddress: "Address", cReserve: "Reservations", cOrders: "Orders",
 });
 Object.assign(UI.pt, {
-  navMenu: "Cardápio", navAbout: "Sobre nós", navStory: "Nossa história", storyBtn: "Conheça nossa história", navStamps: "Selos", stampsBtn: "Cartão de selos: ganhe prêmios", navContact: "Contato", cartBtn: "Pedido",
+  navLounge: "O Lounge", navRewards: "Prêmios", navLocation: "Localização", reserveTable: "Reservar mesa", exploreMenu: "Explorar o cardápio", heroSub: "Alma Haitiana, Ritmo Caribenho e Coquetelaria Autoral · Cartagena", loungeTitle: "Entre no lounge", tasteTitle: "Um gostinho da nossa cozinha e bar", fullMenuBtn: "Ver cardápio completo e preços", navMenu: "Cardápio", navAbout: "Sobre nós", navStory: "Nossa história", storyBtn: "Conheça nossa história", navStamps: "Selos", stampsBtn: "Cartão de selos: ganhe prêmios", navContact: "Contato", cartBtn: "Pedido",
   heroText: "Cozinha caribenha com raízes haitianas, colombianas e canadenses, café desde o café da manhã e coquetéis autorais em La Matuna. Veja o cardápio, monte seu pedido e envie pelo WhatsApp.",
   heroCta: "Ver o cardápio",
   menuTitle: "Nosso cardápio", menuSub: "Pratos e bebidas com foto e preço em pesos colombianos.",
@@ -354,10 +354,10 @@ Object.assign(UI.pt, {
   aboutB1: "Café da manhã, pratos principais e aperitivos para dividir",
   aboutB2: "Café, sucos naturais e limonadas",
   aboutB3: "Coquetelaria autoral, vinhos e cervejas",
-  contactTitle: "Contato e reservas", cAddress: "Endereço", cReserve: "Reservas", cOrders: "Pedidos",
+  contactTitle: "Localização e reservas", cAddress: "Endereço", cReserve: "Reservas", cOrders: "Pedidos",
 });
 Object.assign(UI.fr, {
-  navMenu: "Menu", navAbout: "À propos", navStory: "Notre histoire", storyBtn: "Découvrez notre histoire", navStamps: "Fidélité", stampsBtn: "Carte de fidélité : gagnez des cadeaux", navContact: "Contact", cartBtn: "Commande",
+  navLounge: "Le Lounge", navRewards: "Cadeaux", navLocation: "Adresse", reserveTable: "Réserver une table", exploreMenu: "Explorer le menu", heroSub: "Âme haïtienne, rythme caribéen et cocktails signature · Carthagène", loungeTitle: "Entrez dans le lounge", tasteTitle: "Un avant-goût de notre cuisine et de notre bar", fullMenuBtn: "Voir le menu complet et les prix", navMenu: "Menu", navAbout: "À propos", navStory: "Notre histoire", storyBtn: "Découvrez notre histoire", navStamps: "Fidélité", stampsBtn: "Carte de fidélité : gagnez des cadeaux", navContact: "Contact", cartBtn: "Commande",
   heroText: "Cuisine caribéenne aux racines haïtiennes, colombiennes et canadiennes, café dès le petit-déjeuner et cocktails signature à La Matuna. Parcourez la carte, composez votre commande et envoyez-la sur WhatsApp.",
   heroCta: "Voir le menu",
   menuTitle: "Notre menu", menuSub: "Plats et boissons avec photo et prix en pesos colombiens.",
@@ -367,7 +367,7 @@ Object.assign(UI.fr, {
   aboutB1: "Petits-déjeuners, plats et entrées à partager",
   aboutB2: "Café, jus naturels et limonades",
   aboutB3: "Cocktails signature, vins et bières",
-  contactTitle: "Contact et réservations", cAddress: "Adresse", cReserve: "Réservations", cOrders: "Commandes",
+  contactTitle: "Adresse et réservations", cAddress: "Adresse", cReserve: "Réservations", cOrders: "Commandes",
 });
 
 // Franja de reseñas en Tripadvisor

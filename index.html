@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0d1528">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -14,64 +14,69 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260921a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Fira+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261031a">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Roboto+Condensed:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=20261126a">
 </head>
 <body>
 
-<!-- ===== BARRA SUPERIOR (como Fidelio: logo, enlaces, idioma y pedido) ===== -->
+<!-- ===== BARRA SUPERIOR: logo dorado, secciones, idioma y reserva ===== -->
 <header class="topbar" id="topbar">
   <div class="topbar-row">
     <a href="#" class="brand" aria-label="Azul Caribe Lounge">
       <img src="images/logo-palm.png" alt="" class="brand-logo">
-      <span class="brand-name">Azul Caribe <span>Lounge</span></span>
+      <span class="brand-name">Azul Caribe<small>Lounge</small></span>
     </a>
     <nav class="topnav" aria-label="Secciones">
       <a href="#menu" data-i18n="navMenu">Menú</a>
-      <a href="#nosotros" data-i18n="navAbout">Nosotros</a>
+      <a href="#lounge" data-i18n="navLounge">El Lounge</a>
       <a href="biblia/" class="story-link" data-i18n="navStory">Historia</a>
-      <a href="sellos/" class="stamps-link" data-i18n="navStamps">Sellos</a>
-      <a href="#contacto" data-i18n="navContact">Contacto</a>
+      <a href="sellos/" class="stamps-link" data-i18n="navRewards">Premios</a>
+      <a href="#ubicacion" data-i18n="navLocation">Ubicación</a>
     </nav>
     <div class="topbar-actions">
+      <div class="lang-inline" id="lang-inline" aria-label="Idioma / Language"></div>
       <button class="lang-btn" id="lang-btn" aria-label="Idioma / Language / Idioma">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9s1.3-6.5 3.8-9z"/></svg>
         <span id="lang-btn-label">ES</span>
       </button>
       <div class="lang-menu" id="lang-menu"></div>
+      <button class="btn btn-gold btn-reserve-top" id="reserve-btn"><span data-i18n="reserveTable">Reservar mesa</span></button>
       <button class="cart-btn" id="cart-btn" aria-label="Ver pedido">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14l-1.4 10.2a2 2 0 0 1-2 1.8H8.4a2 2 0 0 1-2-1.8L5 7z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg>
-        <span data-i18n="cartBtn">Pedido</span>
         <span class="cart-count" id="cart-count">0</span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- ===== PORTADA (dos columnas: texto y video) ===== -->
+<!-- ===== PORTADA a todo el ancho ===== -->
 <section class="hero" id="venue-hero">
-  <div class="hero-grid">
-    <div class="hero-text">
-      <div class="status"><span class="dot"></span> <span id="status-text">Abierto ahora</span></div>
-      <p class="eyebrow" id="venue-eyebrow">Coctelería de autor</p>
-      <h1 class="hero-title"><span class="t1">Azul Caribe</span><span class="t2">Lounge</span></h1>
-      <p class="hero-tagline" id="venue-tagline">Cocina caribeña · Cartagena de Indias, Colombia</p>
-      <p class="hero-lead" data-i18n="heroText">Cocina caribeña con raíces haitianas, colombianas y canadienses, café desde el desayuno y cócteles de autor en La Matuna. Mira la carta, arma tu pedido y envíalo por WhatsApp.</p>
-      <div class="hero-actions">
-        <a href="#menu" class="btn btn-primary" data-i18n="heroCta">Ver el menú</a>
-        <button class="btn btn-gold" id="reserve-btn">
-          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6.5"/><line x1="16" y1="2.5" x2="16" y2="6.5"/></svg>
-          <span id="reserve-btn-label">Reservar</span>
-        </button>
-        <button class="btn btn-outline" id="info-btn">
-          <span id="info-btn-label">Información</span>
-        </button>
-      </div>
-    </div>
-    <div class="hero-media">
-      <video class="hero-video" src="videos/mojito-pour.mp4" poster="images/pour-full.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Mojito servido en la barra de Azul Caribe"></video>
+  <video class="hero-bg" src="videos/mojito-pour.mp4" poster="images/pour-full.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <div class="hero-inner">
+    <h1 class="hero-title">Azul Caribe Lounge</h1>
+    <p class="hero-sub" data-i18n="heroSub">Alma Haitiana, Ritmo Caribeño y Coctelería de Autor · Cartagena</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" id="hero-reserve"><span data-i18n="reserveTable">Reservar mesa</span></button>
+      <a href="#menu" class="btn btn-outline" data-i18n="exploreMenu">Explorar el menú</a>
     </div>
   </div>
+</section>
+
+<!-- ===== ENTRA AL LOUNGE ===== -->
+<section class="band band-dark" id="lounge">
+  <h2 class="band-title" data-i18n="loungeTitle">Entra al lounge</h2>
+  <div class="lounge-grid">
+    <img src="images/lounge-1.jpg" alt="La barra de Azul Caribe Lounge" loading="lazy">
+    <img src="images/lounge-2.jpg" alt="El salón de Azul Caribe Lounge" loading="lazy">
+    <img src="images/lounge-3.jpg" alt="Una noche en Azul Caribe Lounge" loading="lazy">
+  </div>
+</section>
+
+<!-- ===== UN SABOR DE NUESTRA COCINA Y BAR (los platos salen de data.js) ===== -->
+<section class="band band-mid" id="sabor">
+  <h2 class="band-title" data-i18n="tasteTitle">Un sabor de nuestra cocina y bar</h2>
+  <div class="taste-grid" id="taste-grid"></div>
+  <div class="band-cta"><a href="#menu" class="btn btn-outline" data-i18n="fullMenuBtn">Ver menú completo y precios</a></div>
 </section>
 
 <!-- ===== MENÚ ===== -->
@@ -98,33 +103,9 @@
   </main>
 </section>
 
-<!-- ===== NOSOTROS ===== -->
-<section class="about" id="nosotros">
-  <div class="about-grid">
-    <div class="about-text">
-      <p class="eyebrow" data-i18n="aboutEyebrow">Nuestra cocina</p>
-      <h2 data-i18n="aboutTitle">El Caribe en una mesa de La Matuna</h2>
-      <p class="about-lead" data-i18n="aboutText">Azul Caribe nace de la unión de tres culturas: Haití, Colombia y Canadá.</p>
-      <ul class="about-list">
-        <li data-i18n="aboutB1">Desayunos, platos fuertes y aperitivos para compartir</li>
-        <li data-i18n="aboutB2">Café, jugos naturales y limonadas</li>
-        <li data-i18n="aboutB3">Coctelería de autor, vinos y cervezas</li>
-      </ul>
-      <a href="biblia/" class="btn btn-primary about-story story-link" data-i18n="storyBtn">Conoce nuestra historia</a>
-      <a href="sellos/" class="btn btn-gold about-story stamps-link stamps-btn" data-i18n="stampsBtn">Tarjeta de sellos: gana premios</a>
-    </div>
-    <div class="about-media">
-      <img src="images/plato-griot-real-piedra.jpg" alt="Griot" loading="lazy">
-      <img src="images/plato-fritay-real-piedra.jpg" alt="Bandeja de Plátano Fritay" loading="lazy">
-      <img src="images/aperitivo-ceviche-piedra.jpg" alt="Ceviche Mixto" loading="lazy">
-      <img src="images/carnes-camarones-curry-coco-piedra.jpg" alt="Camarones al Curry con Arroz de Coco" loading="lazy">
-    </div>
-  </div>
-</section>
-
 <!-- ===== CONTACTO ===== -->
-<section class="contact" id="contacto">
-  <h2 data-i18n="contactTitle">Contacto y reservas</h2>
+<section class="contact" id="ubicacion">
+  <h2 class="band-title" data-i18n="contactTitle">Ubicación y reservas</h2>
   <div class="contact-grid">
     <a class="contact-card" href="https://www.google.com/maps/search/?api=1&query=Edificio%20San%20Jos%C3%A9%2C%209%20Av.%20Venezuela%2C%20CL1%2035%20%2310-170%2C%20LOC1%2C%20Cartagena%20de%20Indias%2C%20Bol%C3%ADvar" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
@@ -147,6 +128,7 @@
       <span>@azulcaribelounge</span>
     </a>
   </div>
+  <div class="contact-more"><button class="btn btn-outline" id="info-btn"><span id="info-btn-label">Información</span></button></div>
   <div class="review-banner">
     <div class="review-left">
       <div class="review-stars"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.7 6.3.9-4.6 4.4 1.1 6.2L12 17.1 6.4 20l1.1-6.2L2.9 9.4l6.3-.9z"/></svg></div>
@@ -249,8 +231,8 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="i18n.js?v=20261031a"></script>
-<script src="data.js?v=20261031a"></script>
-<script src="app.js?v=20261031a"></script>
+<script src="i18n.js?v=20261126a"></script>
+<script src="data.js?v=20261126a"></script>
+<script src="app.js?v=20261126a"></script>
 </body>
 </html>

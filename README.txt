@@ -1,5 +1,25 @@
-AZUL CARIBE LOUNGE — MENÚ DIGITAL (v17)
+AZUL CARIBE LOUNGE — MENÚ DIGITAL (v18)
 =======================================
+
+QUÉ CAMBIÓ EN v18 (26 nov 2026)
+---------------------------------
+- Diseño nuevo copiado de la imagen que mandó Rigoberto: azul noche y
+  dorado, títulos en mayúsculas (Cinzel) y textos en Roboto Condensed,
+  botones rectos.
+- Barra superior: palmera dorada, Menú | El Lounge | Historia | Premios |
+  Ubicación, idiomas ES | EN | PT | FR (en celular sigue el botón del
+  globo), botón dorado "Reservar mesa" y botón del pedido.
+- Portada a todo el ancho con el video del mojito de fondo, el título,
+  el subtítulo y los botones "Reservar mesa" y "Explorar el menú".
+- Sección "Entra al lounge" con 3 fotos (images/lounge-1, -2 y -3),
+  sacadas de la imagen de muestra por decisión de Rigoberto (26 nov 2026).
+- Sección "Un sabor de nuestra cocina y bar": Griot, Fritay, Ceviche y
+  Camarones al curry con su precio y botón "Agregar". Para cambiar los
+  platos, cambia la lista TASTE_IDS en app.js.
+- Se quitó la sección "Nosotros" (sus fotos ahora están en "Un sabor…" y
+  sus enlaces en la barra). "Contacto" ahora es "Ubicación y reservas"
+  (#ubicacion) y trae el botón "Información".
+- Carta: nuevo acompañamiento "Porción de Huevo" $5.000.
 
 QUÉ CAMBIÓ EN v17
 -------------------

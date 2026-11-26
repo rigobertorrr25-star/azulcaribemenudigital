@@ -144,8 +144,51 @@ function initLangSwitcher() {
   });
 }
 
+// ============ IDIOMAS EN LA BARRA (ES | EN | FR | PT, en computador) ============
+function renderLangInline() {
+  const box = document.getElementById("lang-inline");
+  if (!box) return;
+  box.innerHTML = LANGS.map(l =>
+    `<button type="button" class="${currentLang === l.code ? "active" : ""}" data-lang="${l.code}" aria-label="${l.name}">${l.label}</button>`
+  ).join('<span class="sep" aria-hidden="true">|</span>');
+  box.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    setLang(b.dataset.lang);
+    refreshAll();
+  }));
+}
+
+// ============ UN SABOR DE NUESTRA COCINA Y BAR (4 platos de la carta) ============
+// Para cambiar los platos de esta sección, cambia los códigos de esta lista
+// (son los "id" de data.js). Precio, foto y textos salen de la carta.
+const TASTE_IDS = ["p2", "p1", "a3", "m6"];
+function renderTaste() {
+  const box = document.getElementById("taste-grid");
+  if (!box) return;
+  const items = TASTE_IDS.map(id => MENU_DATA.find(i => i.id === id)).filter(Boolean);
+  box.innerHTML = items.map(item => `
+    <article class="taste-card" data-id="${item.id}" tabindex="0" role="button" aria-label="${itemName(item)}">
+      <div class="taste-img"><img src="images/${item.img}.jpg" alt="${itemName(item)}" loading="lazy"></div>
+      <h3 class="taste-name">${itemName(item)}</h3>
+      <p class="taste-desc">${desc(item)}</p>
+      <div class="taste-foot">
+        <span class="taste-price">${priceLabelShort(item)}</span>
+        <button class="taste-add" type="button" data-add="${item.id}">${hasVariants(item) ? t("chooseBtn") : t("addBtn")}</button>
+      </div>
+    </article>`).join("");
+  box.querySelectorAll(".taste-add").forEach(btn => btn.addEventListener("click", (e) => {
+    e.stopPropagation(); addOneToCart(btn.dataset.add);
+  }));
+  box.querySelectorAll(".taste-card").forEach(card => {
+    const open = () => openProductModal(card.dataset.id);
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", (e) => { if (e.target !== card) return; if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+  });
+}
+
 function refreshAll() {
   applyStaticTranslations();
+  renderLangInline();
+  renderTaste();
   renderLangMenu();
   renderCatNav();
   renderGrid();
@@ -758,6 +801,8 @@ function closeDrawer() {
 document.addEventListener("DOMContentLoaded", () => {
   applyStaticTranslations();
   initLangSwitcher();
+  renderLangInline();
+  renderTaste();
   renderCatNav();
   renderGrid();
   updateCartUI();
@@ -773,6 +818,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(`https://wa.me/${WHATSAPP_RESERVATION_NUMBER}?text=${msg}`, "_blank");
   };
   document.getElementById("reserve-btn").addEventListener("click", reserve);
+  const heroReserve = document.getElementById("hero-reserve");
+  if (heroReserve) heroReserve.addEventListener("click", reserve);
   const contactReserve = document.getElementById("contact-reserve");
   if (contactReserve) contactReserve.addEventListener("click", reserve);
 
