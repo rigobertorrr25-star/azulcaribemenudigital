@@ -11,9 +11,8 @@ QUÉ CAMBIÓ EN v18 (26 nov 2026)
   globo), botón dorado "Reservar mesa" y botón del pedido.
 - Portada a todo el ancho con el video del mojito de fondo, el título,
   el subtítulo y los botones "Reservar mesa" y "Explorar el menú".
-- Sección "Entra al lounge" con 3 fotos (images/lounge-1, -2 y -3).
-  OJO: por ahora son las fotos de la imagen de muestra, no del local real;
-  hay que cambiarlas por fotos reales antes de publicar.
+- Sección "Entra al lounge" con 3 fotos (images/lounge-1, -2 y -3),
+  sacadas de la imagen de muestra por decisión de Rigoberto (26 nov 2026).
 - Sección "Un sabor de nuestra cocina y bar": Griot, Fritay, Ceviche y
   Camarones al curry con su precio y botón "Agregar". Para cambiar los
   platos, cambia la lista TASTE_IDS en app.js.
