@@ -472,6 +472,88 @@ function attachCardEvents() {
   });
 }
 
+// ============ RECORRIDO "ENTRA AL LOUNGE" (avanza al bajar) ============
+// La sección #lounge mide varias pantallas de alto y su contenido queda fijo
+// mientras se baja. Según cuánto se haya bajado se dibuja un cuadro del video
+// (images/recorrido/f001.jpg … fNNN.jpg). Para cambiar el video: reemplaza esos
+// cuadros y pon aquí cuántos son.
+const JOURNEY_FRAMES = 120;
+function initJourney() {
+  const section = document.getElementById("lounge");
+  const canvas = document.getElementById("journey-canvas");
+  if (!section || !canvas) return;
+  const ctx = canvas.getContext("2d");
+  const bar = document.getElementById("journey-bar");
+  const steps = [...section.querySelectorAll(".journey-step")];
+  const frames = new Array(JOURNEY_FRAMES);
+  const src = i => `images/recorrido/f${String(i + 1).padStart(3, "0")}.jpg`;
+  let current = -1, target = 0, raf = 0;
+
+  function load(i) {
+    if (frames[i]) return frames[i];
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src(i);
+    img.onload = () => { if (i === target) draw(i); };
+    frames[i] = img;
+    return img;
+  }
+  function size() {
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(r.width * dpr);
+    canvas.height = Math.round(r.height * dpr);
+    current = -1; draw(target);
+  }
+  function nearestLoaded(i) {
+    for (let d = 0; d < JOURNEY_FRAMES; d++) {
+      for (const j of [i - d, i + d]) {
+        const f = frames[j];
+        if (f && f.complete && f.naturalWidth) return f;
+      }
+    }
+    return null;
+  }
+  function draw(i) {
+    const img = (frames[i] && frames[i].complete && frames[i].naturalWidth) ? frames[i] : nearestLoaded(i);
+    if (!img) return;
+    const cw = canvas.width, ch = canvas.height;
+    const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    const w = img.naturalWidth * s, h = img.naturalHeight * s;
+    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+    current = i;
+  }
+  function progress() {
+    const r = section.getBoundingClientRect();
+    const total = r.height - window.innerHeight;
+    return Math.min(1, Math.max(0, -r.top / (total > 0 ? total : 1)));
+  }
+  function update() {
+    raf = 0;
+    const p = progress();
+    target = Math.min(JOURNEY_FRAMES - 1, Math.round(p * (JOURNEY_FRAMES - 1)));
+    load(target);
+    if (target !== current) draw(target);
+    if (bar) bar.style.transform = `scaleX(${p})`;
+    section.classList.toggle("journey-started", p > 0.02);
+    steps.forEach(s => {
+      const on = p >= parseFloat(s.dataset.from) && p < parseFloat(s.dataset.to);
+      s.classList.toggle("on", on);
+    });
+  }
+  const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
+
+  // Primero el cuadro inicial; luego el resto, de a pocos para no frenar la página.
+  load(0);
+  let k = 1;
+  const more = () => { for (let n = 0; n < 12 && k < JOURNEY_FRAMES; n++, k++) load(k); if (k < JOURNEY_FRAMES) setTimeout(more, 120); };
+  setTimeout(more, 400);
+
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", size);
+  size(); update();
+}
+
 // ============ POUR SCENE: el vaso se "llena" cruzando fotos según el scroll ============
 // Bidireccional y SIN bloqueo de scroll. #pour-scroll mide 230vh; su hijo
 // .pour-stage queda sticky mientras se recorre. El progreso se calcula así:
@@ -811,6 +893,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initProductModal();
   initInfoModal();
   initPourScene();
+  initJourney();
   initScrollSpyListener();
 
   const reserve = () => {
