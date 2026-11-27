@@ -125,6 +125,25 @@ h1,h2,h3{font-family:var(--display); font-weight:400; letter-spacing:.02em; text
 .taste-add:hover{background:#dbb45a;}
 .band-cta{margin-top:28px; text-align:center;}
 
+/* ============ RECORRIDO "ENTRA AL LOUNGE" (avanza al bajar) ============ */
+.journey{position:relative; height:500vh; background:var(--night);}
+.journey-sticky{position:sticky; top:var(--topbar-h); height:calc(100vh - var(--topbar-h)); height:calc(100svh - var(--topbar-h)); overflow:hidden;}
+#journey-canvas{position:absolute; inset:0; width:100%; height:100%; display:block; background:var(--night);}
+.journey-shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,21,40,.55) 0%, rgba(13,21,40,0) 28%, rgba(13,21,40,0) 55%, rgba(13,21,40,.8) 100%); pointer-events:none;}
+.journey-title{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; top:28px; left:0; right:0; text-align:center; font-size:clamp(24px,3.4vw,32px); text-transform:uppercase; color:var(--ink); text-shadow:0 2px 14px rgba(0,0,0,.6); padding:0 16px;}
+.journey-hero{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 16px 40px; transition:opacity .5s ease, transform .5s ease;}
+.journey:not(.journey-intro) .journey-hero{opacity:0; transform:translateY(-16px); pointer-events:none;}
+.journey-shade::after{content:""; position:absolute; inset:0; background:rgba(13,21,40,.45); transition:opacity .5s ease;}
+.journey:not(.journey-intro) .journey-shade::after{opacity:0;}
+.journey-copy{position:absolute; left:0; right:0; bottom:72px; height:3.2em; text-align:center; padding:0 16px;}
+.journey-step{position:absolute; left:16px; right:16px; bottom:0; font-family:var(--display); font-size:clamp(26px,4.6vw,48px); line-height:1.1; text-transform:uppercase; color:#f6f1e6; text-shadow:0 2px 18px rgba(0,0,0,.7); opacity:0; transform:translateY(14px); transition:opacity .45s ease, transform .45s ease;}
+.journey-step.on{opacity:1; transform:none;}
+.journey-progress{position:absolute; left:50%; bottom:36px; width:min(240px,50vw); height:2px; transform:translateX(-50%); background:rgba(255,255,255,.18);}
+.journey-progress span{display:block; height:100%; background:var(--gold); transform-origin:left center; transform:scaleX(0);}
+.journey-hint{position:absolute; left:0; right:0; bottom:46px; text-align:center; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); transition:opacity .3s;}
+.journey.journey-started .journey-hint{opacity:0;}
+@media (prefers-reduced-motion:reduce){ .journey{height:auto;} .journey-sticky{position:relative; top:0; height:70vh;} .journey-step{transition:none;} }
+
 /* ============ MENÚ ============ */
 .menu{max-width:var(--maxw); margin:0 auto; padding:56px 16px 40px;}
 .menu-head{text-align:center;}
