@@ -471,7 +471,7 @@ function attachCardEvents() {
 // mientras se baja. Según cuánto se haya bajado se dibuja un cuadro del video
 // (images/recorrido/f001.jpg … fNNN.jpg). Para cambiar el video: reemplaza esos
 // cuadros y pon aquí cuántos son.
-const JOURNEY_FRAMES = 120;
+const JOURNEY_FRAMES = 140;
 function initJourney() {
   const section = document.getElementById("lounge");
   const canvas = document.getElementById("journey-canvas");

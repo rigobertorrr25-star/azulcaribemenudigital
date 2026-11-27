@@ -126,11 +126,11 @@ h1,h2,h3{font-family:var(--display); font-weight:400; letter-spacing:.02em; text
 .band-cta{margin-top:28px; text-align:center;}
 
 /* ============ RECORRIDO "ENTRA AL LOUNGE" (avanza al bajar) ============ */
-.journey{position:relative; height:420vh; background:var(--night);}
+.journey{position:relative; height:500vh; background:var(--night);}
 .journey-sticky{position:sticky; top:var(--topbar-h); height:calc(100vh - var(--topbar-h)); height:calc(100svh - var(--topbar-h)); overflow:hidden;}
 #journey-canvas{position:absolute; inset:0; width:100%; height:100%; display:block; background:var(--night);}
 .journey-shade{position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,21,40,.55) 0%, rgba(13,21,40,0) 28%, rgba(13,21,40,0) 55%, rgba(13,21,40,.8) 100%); pointer-events:none;}
-.journey-title{position:absolute; top:28px; left:0; right:0; text-align:center; font-size:clamp(24px,3.4vw,32px); text-transform:uppercase; color:var(--ink); text-shadow:0 2px 14px rgba(0,0,0,.6); padding:0 16px;}
+.journey-title{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; top:28px; left:0; right:0; text-align:center; font-size:clamp(24px,3.4vw,32px); text-transform:uppercase; color:var(--ink); text-shadow:0 2px 14px rgba(0,0,0,.6); padding:0 16px;}
 .journey-copy{position:absolute; left:0; right:0; bottom:72px; height:3.2em; text-align:center; padding:0 16px;}
 .journey-step{position:absolute; left:16px; right:16px; bottom:0; font-family:var(--display); font-size:clamp(26px,4.6vw,48px); line-height:1.1; text-transform:uppercase; color:#f6f1e6; text-shadow:0 2px 18px rgba(0,0,0,.7); opacity:0; transform:translateY(14px); transition:opacity .45s ease, transform .45s ease;}
 .journey-step.on{opacity:1; transform:none;}
