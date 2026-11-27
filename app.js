@@ -159,7 +159,8 @@ function renderLangInline() {
 
 // ============ UN SABOR DE NUESTRA COCINA Y BAR (4 platos de la carta) ============
 // Para cambiar los platos de esta sección, cambia los códigos de esta lista
-// (son los "id" de data.js). Precio, foto y textos salen de la carta.
+// (son los "id" de data.js). Foto y textos salen de la carta; aquí no se
+// muestran precio ni botón de agregar (pedido de Rigoberto, 27 nov 2026).
 const TASTE_IDS = ["p2", "p1", "a3", "m6"];
 function renderTaste() {
   const box = document.getElementById("taste-grid");
@@ -170,14 +171,7 @@ function renderTaste() {
       <div class="taste-img"><img src="images/${item.img}.jpg" alt="${itemName(item)}" loading="lazy"></div>
       <h3 class="taste-name">${itemName(item)}</h3>
       <p class="taste-desc">${desc(item)}</p>
-      <div class="taste-foot">
-        <span class="taste-price">${priceLabelShort(item)}</span>
-        <button class="taste-add" type="button" data-add="${item.id}">${hasVariants(item) ? t("chooseBtn") : t("addBtn")}</button>
-      </div>
     </article>`).join("");
-  box.querySelectorAll(".taste-add").forEach(btn => btn.addEventListener("click", (e) => {
-    e.stopPropagation(); addOneToCart(btn.dataset.add);
-  }));
   box.querySelectorAll(".taste-card").forEach(card => {
     const open = () => openProductModal(card.dataset.id);
     card.addEventListener("click", open);
