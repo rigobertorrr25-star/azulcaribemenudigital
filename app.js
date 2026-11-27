@@ -480,18 +480,50 @@ function initJourney() {
   const bar = document.getElementById("journey-bar");
   const steps = [...section.querySelectorAll(".journey-step")];
   const frames = new Array(JOURNEY_FRAMES);
-  const src = i => `images/recorrido/f${String(i + 1).padStart(3, "0")}.jpg`;
+  // Celular en vertical: cuadros verticales y más livianos (images/recorrido-m).
+  const folder = (window.innerWidth / window.innerHeight < 0.9) ? "recorrido-m" : "recorrido";
+  const src = i => `images/${folder}/f${String(i + 1).padStart(3, "0")}.jpg`;
   let current = -1, target = 0, raf = 0;
 
-  function load(i) {
-    if (frames[i]) return frames[i];
-    const img = new Image();
-    img.decoding = "async";
-    img.src = src(i);
-    img.onload = () => { if (i === target) draw(i); };
-    frames[i] = img;
-    return img;
+  // Orden de carga: primero cuadros repartidos por todo el recorrido (cada 10,
+  // luego cada 5…) para que siempre haya uno cerca de donde esté la persona;
+  // después se rellenan los demás. Lo que se ve en pantalla pasa al frente.
+  const order = [];
+  const seen = new Set();
+  for (const stepN of [10, 5, 2, 1]) {
+    for (let i = 0; i < JOURNEY_FRAMES; i += stepN) if (!seen.has(i)) { seen.add(i); order.push(i); }
   }
+  if (!seen.has(JOURNEY_FRAMES - 1)) order.splice(1, 0, JOURNEY_FRAMES - 1);
+  let inFlight = 0;
+  const MAX_IN_FLIGHT = 4;
+  function pump() {
+    while (inFlight < MAX_IN_FLIGHT && order.length) {
+      const i = order.shift();
+      if (frames[i]) continue;
+      inFlight++;
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = img.onerror = () => {
+        inFlight--;
+        if (img.naturalWidth && Math.abs(i - target) < Math.abs(currentShown - target)) draw(target);
+        pump();
+      };
+      img.src = src(i);
+      frames[i] = img;
+    }
+  }
+  let currentShown = -9999;
+  function want(i) {
+    // Pone el cuadro pedido y sus vecinos al frente de la fila.
+    for (const j of [i, i + 1, i - 1, i + 2, i + 3, i - 2]) {
+      if (j < 0 || j >= JOURNEY_FRAMES || frames[j]) continue;
+      const k = order.indexOf(j);
+      if (k > -1) order.splice(k, 1);
+      order.unshift(j);
+    }
+    pump();
+  }
+
   function size() {
     const r = canvas.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -509,8 +541,10 @@ function initJourney() {
     return null;
   }
   function draw(i) {
-    const img = (frames[i] && frames[i].complete && frames[i].naturalWidth) ? frames[i] : nearestLoaded(i);
+    const exact = frames[i] && frames[i].complete && frames[i].naturalWidth;
+    const img = exact ? frames[i] : nearestLoaded(i);
     if (!img) return;
+    currentShown = exact ? i : frames.indexOf(img);
     const cw = canvas.width, ch = canvas.height;
     const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
     const w = img.naturalWidth * s, h = img.naturalHeight * s;
@@ -526,8 +560,8 @@ function initJourney() {
     raf = 0;
     const p = progress();
     target = Math.min(JOURNEY_FRAMES - 1, Math.round(p * (JOURNEY_FRAMES - 1)));
-    load(target);
-    if (target !== current) draw(target);
+    want(target);
+    if (target !== current || currentShown !== target) draw(target);
     if (bar) bar.style.transform = `scaleX(${p})`;
     section.classList.toggle("journey-started", p > 0.02);
     section.classList.toggle("journey-intro", p < 0.08);
@@ -538,11 +572,7 @@ function initJourney() {
   }
   const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
 
-  // Primero el cuadro inicial; luego el resto, de a pocos para no frenar la página.
-  load(0);
-  let k = 1;
-  const more = () => { for (let n = 0; n < 12 && k < JOURNEY_FRAMES; n++, k++) load(k); if (k < JOURNEY_FRAMES) setTimeout(more, 120); };
-  setTimeout(more, 400);
+  pump();
 
   window.addEventListener("scroll", queue, { passive: true });
   window.addEventListener("resize", size);
