@@ -530,6 +530,7 @@ function initJourney() {
     if (target !== current) draw(target);
     if (bar) bar.style.transform = `scaleX(${p})`;
     section.classList.toggle("journey-started", p > 0.02);
+    section.classList.toggle("journey-intro", p < 0.08);
     steps.forEach(s => {
       const on = p >= parseFloat(s.dataset.from) && p < parseFloat(s.dataset.to);
       s.classList.toggle("on", on);
