@@ -327,3 +327,10 @@ textarea.note:focus{border-color:var(--gold);}
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms !important; animation-duration:.01ms !important; scroll-behavior:auto !important;}
 }
+
+/* ============ SIN PEDIDOS EN LÍNEA (27 nov 2026, pedido de Rigoberto) ============
+   La carta muestra foto, descripción y precio, pero sin botón "Agregar", sin la
+   ficha para sumar al pedido y sin el botón del pedido arriba. Para volver a
+   activar los pedidos por WhatsApp, borra este bloque. */
+.card-add, .card-qty-badge, .pm-footer, .cart-btn { display:none !important; }
+.card-foot{flex-direction:row; align-items:center;}
